@@ -17,6 +17,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
 
 [node name="StateText" type="Label" parent="."]
 margin_left = -16.0
