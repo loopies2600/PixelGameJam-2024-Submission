@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "KinematicActor",
+"language": "GDScript",
+"path": "res://scenes/entity/actor/kinematic_actor.gd"
+} ]
+_global_script_class_icons={
+"KinematicActor": ""
+}
+
 [application]
 
 config/name="AquaKnight"

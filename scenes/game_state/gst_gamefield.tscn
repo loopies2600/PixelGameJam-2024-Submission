@@ -5,3 +5,4 @@
 [node name="GameState" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
+steering = 0.782
