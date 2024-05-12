@@ -16,6 +16,8 @@ func _on_damage_taken(damage_amount, source):
 func _on_death(damage_amount, source):
 	anim.play("DamageOpen")
 	
+	$Collision.call_deferred("set_disabled", true)
+	
 	_puke_contents()
 	
 func _puke_contents():
