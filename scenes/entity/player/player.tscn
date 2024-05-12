@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/entity/player/player.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 30
@@ -30,4 +33,11 @@ text = "Text"
 [node name="InteractionRay" type="RayCast2D" parent="."]
 enabled = true
 collision_mask = 28
+collide_with_areas = true
+
+[node name="AttackAreaTest" type="ShapeCast2D" parent="."]
+shape = SubResource( 2 )
+target_position = Vector2( 0, 0 )
+max_results = 1
+collision_mask = 24
 collide_with_areas = true

@@ -3,6 +3,7 @@ class_name PlayerActor
 
 const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
+const LERP_WEIGHT := 8.0
 
 export (float, 0.0, 0.99) var walk_steering := 0.1
 export (float, 0.0, 0.99) var swim_steering := 0.96
@@ -43,6 +44,10 @@ func _on_cutscene_end():
 	
 	current_state = PlayerStates.IDLE
 	
+func _on_death(damage_amount, source):
+	visible = false
+	print("test")
+	
 func _process(delta : float):
 	interaction_ray.cast_to = INTERACTION_OFFSET.rotated(look_angle.angle())
 	$StateText.text = PlayerStates.keys()[current_state]
@@ -69,6 +74,20 @@ func check_input():
 	if Input.is_action_just_pressed("interact"):
 		_try_interaction()
 	
+	if Input.is_action_just_pressed("attack"):
+		try_attack()
+	
+func try_attack():
+	var _shapecast : ShapeCast2D = $AttackAreaTest
+	
+	if not _shapecast.is_colliding(): return
+		
+	for i in range(_shapecast.get_collision_count()):
+		var collider = _shapecast.get_collider(i)
+		
+		if collider is KinematicActor:
+			collider.take_damage(self, 5)
+			
 func _try_interaction():
 	if current_state == PlayerStates.CUTSCENE:
 		return
@@ -93,12 +112,14 @@ func is_input_moving() -> bool:
 	return input_direction != Vector2.ZERO
 	
 func _tick_idle_state(delta : float):
+	base_speed = lerp(base_speed, 0.0, LERP_WEIGHT * delta)
+	
 	if is_input_moving():
 		current_state = PlayerStates.WALK
 	
 func _tick_walk_state(delta : float):
-	base_speed = walk_speed
-	steering = walk_steering
+	base_speed = lerp(base_speed, walk_speed, LERP_WEIGHT * delta)
+	steering = lerp(steering, walk_steering, LERP_WEIGHT * delta)
 	
 	direction = input_direction
 	
@@ -109,8 +130,8 @@ func _tick_walk_state(delta : float):
 		current_state = PlayerStates.IDLE
 	
 func _tick_swim_state(delta : float):
-	base_speed = swim_speed
-	steering = swim_steering
+	base_speed = lerp(base_speed, swim_speed, LERP_WEIGHT * delta)
+	steering = lerp(steering, swim_steering, (LERP_WEIGHT * 2.0) * delta)
 	
 	direction = input_direction
 	
