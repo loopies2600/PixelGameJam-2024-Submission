@@ -59,10 +59,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/screenplayer/interactable/Interactable.gd"
 }, {
+"base": "Reference",
+"class": "ItemData",
+"language": "GDScript",
+"path": "res://scenes/database/item_data.gd"
+}, {
+"base": "Pickup",
+"class": "ItemPickup",
+"language": "GDScript",
+"path": "res://scenes/entity/pickup/item_pickup/item_pickup.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "KinematicActor",
 "language": "GDScript",
 "path": "res://scenes/entity/actor/kinematic_actor.gd"
+}, {
+"base": "Area2D",
+"class": "Pickup",
+"language": "GDScript",
+"path": "res://scenes/entity/pickup/pickup.gd"
 }, {
 "base": "KinematicActor",
 "class": "PlayerActor",
@@ -100,7 +115,10 @@ _global_script_class_icons={
 "CutsceneCommandSetProperty": "",
 "CutsceneCommandTextbox": "",
 "Interactable": "res://assets/screenplayer/icons/interactable.png",
+"ItemData": "",
+"ItemPickup": "",
 "KinematicActor": "",
+"Pickup": "",
 "PlayerActor": "",
 "ScrollingSelector": "",
 "TextBox": "",
@@ -182,6 +200,8 @@ attack={
 2d_physics/layer_3="Objects"
 2d_physics/layer_4="Enemy Entities"
 2d_physics/layer_5="Passive Entities"
+2d_physics/layer_6="Breakables"
+2d_physics/layer_7="Player Pickups"
 
 [physics]
 

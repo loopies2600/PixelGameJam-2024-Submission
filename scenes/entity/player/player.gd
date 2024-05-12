@@ -86,7 +86,7 @@ func try_attack():
 		var collider = _shapecast.get_collider(i)
 		
 		if collider is KinematicActor:
-			collider.take_damage(self, 5)
+			collider.take_damage(self, strength)
 			
 func _try_interaction():
 	if current_state == PlayerStates.CUTSCENE:

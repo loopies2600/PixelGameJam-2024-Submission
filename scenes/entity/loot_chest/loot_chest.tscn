@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/entity/loot_chest/loot_chest.gd" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+period = 3.1
+
+[sub_resource type="NoiseTexture" id=3]
+flags = 3
+width = 64
+height = 32
+seamless = true
+noise = SubResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 16 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "DamageOpen"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 0.75 ), Vector2( 0.539, 1.643 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "TakeDamage"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 0.75 ), Vector2( 1, 1 ) ]
+}
+
+[node name="loot_chest" type="KinematicBody2D"]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource( 1 )
+contents = PoolIntArray( 0, 0, 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.733333, 0.580392, 1, 1 )
+texture = SubResource( 3 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/DamageOpen = SubResource( 7 )
+anims/Idle = SubResource( 4 )
+anims/RESET = SubResource( 5 )
+anims/TakeDamage = SubResource( 6 )
+
+[node name="ItemPukeTimer" type="Timer" parent="."]
+wait_time = 0.25

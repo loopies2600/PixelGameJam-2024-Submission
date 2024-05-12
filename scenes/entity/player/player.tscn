@@ -10,7 +10,7 @@ radius = 16.0
 extents = Vector2( 32, 32 )
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 30
+collision_mask = 126
 script = ExtResource( 2 )
 
 [node name="MainSprite" type="Sprite" parent="."]
@@ -32,12 +32,12 @@ text = "Text"
 
 [node name="InteractionRay" type="RayCast2D" parent="."]
 enabled = true
-collision_mask = 28
+collision_mask = 60
 collide_with_areas = true
 
 [node name="AttackAreaTest" type="ShapeCast2D" parent="."]
 shape = SubResource( 2 )
 target_position = Vector2( 0, 0 )
 max_results = 1
-collision_mask = 24
+collision_mask = 56
 collide_with_areas = true
