@@ -7,6 +7,7 @@
 radius = 16.0
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 30
 script = ExtResource( 2 )
 
 [node name="MainSprite" type="Sprite" parent="."]
@@ -25,3 +26,8 @@ margin_top = -32.0
 margin_right = 24.0
 margin_bottom = -18.0
 text = "Text"
+
+[node name="InteractionRay" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 28
+collide_with_areas = true
