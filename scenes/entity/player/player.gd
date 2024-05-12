@@ -145,6 +145,6 @@ func _tick_cutscene_state(delta : float):
 	velocity = Vector2.ZERO
 	direction = Vector2.ZERO
 	input_direction = Vector2.ZERO
-	look_angle = Vector2.ZERO
+	#look_angle = Vector2.ZERO
 	
 	can_input = false
