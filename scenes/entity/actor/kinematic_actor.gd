@@ -6,6 +6,7 @@ signal died(amount, attacker)
 
 export (float) var base_speed := 128.0
 export (float, 0.0, 0.99) var steering := 0.0
+export (float, 0.0, 1.0) var damping := 0.8
 
 export (int) var max_health := 10
 export (int) var strength := 1
@@ -14,7 +15,9 @@ var direction : Vector2 = Vector2.ZERO
 var velocity : Vector2 = Vector2.ZERO
 
 var health : int = max_health
+
 var dead : bool = false
+var attacking : bool = false
 
 func _ready():
 	connect("took_damage", self, "_on_damage_taken")
@@ -25,6 +28,13 @@ func _on_damage_taken(damage_amount, source):
 	
 func _on_death(damage_amount, source):
 	queue_free()
+	
+func attack(victim : KinematicActor, damage_amount := strength):
+	if attacking: return
+	
+	victim.take_damage(self, damage_amount)
+	
+	attacking = true
 	
 func take_damage(source, damage_amount : int):
 	if dead: return
