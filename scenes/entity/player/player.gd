@@ -5,8 +5,7 @@ const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
 const LERP_WEIGHT := 8.0
 
-const ATTACK_1_ANIM_OFFSET := Vector2(10, -10)
-const ATTACK_1_HURT_FRAMES := [false, false, false, true, false, false]
+const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
 
 export (float, 0.0, 0.99) var walk_steering := 0.3
 export (float, 0.0, 0.99) var swim_steering := 0.96
@@ -60,7 +59,7 @@ func _on_cutscene_end():
 func _on_death(damage_amount, source):
 	visible = false
 	
-func _build_state_anim_name() -> String:
+func _animate():
 	var anim_name := ""
 	
 	var state_name : String = PlayerStates.keys()[current_state]
@@ -70,9 +69,9 @@ func _build_state_anim_name() -> String:
 		
 	var suffix := "_h"
 	
-	if not is_equal_approx(look_angle.x, 0.0):
-		suffix = "_h"
-		anim_sprite.scale.x = -1.0 if sign(look_angle.x) == -1 else 1.0
+	var h_dir := sign(look_angle.dot(Vector2.RIGHT))
+	
+	anim_sprite.scale.x = h_dir
 	
 	match int(sign(round(look_angle.y))):
 		-1:
@@ -84,7 +83,10 @@ func _build_state_anim_name() -> String:
 	
 	anim_name = state_name.to_lower() + suffix
 	
-	return anim_name
+	var prev_anim_frame = anim_sprite.frame
+	
+	anim_sprite.animation = anim_name
+	anim_sprite.frame = prev_anim_frame
 	
 func _on_state_exit(state : int):
 	match state:
@@ -93,10 +95,12 @@ func _on_state_exit(state : int):
 			anim_sprite.offset = Vector2.ZERO
 	
 func _on_state_enter(state : int):
+	anim_sprite.frame = 0
+	
 	match state:
 		PlayerStates.ATTACK:
 			if current_combo == 1:
-				anim_sprite.offset = ATTACK_1_ANIM_OFFSET
+				anim_sprite.offset = ATTACK_1_DATA.sprite_offset
 			
 			can_input = false
 			
@@ -130,13 +134,13 @@ func _process(delta : float):
 		PlayerStates.CUTSCENE:
 			_tick_cutscene_state(delta)
 	
-	anim_sprite.animation = _build_state_anim_name()
+	_animate()
 	
 func check_input():
 	input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	if is_input_moving():
-		look_angle = input_direction
+	var angle_to_cursor := get_global_mouse_position().angle_to_point(global_position)
+	look_angle = Vector2.RIGHT.rotated(angle_to_cursor)
 	
 	if Input.is_action_just_pressed("interact"):
 		_try_interaction()
@@ -211,10 +215,16 @@ func _tick_swim_state(delta : float):
 func _tick_attack_state(delta : float):
 	base_speed = lerp(base_speed, 0.0, LERP_WEIGHT * delta)
 	
+	if ATTACK_1_DATA.can_attack_in_frame[anim_sprite.frame] == true:
+		attacking = false
+		
+		if Input.is_action_just_pressed("attack"):
+			set_state(PlayerStates.ATTACK)
+		
 func _check_attack_hit():
 	attacking = false
 	
-	if ATTACK_1_HURT_FRAMES[anim_sprite.frame] == true:
+	if ATTACK_1_DATA.scan_in_frame[anim_sprite.frame] == true:
 		try_attack()
 	
 func _tick_cutscene_state(delta : float):
