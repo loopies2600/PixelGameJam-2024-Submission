@@ -5,10 +5,10 @@ const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
 const LERP_WEIGHT := 8.0
 
-export (float, 0.0, 0.99) var walk_steering := 0.1
+export (float, 0.0, 0.99) var walk_steering := 0.3
 export (float, 0.0, 0.99) var swim_steering := 0.96
 
-export (float) var walk_speed = 96.0
+export (float) var walk_speed = 86.0
 export (float) var swim_speed = 280.0
 
 enum PlayerStates {
@@ -26,6 +26,7 @@ var look_angle : Vector2 = Vector2.ZERO
 
 onready var cam : Camera2D = $Camera2D
 onready var interaction_ray : RayCast2D = $InteractionRay
+onready var anim_sprite : AnimatedSprite = $MainSprite
 
 func _ready():
 	Global.player = self
@@ -46,11 +47,33 @@ func _on_cutscene_end():
 	
 func _on_death(damage_amount, source):
 	visible = false
-	print("test")
+	
+func _build_state_anim_name() -> String:
+	var anim_name := ""
+	
+	var state_name : String = PlayerStates.keys()[current_state]
+	var suffix := "_h"
+	
+	if not is_equal_approx(look_angle.x, 0.0):
+		suffix = "_h"
+		anim_sprite.flip_h = true if sign(look_angle.x) == -1 else false
+	
+	match int(sign(round(look_angle.y))):
+		-1:
+			suffix = "_up"
+			anim_sprite.flip_h = false
+		1:
+			suffix = "_down"
+			anim_sprite.flip_h = false
+	
+	anim_name = state_name.to_lower() + suffix
+	
+	return anim_name
 	
 func _process(delta : float):
+	anim_sprite.animation = _build_state_anim_name()
+	
 	interaction_ray.cast_to = INTERACTION_OFFSET.rotated(look_angle.angle())
-	$StateText.text = PlayerStates.keys()[current_state]
 	
 	if can_input:
 		check_input()

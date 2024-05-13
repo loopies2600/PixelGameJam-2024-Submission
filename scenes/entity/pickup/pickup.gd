@@ -8,6 +8,9 @@ var velocity : Vector3 = Vector3.ZERO
 
 onready var position_3d : Vector3 = Vector3(position.x, 0.0, position.y)
 
+onready var pickbox : CollisionShape2D = $Pickbox
+onready var sprite : Sprite = $Sprite
+
 func _ready():
 	connect("body_entered", self, "_on_picked_up")
 	
@@ -32,4 +35,4 @@ func is_on_floor() -> bool:
 	return position_3d.y >= 0.0
 	
 func _on_picked_up(body):
-	queue_free()
+	pass
