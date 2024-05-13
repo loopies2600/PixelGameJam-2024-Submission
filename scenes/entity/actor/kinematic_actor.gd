@@ -14,10 +14,10 @@ export (int) var strength := 1
 var direction : Vector2 = Vector2.ZERO
 var velocity : Vector2 = Vector2.ZERO
 
-var health : int = max_health
-
 var dead : bool = false
 var attacking : bool = false
+
+onready var health : int = max_health
 
 func _ready():
 	connect("took_damage", self, "_on_damage_taken")

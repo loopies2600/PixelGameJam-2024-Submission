@@ -10,8 +10,9 @@ const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state
 export (float, 0.0, 0.99) var walk_steering := 0.3
 export (float, 0.0, 0.99) var swim_steering := 0.96
 
-export (float) var walk_speed = 86.0
-export (float) var swim_speed = 280.0
+export (float) var walk_speed := 86.0
+export (float) var swim_speed := 280.0
+export (float) var swing_dash := 300.0
 
 enum PlayerStates {
 	IDLE,
@@ -85,7 +86,7 @@ func _animate():
 	
 	var prev_anim_frame = anim_sprite.frame
 	
-	anim_sprite.animation = anim_name
+	anim_sprite.play(anim_name)
 	anim_sprite.frame = prev_anim_frame
 	
 func _on_state_exit(state : int):
@@ -99,14 +100,17 @@ func _on_state_enter(state : int):
 	
 	match state:
 		PlayerStates.ATTACK:
-			if current_combo == 1:
-				anim_sprite.offset = ATTACK_1_DATA.sprite_offset
+			steering = 0.782
+			look_angle = look_at_cursor()
+			_reposition_sprite()
 			
 			can_input = false
 			
 			yield(anim_sprite, "animation_finished")
 			
 			set_state(PlayerStates.IDLE)
+		_:
+			_reposition_sprite()
 	
 func set_state(new_state_id : int):
 	_on_state_exit(current_state)
@@ -136,11 +140,16 @@ func _process(delta : float):
 	
 	_animate()
 	
+func look_at_cursor() -> Vector2:
+	var angle_to_cursor := get_global_mouse_position().angle_to_point(global_position)
+	
+	return Vector2.RIGHT.rotated(angle_to_cursor)
+	
 func check_input():
 	input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	var angle_to_cursor := get_global_mouse_position().angle_to_point(global_position)
-	look_angle = Vector2.RIGHT.rotated(angle_to_cursor)
+	if is_input_moving():
+		look_angle = input_direction
 	
 	if Input.is_action_just_pressed("interact"):
 		_try_interaction()
@@ -213,8 +222,6 @@ func _tick_swim_state(delta : float):
 		set_state(PlayerStates.IDLE)
 	
 func _tick_attack_state(delta : float):
-	base_speed = lerp(base_speed, 0.0, LERP_WEIGHT * delta)
-	
 	if ATTACK_1_DATA.can_attack_in_frame[anim_sprite.frame] == true:
 		attacking = false
 		
@@ -224,8 +231,24 @@ func _tick_attack_state(delta : float):
 func _check_attack_hit():
 	attacking = false
 	
-	if ATTACK_1_DATA.scan_in_frame[anim_sprite.frame] == true:
+	var frame_idx : int = anim_sprite.frame
+	var atk_data : AttackStateData = get("ATTACK_%s_DATA" % current_combo)
+	
+	if atk_data.scan_in_frame[frame_idx] == true:
 		try_attack()
+	
+	velocity += (swing_dash * atk_data.frame_impulse[frame_idx]) * look_at_cursor()
+	_reposition_sprite()
+	
+func _reposition_sprite():
+	if current_state != PlayerStates.ATTACK: 
+		anim_sprite.offset = Vector2.ZERO
+		return
+	
+	var frame_idx : int = anim_sprite.frame
+	var atk_data : AttackStateData = get("ATTACK_%s_DATA" % current_combo)
+	
+	anim_sprite.offset = atk_data.frame_offset[frame_idx]
 	
 func _tick_cutscene_state(delta : float):
 	velocity = Vector2.ZERO

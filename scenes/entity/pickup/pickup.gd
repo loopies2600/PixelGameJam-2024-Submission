@@ -11,11 +11,19 @@ onready var position_3d : Vector3 = Vector3(position.x, 0.0, position.y)
 onready var pickbox : CollisionShape2D = $Pickbox
 onready var sprite : Sprite = $Sprite
 
+var lifetime := 0.0
+
 func _ready():
 	connect("body_entered", self, "_on_picked_up")
 	
-func _process(_delta):
+func _process(delta):
+	lifetime += delta
+	
 	z_index = int(max(get_global_transform_with_canvas().origin.y - position_3d.y, 0))
+	
+	# kill after 5 mins
+	if lifetime > (5.0 * 60.0):
+		queue_free()
 	
 func _physics_process(delta):
 	if not is_on_floor():
