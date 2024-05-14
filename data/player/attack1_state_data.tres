@@ -7,4 +7,4 @@ script = ExtResource( 1 )
 frame_offset = [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 scan_in_frame = [ false, false, false, true, false, false ]
 can_attack_in_frame = [ false, false, false, false, true, true ]
-frame_impulse = [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 0.5, 0.5 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+frame_impulse = [ Vector2( 0, 0 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]

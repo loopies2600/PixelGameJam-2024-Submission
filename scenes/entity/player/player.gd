@@ -236,6 +236,10 @@ func _tick_swim_state(delta : float):
 		set_state(PlayerStates.IDLE)
 	
 func _tick_attack_state(delta : float):
+	base_speed = 0.0
+	
+	can_input = false
+	
 	if ATTACK_1_DATA.can_attack_in_frame[anim_sprite.frame] == true:
 		attacking = false
 		
