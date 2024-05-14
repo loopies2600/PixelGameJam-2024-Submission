@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/comet_card.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/title/comet_logo.png" type="Texture" id=2]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="CometCard" type="TextureRect" parent="."]
+margin_right = 896.0
+margin_bottom = 240.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+
+[node name="CometLogo" type="Sprite" parent="."]
+position = Vector2( 632, 128 )
+texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0

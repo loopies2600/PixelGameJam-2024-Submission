@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/game_state/gst_gamefield.gd" type="Script" id=3]
 [ext_resource path="res://scenes/entity/loot_chest/loot_chest.tscn" type="PackedScene" id=7]
 
-[node name="GameState" type="Node2D"]
+[node name="MainGame" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="BlackBG" type="CanvasLayer" parent="."]
