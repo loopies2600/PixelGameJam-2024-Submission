@@ -5,42 +5,52 @@
 [ext_resource path="res://scenes/particles/hit_stars.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 40, 38 )
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 40, 0, 40, 38 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 80, 0, 40, 38 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 120, 0, 40, 38 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 160, 0, 40, 38 )
 
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 66, 0, 22, 27 )
+
 [sub_resource type="AtlasTexture" id=6]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 22, 27 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 22, 0, 22, 27 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 44, 0, 22, 27 )
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 66, 0, 22, 27 )
-
 [sub_resource type="AtlasTexture" id=10]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 88, 0, 22, 27 )
 
@@ -51,7 +61,7 @@ animations = [ {
 "name": "Big",
 "speed": 20.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 9 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 10 ) ],
 "loop": true,
 "name": "Small",
 "speed": 20.0
