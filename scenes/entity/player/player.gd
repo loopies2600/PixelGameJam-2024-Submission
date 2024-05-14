@@ -5,6 +5,8 @@ const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
 const LERP_WEIGHT := 8.0
 
+const HURT_FREEZE_TIME := 0.5
+
 const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
 
 const HIT_STARS : PackedScene = preload("res://scenes/particles/hit_stars.tscn")
@@ -20,7 +22,8 @@ enum PlayerStates {
 	IDLE,
 	WALK,
 	DIVE,
-	ATTACK
+	ATTACK,
+	HURT,
 	CUTSCENE # siempre al final
 }
 
@@ -43,6 +46,7 @@ onready var inventory : Inventory = $PlayerInventory
 onready var punch_sound : AudioStreamPlayer = $SuccessfulPunchSound
 onready var attack_pivot : Node2D = $AttackHitPivot
 onready var swing_sound : AudioStreamPlayer = $SwordSwingSound
+onready var extra_anim : AnimationPlayer = $SpriteAnims
 
 func _ready():
 	Global.player = self
@@ -52,6 +56,10 @@ func _ready():
 	CutsceneManager.connect("cutscene_ended", self, "_on_cutscene_end")
 	
 	anim_sprite.connect("frame_changed", self, "_on_anim_frame_update")
+	
+	yield(get_tree().create_timer(5.0), "timeout")
+	
+	take_damage(self, 5)
 	
 func _on_anim_frame_update():
 	if anim_sprite.animation.begins_with("attack"):
@@ -66,6 +74,9 @@ func _on_cutscene_end():
 	can_input = true
 	
 	set_state(PlayerStates.IDLE)
+	
+func _on_damage_taken(damage_amount, source):
+	set_state(PlayerStates.HURT)
 	
 func _on_death(damage_amount, source):
 	visible = false
@@ -167,6 +178,17 @@ func _on_state_enter(state : int):
 			can_input = false
 			
 			yield(anim_sprite, "animation_finished")
+			
+			set_state(PlayerStates.IDLE)
+		PlayerStates.HURT:
+			extra_anim.play("Hurt")
+			frozen = true
+			
+			var freeze_timer := get_tree().create_timer(HURT_FREEZE_TIME)
+				
+			yield(freeze_timer, "timeout")
+			
+			frozen = false
 			
 			set_state(PlayerStates.IDLE)
 		_:

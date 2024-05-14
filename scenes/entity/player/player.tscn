@@ -1,10 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://data/player/animframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/entity/player/player.gd" type="Script" id=2]
 [ext_resource path="res://data/inventory/inventory.gd" type="Script" id=3]
 [ext_resource path="res://assets/streams/sounds/punch.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/streams/sounds/sword_swing.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/shaders/flash.shader" type="Shader" id=6]
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 1.0
+shader_param/opacity = 1.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 32 )
@@ -12,11 +20,93 @@ extents = Vector2( 32, 32 )
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
+[sub_resource type="Animation" id=4]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainSprite:material:shader_param/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.976471, 0.164706, 0.164706, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainSprite:material:shader_param/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainSprite:material:shader_param/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 126
 script = ExtResource( 2 )
 
 [node name="MainSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 3 )
 frames = ExtResource( 1 )
 animation = "idle_h"
 playing = true
@@ -66,3 +156,9 @@ bus = "UnderwaterEcho"
 [node name="SwordSwingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 bus = "UnderwaterEcho"
+
+[node name="SpriteAnims" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Hurt = SubResource( 4 )
+anims/Idle = SubResource( 6 )
+anims/RESET = SubResource( 5 )

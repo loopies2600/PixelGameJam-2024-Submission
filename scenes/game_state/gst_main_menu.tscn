@@ -1,15 +1,289 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sprites/comet_card.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/title/comet_logo.png" type="Texture" id=2]
+[ext_resource path="res://assets/shaders/wave.shader" type="Shader" id=3]
+[ext_resource path="res://assets/sprites/title/game_logo.png" type="Texture" id=4]
+[ext_resource path="res://assets/screenplayer/fonts/aquarius_bold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scenes/game_state/gst_main_menu.gd" type="Script" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/toScreen = null
+shader_param/effectType = 0
+shader_param/uSpeed = 1.0
+shader_param/uFrequency = 32.0
+shader_param/uWaveAmplitude = 0.025
+
+[sub_resource type="Animation" id=5]
+resource_name = "FlashText"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PanyKey:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 3.605, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PanyKey:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "BaseTitleAnim"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4, 6, 8 ),
+"transitions": PoolRealArray( 0.210224, 60887.3, 0.203063, 0.329877 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 464, 0 ), Vector2( 464, 0 ), Vector2( 1296, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameLogo:material:shader_param/uWaveAmplitude")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 8, 9, 9.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 4.0, 0.013, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GameLogo:material:shader_param/uFrequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 32.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GameLogo:material:shader_param/uSpeed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GameLogo:material:shader_param/effectType")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("GameLogo:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("PanyKey:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("PanyKey:rect_scale")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 8, 8.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameLogo:material:shader_param/uWaveAmplitude")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GameLogo:material:shader_param/uFrequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 32.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GameLogo:material:shader_param/uSpeed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GameLogo:material:shader_param/effectType")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("GameLogo:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("PanyKey:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("PanyKey:rect_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/toScreen = null
+shader_param/effectType = 0
+shader_param/uSpeed = 4.0
+shader_param/uFrequency = 32.0
+shader_param/uWaveAmplitude = 4.0
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource( 6 )
 
-[node name="CometCard" type="TextureRect" parent="."]
-margin_right = 896.0
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+
+[node name="CometCard" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource( 1 )
+margin_right = 1888.0
 margin_bottom = 240.0
 texture = ExtResource( 1 )
 stretch_mode = 2
+
+[node name="PanyKey" type="Label" parent="."]
+visible = false
+margin_left = 1329.0
+margin_top = 184.0
+margin_right = 1601.0
+margin_bottom = 204.0
+rect_pivot_offset = Vector2( 136, 10 )
+custom_fonts/font = ExtResource( 5 )
+text = "PRESS ANY KEY TO START"
+
+[node name="FlashText" type="AnimationPlayer" parent="PanyKey"]
+root_node = NodePath("../..")
+autoplay = "FlashText"
+anims/FlashText = SubResource( 5 )
+anims/RESET = SubResource( 6 )
 
 [node name="CometLogo" type="Sprite" parent="."]
 position = Vector2( 632, 128 )
@@ -17,3 +291,15 @@ texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "BaseTitleAnim"
+anims/BaseTitleAnim = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="GameLogo" type="Sprite" parent="."]
+visible = false
+material = SubResource( 4 )
+position = Vector2( 1456, 72 )
+texture = ExtResource( 4 )

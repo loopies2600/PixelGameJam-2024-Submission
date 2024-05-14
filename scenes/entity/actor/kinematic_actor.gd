@@ -18,6 +18,8 @@ var velocity : Vector2 = Vector2.ZERO
 
 var dead : bool = false
 var attacking : bool = false
+var frozen : bool = false
+var parrying : bool = false
 
 onready var health : int = max_health
 
@@ -32,6 +34,7 @@ func _on_death(damage_amount, source):
 	queue_free()
 	
 func attack(victim : KinematicActor, damage_amount := strength) -> bool:
+	if frozen: return false
 	if attacking: return false
 	
 	victim.take_damage(self, damage_amount)
@@ -41,6 +44,8 @@ func attack(victim : KinematicActor, damage_amount := strength) -> bool:
 	return true
 	
 func take_damage(source, damage_amount : int):
+	if parrying: return
+	if frozen: return
 	if dead: return
 	if damage_amount <= 0: return
 	
@@ -55,6 +60,8 @@ func take_damage(source, damage_amount : int):
 		emit_signal("took_damage", damage_amount, source)
 	
 func get_walk_velocity() -> Vector2:
+	if frozen: return Vector2.ZERO
+	
 	var new_velocity : Vector2 = direction * base_speed
 	
 	return velocity.linear_interpolate(new_velocity, 1.0 - steering)
