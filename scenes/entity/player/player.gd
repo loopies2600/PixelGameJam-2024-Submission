@@ -7,6 +7,8 @@ const LERP_WEIGHT := 8.0
 
 const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
 
+const HIT_STARS : PackedScene = preload("res://scenes/particles/hit_stars.tscn")
+
 export (float, 0.0, 0.99) var walk_steering := 0.3
 export (float, 0.0, 0.99) var swim_steering := 0.96
 
@@ -180,6 +182,16 @@ func try_attack():
 		var collider = attack_area.get_collider(i)
 		
 		if collider is KinematicActor:
+			randomize()
+			
+			var star_amount := 4 + (randi() % 11)
+			
+			for j in range(star_amount):
+				var new_hit_star = HIT_STARS.instance()
+				
+				new_hit_star.global_position = collider.global_position
+				get_parent().add_child(new_hit_star)
+				
 			attack(collider)
 			
 func _try_interaction():
