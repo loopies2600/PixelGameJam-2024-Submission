@@ -19,14 +19,17 @@ export (float) var swing_dash := 300.0
 enum PlayerStates {
 	IDLE,
 	WALK,
-	SWIM,
+	DIVE,
 	ATTACK
 	CUTSCENE # siempre al final
 }
 
 var current_state : int = PlayerStates.IDLE
+var previous_state : int = PlayerStates.IDLE
+
 var input_direction : Vector2 = Vector2.ZERO
 var can_input := true
+var lock_anim := false
 
 var look_angle : Vector2 = Vector2.ZERO
 
@@ -91,6 +94,9 @@ func get_dominant_facing() -> String:
 	return facing_name
 	
 func _animate():
+	if lock_anim:
+		return
+	
 	var anim_name := ""
 	
 	var state_name : String = PlayerStates.keys()[current_state]
@@ -140,6 +146,15 @@ func _on_state_enter(state : int):
 	anim_sprite.frame = 0
 	
 	match state:
+		PlayerStates.IDLE:
+			if previous_state != PlayerStates.ATTACK:
+				lock_anim = true
+				
+				var idle_anim_delay := get_tree().create_timer(0.1)
+				
+				yield(idle_anim_delay, "timeout")
+				
+				lock_anim = false
 		PlayerStates.ATTACK:
 			swing_sound.pitch_scale = rand_range(1.0, 1.3)
 			swing_sound.play()
@@ -159,7 +174,10 @@ func _on_state_enter(state : int):
 	
 func set_state(new_state_id : int):
 	_on_state_exit(current_state)
+	
+	previous_state = current_state
 	current_state = new_state_id
+	
 	_on_state_enter(current_state)
 	
 func reset_combo_counter():
@@ -177,8 +195,8 @@ func _process(delta : float):
 			_tick_idle_state(delta)
 		PlayerStates.WALK:
 			_tick_walk_state(delta)
-		PlayerStates.SWIM:
-			_tick_swim_state(delta)
+		PlayerStates.DIVE:
+			_tick_diving_state(delta)
 		PlayerStates.ATTACK:
 			_tick_attack_state(delta)
 		PlayerStates.CUTSCENE:
@@ -251,12 +269,12 @@ func _tick_walk_state(delta : float):
 	direction = input_direction
 	
 	if Input.is_action_pressed("run"):
-		set_state(PlayerStates.SWIM)
+		set_state(PlayerStates.DIVE)
 	
 	if not is_input_moving():
 		set_state(PlayerStates.IDLE)
 	
-func _tick_swim_state(delta : float):
+func _tick_diving_state(delta : float):
 	base_speed = lerp(base_speed, swim_speed, LERP_WEIGHT * delta)
 	steering = lerp(steering, swim_steering, (LERP_WEIGHT * 2.0) * delta)
 	

@@ -4,6 +4,7 @@ class_name Pickup
 export (float) var base_gravity := 9.8
 export (float) var damping := 0.8
 export (float) var pickbox_delay := 1.0
+export (float) var attraction_distance := 32.0
 
 var velocity : Vector3 = Vector3.ZERO
 
@@ -47,6 +48,20 @@ func _physics_process(delta):
 	
 	position = Vector2(position_3d.x, position_3d.z + position_3d.y)
 	
+	if is_equal_approx(attraction_distance, 0.0):
+		return
+	
+	if monitoring:
+		_move_to_player(delta)
+		
+func _move_to_player(delta : float):
+	var distance_to_player : float = Global.player.global_position.distance_squared_to(global_position)
+	
+	if distance_to_player < pow(attraction_distance, 2.0):
+		var player_position_3d := Vector3(Global.player.position.x, 0.0, Global.player.position.y)
+		
+		position_3d = position_3d.move_toward(player_position_3d, 1.5)
+		
 func is_on_floor() -> bool:
 	if position_3d.y >= 0.0:
 		position_3d.y = 0.0

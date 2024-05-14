@@ -1,24 +1,17 @@
 extends Reference
 class_name ItemData
 
+const ITEM_DEFINITIONS := [
+	preload("res://data/pickup/item/dummy_fish.tres"),
+	preload("res://data/pickup/item/red_fish.tres")
+]
+
 enum GameItems {
-	TEST_ITEM
+	TEST_ITEM,
+	RED_FISH
 }
 
-static func get_identifier(item_id : int = 0) -> String:
-	if item_id > GameItems.size(): return "null"
-	if item_id < 0: return "null"
+static func get_definition(item_id : int = 0) -> ItemPickupDefinition:
+	item_id = clamp(item_id, 0, GameItems.size() - 1)
 	
-	return GameItems.keys()[item_id]
-	
-static func get_hitbox(item_id : int = 0) -> Shape2D:
-	if item_id > GameItems.size(): return null
-	if item_id < 0: return null
-	
-	return load("res://data/pickup/hitbox/item/item_hitbox_%s.tres" % item_id) as Shape2D
-	
-static func get_sprite(item_id : int = 0) -> Texture:
-	if item_id > GameItems.size(): return null
-	if item_id < 0: return null
-	
-	return load("res://assets/items/item_%s.png" % item_id) as Texture
+	return ITEM_DEFINITIONS[item_id]

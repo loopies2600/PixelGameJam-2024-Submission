@@ -4,7 +4,8 @@ class_name Inventory
 var data : Dictionary = {}
 
 func add_item(item_id : int):
-	var id_string := ItemData.get_identifier(item_id)
+	var item_def : ItemPickupDefinition = ItemData.get_definition(item_id)
+	var id_string := item_def.identifier
 	
 	if not data.has(id_string):
 		data[id_string] = 0
@@ -14,7 +15,8 @@ func add_item(item_id : int):
 	print(data)
 	
 func remove_item(item_id : int):
-	var id_string := ItemData.get_identifier(item_id)
+	var item_def : ItemPickupDefinition = ItemData.get_definition(item_id)
+	var id_string := item_def.identifier
 	
 	if data.has(id_string):
 		data[id_string] += 1

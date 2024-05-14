@@ -1,11 +1,23 @@
 extends Pickup
 class_name ItemPickup
 
-var item_id : int = ItemData.GameItems.TEST_ITEM
+var item_id : int = ItemData.GameItems.TEST_ITEM setget _set_item_id
 
+onready var item_def : ItemPickupDefinition = ItemData.get_definition(item_id)
+
+func _set_item_id(value : int):
+	item_id = value
+	
+	_refresh_pickup()
+	
 func _ready():
-	pickbox.shape = ItemData.get_hitbox(item_id)
-	sprite.texture = ItemData.get_sprite(item_id)
+	_refresh_pickup()
+	
+func _refresh_pickup():
+	item_def = ItemData.get_definition(item_id)
+	
+	pickbox.shape = item_def.collision_box
+	sprite.texture = item_def.sprite
 
 func _on_picked_up(body : Node):
 	if body is PlayerActor:

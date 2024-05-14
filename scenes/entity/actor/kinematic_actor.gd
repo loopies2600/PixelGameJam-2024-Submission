@@ -11,6 +11,8 @@ export (float, 0.0, 1.0) var damping := 0.8
 export (int) var max_health := 10
 export (int) var strength := 1
 
+export (PoolIntArray) var death_drops := []
+
 var direction : Vector2 = Vector2.ZERO
 var velocity : Vector2 = Vector2.ZERO
 

@@ -2,10 +2,11 @@
 
 [ext_resource path="res://scenes/entity/pickup/pickup.gd" type="Script" id=1]
 
-[node name="item_pickup" type="Area2D"]
+[node name="Pickup" type="Area2D"]
 collision_layer = 64
 collision_mask = 64
 script = ExtResource( 1 )
+attraction_distance = 0.0
 
 [node name="Pickbox" type="CollisionShape2D" parent="."]
 

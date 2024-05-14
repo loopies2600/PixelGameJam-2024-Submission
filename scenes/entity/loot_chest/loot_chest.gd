@@ -7,12 +7,21 @@ const LID_SPRITE := preload("res://assets/sprites/objects/spr_chest_lid.png")
 const LOCK_SPRITE := preload("res://assets/sprites/objects/spr_chest_lock.png")
 
 # Ids de items individuales
-export (PoolIntArray) var contents := []
 export (Vector2) var max_item_spread := Vector2(-64, 64)
 
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var item_puke_timer : Timer = $ItemPukeTimer
 
+func _ready():
+	death_drops = death_drops.duplicate()
+	
+	death_drops.clear()
+	
+	for i in range(20):
+		var random_integer : int = [0, 1].pick_random()
+		
+		death_drops.append(random_integer)
+	
 func _on_damage_taken(damage_amount, source):
 	anim.stop(true)
 	anim.play("TakeDamage")
@@ -52,13 +61,13 @@ func _animate_lid():
 	lock_pickup.sprite.texture = LOCK_SPRITE
 	
 func _puke_contents():
-	if contents.size() == 0: return
+	if death_drops.size() == 0: return
 	
 	item_puke_timer.start()
 	
 	yield(item_puke_timer, "timeout")
 	
-	var current_item_id : int = contents.pop_back()
+	var current_item_id : int = death_drops.pop_back()
 	var current_item_instance = ITEM_PICKUP_SCENE.instance()
 	
 	current_item_instance.position = global_position
@@ -66,5 +75,7 @@ func _puke_contents():
 	
 	get_parent().add_child(current_item_instance)
 	
-	if contents.size() != 0:
+	current_item_instance.item_id = current_item_id
+	
+	if death_drops.size() != 0:
 		_puke_contents()
