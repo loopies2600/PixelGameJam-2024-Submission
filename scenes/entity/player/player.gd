@@ -33,7 +33,7 @@ var current_combo : int = 1
 onready var cam : Camera2D = $Camera2D
 onready var interaction_ray : RayCast2D = $InteractionRay
 onready var anim_sprite : AnimatedSprite = $MainSprite
-onready var attack_area : ShapeCast2D = $MainSprite/AttackAreaTest
+onready var attack_area : ShapeCast2D = $AttackHitTest_RIGHT
 
 func _ready():
 	Global.player = self
@@ -61,6 +61,29 @@ func _on_cutscene_end():
 func _on_death(damage_amount, source):
 	visible = false
 	
+func get_dominant_facing() -> String:
+	var h_dir = sign(look_angle.dot(Vector2.RIGHT))
+	var v_dir = sign(look_angle.dot(Vector2.UP))
+	
+	var h_dot := abs(look_angle.dot(Vector2.RIGHT))
+	
+	var facing_name := "right"
+	
+	if v_dir == 1:
+		facing_name = "up"
+	elif v_dir == -1:
+		facing_name = "down"
+	
+	if h_dot > 0.7:
+		if h_dir == 1:
+			facing_name = "right"
+			anim_sprite.scale.x = 1.0
+		elif h_dir == -1:
+			facing_name = "left"
+			anim_sprite.scale.x = -1.0
+			
+	return facing_name
+	
 func _animate():
 	var anim_name := ""
 	
@@ -68,20 +91,11 @@ func _animate():
 	
 	if current_state == PlayerStates.ATTACK:
 		state_name += str(current_combo)
-		
-	var suffix := "_h"
 	
-	var h_dir := sign(look_angle.dot(Vector2.RIGHT))
+	var suffix = "_" + get_dominant_facing()
 	
-	anim_sprite.scale.x = h_dir
-	
-	match int(sign(round(look_angle.y))):
-		-1:
-			suffix = "_up"
-			anim_sprite.scale.x = 1.0
-		1:
-			suffix = "_down"
-			anim_sprite.scale.x = 1.0
+	if suffix in ["_left", "_right"]:
+		suffix = "_h"
 	
 	anim_name = state_name.to_lower() + suffix
 	
