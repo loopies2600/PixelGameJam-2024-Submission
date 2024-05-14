@@ -33,6 +33,7 @@ var current_combo : int = 1
 onready var cam : Camera2D = $Camera2D
 onready var interaction_ray : RayCast2D = $InteractionRay
 onready var anim_sprite : AnimatedSprite = $MainSprite
+onready var attack_area : ShapeCast2D = $MainSprite/AttackAreaTest
 
 func _ready():
 	Global.player = self
@@ -100,6 +101,7 @@ func _on_state_enter(state : int):
 	
 	match state:
 		PlayerStates.ATTACK:
+			velocity = Vector2.ZERO
 			steering = 0.782
 			look_angle = look_at_cursor()
 			_reposition_sprite()
@@ -158,12 +160,10 @@ func check_input():
 		set_state(PlayerStates.ATTACK)
 	
 func try_attack():
-	var _shapecast : ShapeCast2D = $AttackAreaTest
+	if not attack_area.is_colliding(): return
 	
-	if not _shapecast.is_colliding(): return
-	
-	for i in range(_shapecast.get_collision_count()):
-		var collider = _shapecast.get_collider(i)
+	for i in range(attack_area.get_collision_count()):
+		var collider = attack_area.get_collider(i)
 		
 		if collider is KinematicActor:
 			attack(collider)
@@ -237,7 +237,7 @@ func _check_attack_hit():
 	if atk_data.scan_in_frame[frame_idx] == true:
 		try_attack()
 	
-	velocity += (swing_dash * atk_data.frame_impulse[frame_idx]) * look_at_cursor()
+	velocity = (swing_dash * atk_data.frame_impulse[frame_idx]) * look_at_cursor()
 	_reposition_sprite()
 	
 func _reposition_sprite():
