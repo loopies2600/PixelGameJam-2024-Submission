@@ -8,7 +8,7 @@ const LOCK_SPRITE := preload("res://assets/sprites/objects/spr_chest_lock.png")
 
 # Ids de items individuales
 export (PoolIntArray) var contents := []
-export (Vector2) var max_item_spread := Vector2(-128, 128)
+export (Vector2) var max_item_spread := Vector2(-64, 64)
 
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var item_puke_timer : Timer = $ItemPukeTimer
@@ -28,7 +28,7 @@ func _on_death(damage_amount, source):
 	
 	yield(item_puke_timer, "timeout")
 	
-	#_puke_contents()
+	_puke_contents()
 	
 func _get_random_velocity(max_spread := max_item_spread) -> Vector3:
 	randomize()

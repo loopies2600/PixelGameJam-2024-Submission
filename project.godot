@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/screenplayer/interactable/Interactable.gd"
 }, {
+"base": "Node",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://data/inventory/inventory.gd"
+}, {
 "base": "Reference",
 "class": "ItemData",
 "language": "GDScript",
@@ -121,6 +126,7 @@ _global_script_class_icons={
 "CutsceneCommandSetProperty": "",
 "CutsceneCommandTextbox": "",
 "Interactable": "res://assets/screenplayer/icons/interactable.png",
+"Inventory": "",
 "ItemData": "",
 "ItemPickup": "",
 "KinematicActor": "",

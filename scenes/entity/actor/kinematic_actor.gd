@@ -29,12 +29,14 @@ func _on_damage_taken(damage_amount, source):
 func _on_death(damage_amount, source):
 	queue_free()
 	
-func attack(victim : KinematicActor, damage_amount := strength):
-	if attacking: return
+func attack(victim : KinematicActor, damage_amount := strength) -> bool:
+	if attacking: return false
 	
 	victim.take_damage(self, damage_amount)
 	
 	attacking = true
+	
+	return true
 	
 func take_damage(source, damage_amount : int):
 	if dead: return

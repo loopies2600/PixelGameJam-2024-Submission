@@ -35,7 +35,11 @@ var current_combo : int = 1
 onready var cam : Camera2D = $Camera2D
 onready var interaction_ray : RayCast2D = $InteractionRay
 onready var anim_sprite : AnimatedSprite = $MainSprite
-onready var attack_area : ShapeCast2D = $AttackHitTest_RIGHT
+onready var attack_area : ShapeCast2D = $AttackHitPivot/AttackHitTester
+onready var inventory : Inventory = $PlayerInventory
+onready var punch_sound : AudioStreamPlayer = $SuccessfulPunchSound
+onready var attack_pivot : Node2D = $AttackHitPivot
+onready var swing_sound : AudioStreamPlayer = $SwordSwingSound
 
 func _ready():
 	Global.player = self
@@ -112,11 +116,34 @@ func _on_state_exit(state : int):
 			can_input = true
 			anim_sprite.offset = Vector2.ZERO
 	
+func _on_successful_punch(target : KinematicActor):
+	randomize()
+	
+	var star_amount := 4 + (randi() % 11)
+	
+	for j in range(star_amount):
+		var new_hit_star = HIT_STARS.instance()
+		
+		new_hit_star.global_position = target.global_position
+		get_parent().add_child(new_hit_star)
+	
+	var lethal := target.health <= 0
+	
+	punch_sound.pitch_scale = rand_range(0.75, 1.75)
+	
+	if lethal:
+		punch_sound.pitch_scale = rand_range(0.4, 0.6)
+		
+	punch_sound.play()
+	
 func _on_state_enter(state : int):
 	anim_sprite.frame = 0
 	
 	match state:
 		PlayerStates.ATTACK:
+			swing_sound.pitch_scale = rand_range(1.0, 1.3)
+			swing_sound.play()
+			
 			velocity = Vector2.ZERO
 			steering = 0.782
 			look_angle = look_at_cursor()
@@ -139,6 +166,7 @@ func reset_combo_counter():
 	current_combo = 1
 	
 func _process(delta : float):
+	attack_pivot.rotation = look_angle.angle()
 	interaction_ray.cast_to = INTERACTION_OFFSET.rotated(look_angle.angle())
 	
 	if can_input:
@@ -182,17 +210,10 @@ func try_attack():
 		var collider = attack_area.get_collider(i)
 		
 		if collider is KinematicActor:
-			randomize()
+			var success := attack(collider)
 			
-			var star_amount := 4 + (randi() % 11)
-			
-			for j in range(star_amount):
-				var new_hit_star = HIT_STARS.instance()
-				
-				new_hit_star.global_position = collider.global_position
-				get_parent().add_child(new_hit_star)
-				
-			attack(collider)
+			if success:
+				_on_successful_punch(collider)
 			
 func _try_interaction():
 	if current_state == PlayerStates.CUTSCENE:

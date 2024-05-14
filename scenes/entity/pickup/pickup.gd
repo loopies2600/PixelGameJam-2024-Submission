@@ -3,6 +3,7 @@ class_name Pickup
 
 export (float) var base_gravity := 9.8
 export (float) var damping := 0.8
+export (float) var pickbox_delay := 1.0
 
 var velocity : Vector3 = Vector3.ZERO
 
@@ -14,6 +15,16 @@ onready var sprite : Sprite = $Sprite
 var lifetime := 0.0
 
 func _ready():
+	monitoring = false
+	monitorable = false
+	
+	var pick_delay_timer := get_tree().create_timer(pickbox_delay)
+	
+	yield(pick_delay_timer, "timeout")
+	
+	monitoring = true
+	monitorable = true
+	
 	connect("body_entered", self, "_on_picked_up")
 	
 func _process(delta):
@@ -42,5 +53,5 @@ func is_on_floor() -> bool:
 		
 	return position_3d.y >= 0.0
 	
-func _on_picked_up(body):
+func _on_picked_up(body : Node):
 	pass
