@@ -29,13 +29,15 @@ func _ready():
 	connect("body_entered", self, "_on_picked_up")
 	
 func _process(delta):
-	lifetime += delta
-	
 	z_index = int(max(get_global_transform_with_canvas().origin.y - position_3d.y, 0))
+	
+	lifetime += delta
 	
 	# kill after 5 mins
 	if lifetime > (5.0 * 60.0):
 		queue_free()
+	
+	position = Vector2(position_3d.x, position_3d.z + position_3d.y).round()
 	
 func _physics_process(delta):
 	if not is_on_floor():
@@ -45,8 +47,6 @@ func _physics_process(delta):
 		velocity.z *= damping
 		
 	position_3d += velocity * delta
-	
-	position = Vector2(position_3d.x, position_3d.z + position_3d.y)
 	
 	if is_equal_approx(attraction_distance, 0.0):
 		return
