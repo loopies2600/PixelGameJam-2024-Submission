@@ -20,6 +20,6 @@ func _refresh_pickup():
 	sprite.texture = item_def.sprite
 
 func _on_picked_up(body : Node):
-	if body is PlayerActor:
+	if body.name == Global.player.name:
 		body.inventory.add_item(item_id)
 		queue_free()

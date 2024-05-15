@@ -10,8 +10,6 @@ const GRACE_TIME := 1.0
 
 const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
 
-const HIT_STARS : PackedScene = preload("res://scenes/particles/hit_stars.tscn")
-
 export (float, 0.0, 0.99) var walk_steering := 0.3
 export (float, 0.0, 0.99) var swim_steering := 0.96
 
@@ -139,15 +137,7 @@ func _on_state_exit(state : int):
 			invencible = false
 			
 func _on_successful_punch(target : KinematicActor):
-	randomize()
-	
-	var star_amount := 4 + (randi() % 11)
-	
-	for j in range(star_amount):
-		var new_hit_star = HIT_STARS.instance()
-		
-		new_hit_star.global_position = target.global_position
-		get_parent().add_child(new_hit_star)
+	._on_successful_punch(target)
 	
 	var lethal := target.health <= 0
 	
@@ -210,6 +200,9 @@ func set_state(new_state_id : int):
 func reset_combo_counter():
 	current_combo = 1
 	
+func _physics_process(delta):
+	velocity = get_walk_velocity()
+	
 func _process(delta : float):
 	attack_pivot.rotation = look_angle.angle()
 	interaction_ray.cast_to = INTERACTION_OFFSET.rotated(look_angle.angle())
@@ -255,10 +248,7 @@ func try_attack():
 		var collider = attack_area.get_collider(i)
 		
 		if collider is KinematicActor:
-			var success := attack(collider)
-			
-			if success:
-				_on_successful_punch(collider)
+			attack(collider)
 			
 func _try_interaction():
 	if current_state == PlayerStates.CUTSCENE:
