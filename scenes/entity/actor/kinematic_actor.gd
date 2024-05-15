@@ -85,6 +85,7 @@ func _on_successful_punch(target : KinematicActor):
 func attack(victim : KinematicActor, damage_amount := strength) -> bool:
 	if frozen: return false
 	if attacking: return false
+	if dead: return false
 	
 	victim.take_damage(self, damage_amount)
 	_on_successful_punch(victim)

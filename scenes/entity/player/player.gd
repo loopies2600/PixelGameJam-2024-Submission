@@ -23,6 +23,7 @@ enum PlayerStates {
 	DIVE,
 	ATTACK,
 	HURT,
+	DEAD,
 	CUTSCENE # siempre al final
 }
 
@@ -56,6 +57,12 @@ func _ready():
 	
 	anim_sprite.connect("frame_changed", self, "_on_anim_frame_update")
 	
+	$SuicideTimer.connect("timeout", self, "_suicide_timer")
+	
+func _suicide_timer():
+	attacking = false
+	attack(self, 1)
+		
 func _on_anim_frame_update():
 	if anim_sprite.animation.begins_with("attack"):
 		_check_attack_hit()
@@ -74,7 +81,7 @@ func _on_damage_taken(damage_amount, source):
 	set_state(PlayerStates.HURT)
 	
 func _on_death(damage_amount, source):
-	visible = false
+	set_state(PlayerStates.DEAD)
 	
 func get_dominant_facing() -> String:
 	var h_dir = sign(look_angle.dot(Vector2.RIGHT))
@@ -221,7 +228,9 @@ func _process(delta : float):
 			_tick_attack_state(delta)
 		PlayerStates.CUTSCENE:
 			_tick_cutscene_state(delta)
-	
+		PlayerStates.DEAD:
+			_tick_dead_state(delta)
+			
 	_animate()
 	
 func look_at_cursor() -> Vector2:
@@ -343,3 +352,6 @@ func _tick_cutscene_state(delta : float):
 	#look_angle = Vector2.ZERO
 	
 	can_input = false
+	
+func _tick_dead_state(delta : float):
+	_tick_cutscene_state(delta)

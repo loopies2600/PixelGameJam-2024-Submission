@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=38 format=2]
+[gd_resource type="SpriteFrames" load_steps=39 format=2]
 
 [ext_resource path="res://assets/sprites/objects/sprsh_knight.png" type="Texture" id=1]
 
@@ -71,6 +71,11 @@ region = Rect2( 560, 224, 112, 112 )
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 672, 224, 112, 112 )
+
+[sub_resource type="AtlasTexture" id=37]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 672, 336, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=27]
 flags = 4
@@ -198,6 +203,21 @@ animations = [ {
 "loop": true,
 "name": "attack1_up",
 "speed": 20.0
+}, {
+"frames": [ SubResource( 37 ) ],
+"loop": true,
+"name": "dead_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 37 ) ],
+"loop": true,
+"name": "dead_h",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 37 ) ],
+"loop": true,
+"name": "dead_up",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 28 ), SubResource( 29 ), SubResource( 29 ), SubResource( 29 ) ],
 "loop": true,

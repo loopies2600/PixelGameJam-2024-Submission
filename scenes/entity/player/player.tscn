@@ -162,3 +162,7 @@ autoplay = "Idle"
 anims/Hurt = SubResource( 4 )
 anims/Idle = SubResource( 6 )
 anims/RESET = SubResource( 5 )
+
+[node name="SuicideTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
