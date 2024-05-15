@@ -39,6 +39,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 288, 216 ), Vector2( 416, 216 ), Vector2( 416, 216 ), Vector2( 288, 216 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2, 2.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "fish_under_consent_of_king"
+}, {
+"args": [  ],
+"method": "_wipe_inventory"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.001

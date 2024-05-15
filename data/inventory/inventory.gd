@@ -6,6 +6,8 @@ var data : Dictionary = {}
 signal item_added(item_id)
 signal item_deleted(item_id)
 
+var locked := false
+
 func get_item_count() -> int:
 	var item_count := 0
 	
@@ -18,6 +20,9 @@ func get_item_count() -> int:
 	return item_count
 	
 func add_item(item_id : int):
+	if locked: 
+		return
+	
 	var item_def : ItemPickupDefinition = ItemData.get_definition(item_id)
 	var id_string := item_def.identifier
 	
@@ -29,6 +34,9 @@ func add_item(item_id : int):
 	emit_signal("item_added", item_id)
 	
 func remove_item(item_id : int):
+	if locked: 
+		return
+	
 	var item_def : ItemPickupDefinition = ItemData.get_definition(item_id)
 	var id_string := item_def.identifier
 	
@@ -41,6 +49,9 @@ func remove_item(item_id : int):
 	emit_signal("item_deleted", item_id)
 	
 func wipe() -> int:
+	if locked: 
+		return 0
+	
 	var deletion_count := 0
 	
 	for i in range(ItemData.GameItems.size()):
