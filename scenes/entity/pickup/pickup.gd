@@ -16,6 +16,8 @@ onready var sprite : Sprite = $Sprite
 var lifetime := 0.0
 
 func _ready():
+	$DropShadow.set_as_toplevel(true)
+	
 	monitoring = false
 	monitorable = false
 	
@@ -38,6 +40,7 @@ func _process(delta):
 		queue_free()
 	
 	position = Vector2(position_3d.x, position_3d.z + position_3d.y).round()
+	$DropShadow.position = Vector2(position_3d.x, position_3d.z + 3).round()
 	
 func _physics_process(delta):
 	if not is_on_floor():

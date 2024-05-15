@@ -18,7 +18,7 @@ func _ready():
 	death_drops.clear()
 	
 	for i in range(20):
-		var random_integer : int = [0, 1].pick_random()
+		var random_integer : int = [0, 1, 2, 3].pick_random()
 		
 		death_drops.append(random_integer)
 	

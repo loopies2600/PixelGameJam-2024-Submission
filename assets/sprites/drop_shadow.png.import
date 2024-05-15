@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fishometer_front.png-0825fc986dbe6c4e3d6d68ff9c0903dc.stex"
+path="res://.import/drop_shadow.png-ad786a181b010063b7d1c226b9a0787d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/hud/fishometer_front.png"
-dest_files=[ "res://.import/fishometer_front.png-0825fc986dbe6c4e3d6d68ff9c0903dc.stex" ]
+source_file="res://assets/sprites/drop_shadow.png"
+dest_files=[ "res://.import/drop_shadow.png-ad786a181b010063b7d1c226b9a0787d.stex" ]
 
 [params]
 
