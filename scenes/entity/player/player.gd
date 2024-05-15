@@ -57,7 +57,7 @@ func _ready():
 	
 	anim_sprite.connect("frame_changed", self, "_on_anim_frame_update")
 	
-	$SuicideTimer.connect("timeout", self, "_suicide_timer")
+	#$SuicideTimer.connect("timeout", self, "_suicide_timer")
 	
 func _suicide_timer():
 	attacking = false
@@ -250,15 +250,51 @@ func check_input():
 	if Input.is_action_just_pressed("attack"):
 		set_state(PlayerStates.ATTACK)
 	
-func try_attack():
-	if not attack_area.is_colliding(): return
+func _get_shape_query_from_shape_cast_2d(shape_cast : ShapeCast2D) -> Physics2DShapeQueryParameters:
+	var shape := Physics2DShapeQueryParameters.new()
 	
-	for i in range(attack_area.get_collision_count()):
-		var collider = attack_area.get_collider(i)
+	shape.collide_with_areas = shape_cast.collide_with_areas
+	shape.collide_with_bodies = shape_cast.collide_with_bodies
+	shape.collision_layer = shape_cast.collision_mask
+	shape.exclude = [self]
+	shape.margin = shape_cast.margin
+	shape.motion = shape_cast.target_position
+	shape.transform = shape_cast.global_transform
+	shape.shape_rid = shape_cast.shape.get_rid()
+	
+	print(shape.transform)
+	
+	return shape
+	
+func _scan_for_actors() -> PoolIntArray:
+	var space_state := get_world_2d().direct_space_state
+	
+	var hit_test_shape := _get_shape_query_from_shape_cast_2d(attack_area)
+	
+	var hit_test_results := space_state.intersect_shape(hit_test_shape, attack_area.max_results)
+	
+	var actors : PoolIntArray = []
+	
+	for i in range(hit_test_results.size()):
+		var result : Dictionary = hit_test_results[i]
+		var instance_id : int = result.collider.get_instance_id()
 		
-		if collider is KinematicActor:
-			attack(collider)
+		if not actors.has(instance_id):
+			actors.append(instance_id)
+	
+	return actors
+	
+func try_attack():
+	var actor_ids := _scan_for_actors()
+	
+	for i in range(actor_ids.size()):
+		var target = instance_from_id(actor_ids[i])
+		
+		if target is KinematicActor:
+			attack(target)
 			
+	attacking = true
+	
 func _try_interaction():
 	if current_state == PlayerStates.CUTSCENE:
 		return

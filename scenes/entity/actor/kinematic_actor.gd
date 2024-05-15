@@ -90,8 +90,6 @@ func attack(victim : KinematicActor, damage_amount := strength) -> bool:
 	victim.take_damage(self, damage_amount)
 	_on_successful_punch(victim)
 	
-	attacking = true
-	
 	return true
 	
 func take_damage(source, damage_amount : int):

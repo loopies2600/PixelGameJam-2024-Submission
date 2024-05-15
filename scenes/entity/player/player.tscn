@@ -117,7 +117,8 @@ __meta__ = {
 [node name="AttackHitPivot" type="Node2D" parent="."]
 
 [node name="AttackHitTester" type="ShapeCast2D" parent="AttackHitPivot"]
-position = Vector2( 16, -8 )
+position = Vector2( 16, 0 )
+enabled = false
 shape = SubResource( 2 )
 target_position = Vector2( 0, 0 )
 max_results = 4
@@ -127,8 +128,7 @@ collide_with_areas = true
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
