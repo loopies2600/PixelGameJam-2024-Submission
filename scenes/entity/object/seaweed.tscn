@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/objects/animsprites/seaweed.tres" type="SpriteFrames" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 4 )
+
+[node name="seaweed" type="StaticBody2D"]
+
+[node name="1" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "1"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 13 )
+shape = SubResource( 1 )
