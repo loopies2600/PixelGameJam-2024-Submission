@@ -30,7 +30,3 @@ func runEvents():
 	var functionState : GDScriptFunctionState = selectedCutscene.execute()
 	
 	yield(functionState, "completed")
-	
-func _process(_delta):
-# warning-ignore:narrowing_conversion
-	z_index = max(get_global_transform_with_canvas().origin.y, 0)

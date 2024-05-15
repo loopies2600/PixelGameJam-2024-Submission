@@ -40,11 +40,16 @@ func remove_item(item_id : int):
 			
 	emit_signal("item_deleted", item_id)
 	
-func wipe():
+func wipe() -> int:
+	var deletion_count := 0
+	
 	for i in range(ItemData.GameItems.size()):
 		var item_def : ItemPickupDefinition = ItemData.get_definition(i)
 		print(item_def.identifier)
 		
 		while data.has(item_def.identifier):
 			remove_item(i)
+			deletion_count += 1
+			
+	return deletion_count
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/sprites/hud/quexote_healthbar.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hud/health_bar_deplete.png" type="Texture" id=2]
@@ -8,6 +8,52 @@
 [ext_resource path="res://assets/sprites/hud/fishometer_front.png" type="Texture" id=6]
 [ext_resource path="res://scenes/ui/Fishometer.gd" type="Script" id=7]
 [ext_resource path="res://assets/screenplayer/fonts/aquarius_bold.tres" type="DynamicFont" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "BaseAnim"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 288, 216 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "GoOffscreen"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3.5 ),
+"transitions": PoolRealArray( 4.28709, 1, 0.353553, 4.28709 ),
+"update": 0,
+"values": [ Vector2( 288, 216 ), Vector2( 416, 216 ), Vector2( 416, 216 ), Vector2( 288, 216 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 288, 216 ) ]
+}
 
 [node name="MainHud" type="CanvasLayer"]
 layer = 128
@@ -47,3 +93,9 @@ custom_fonts/font = ExtResource( 8 )
 text = "0"
 align = 1
 valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fishometer"]
+autoplay = "BaseAnim"
+anims/BaseAnim = SubResource( 1 )
+anims/GoOffscreen = SubResource( 2 )
+anims/RESET = SubResource( 3 )

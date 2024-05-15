@@ -17,6 +17,8 @@ export (float) var walk_speed := 86.0
 export (float) var swim_speed := 280.0
 export (float) var swing_dash := 300.0
 
+export (int, FLAGS, "Double Speed", "Loot Luck", "Double Strength", "FEVER???") var perks := 0
+
 enum PlayerStates {
 	IDLE,
 	WALK,
@@ -47,6 +49,12 @@ onready var punch_sound : AudioStreamPlayer = $SuccessfulPunchSound
 onready var attack_pivot : Node2D = $AttackHitPivot
 onready var swing_sound : AudioStreamPlayer = $SwordSwingSound
 onready var extra_anim : AnimationPlayer = $SpriteAnims
+
+onready var _bwalk := walk_speed
+onready var _bswim := swim_speed
+onready var _bdash := swing_dash
+
+var current_sprite : Texture = null
 
 func _ready():
 	Global.player = self
@@ -128,6 +136,8 @@ func _animate():
 	
 	anim_sprite.play(anim_name)
 	anim_sprite.frame = prev_anim_frame
+	
+	current_sprite = anim_sprite.frames.get_frame(anim_sprite.animation, anim_sprite.frame)
 	
 func _on_state_exit(state : int):
 	match state:
@@ -211,6 +221,8 @@ func _physics_process(delta):
 	velocity = get_walk_velocity()
 	
 func _process(delta : float):
+	_check_perks()
+	
 	attack_pivot.rotation = look_angle.angle()
 	interaction_ray.cast_to = INTERACTION_OFFSET.rotated(look_angle.angle())
 	
@@ -233,6 +245,26 @@ func _process(delta : float):
 			
 	_animate()
 	
+func _check_perks():
+	walk_speed = _bwalk
+	swim_speed = _bswim
+	swing_dash = _bdash
+	
+	if BitwiseUtil.isBitEnabled(perks, 1):
+		walk_speed = _bwalk * 2.0
+		swim_speed = _bswim * 2.0
+		swing_dash = _bdash * 2.0
+		
+		var ghost_sprite = GHOST_SPRITE.instance()
+		
+		ghost_sprite.base_z_index = -1
+		
+		get_parent().add_child(ghost_sprite)
+		
+		ghost_sprite.global_transform = anim_sprite.global_transform
+		
+		ghost_sprite.texture = current_sprite
+		
 func look_at_cursor() -> Vector2:
 	var angle_to_cursor := get_global_mouse_position().angle_to_point(global_position)
 	
@@ -326,6 +358,7 @@ func _tick_idle_state(delta : float):
 	
 func _tick_walk_state(delta : float):
 	base_speed = lerp(base_speed, walk_speed, LERP_WEIGHT * delta)
+	
 	steering = lerp(steering, walk_steering, LERP_WEIGHT * delta)
 	
 	direction = input_direction

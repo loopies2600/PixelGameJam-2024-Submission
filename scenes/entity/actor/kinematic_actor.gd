@@ -1,8 +1,9 @@
-extends KinematicBody2D
+extends Interactable
 class_name KinematicActor
 
 const ITEM_PICKUP_SCENE : PackedScene = preload("res://scenes/entity/pickup/item_pickup/item_pickup.tscn")
 const HIT_STARS : PackedScene = preload("res://scenes/particles/hit_stars.tscn")
+const GHOST_SPRITE : PackedScene = preload("res://scenes/particles/ghost_sprite.tscn")
 
 signal took_damage(amount, attacker)
 signal died(amount, attacker)
@@ -17,6 +18,8 @@ export (int) var strength := 1
 export (Array, int) var death_drops := []
 export (float) var drops_delay := 0.001
 export (Vector2) var max_item_spread := Vector2(-64, 64)
+
+export (int) var loot_multiplier := 1
 
 var direction : Vector2 = Vector2.ZERO
 var velocity : Vector2 = Vector2.ZERO
