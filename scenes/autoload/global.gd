@@ -3,6 +3,7 @@ extends Node
 const TB_SCENE := preload("res://scenes/screenplayer/text_box/TextBox.tscn")
 const MAINFONT := preload("res://assets/screenplayer/fonts/aquarius_monospace.tres")
 const PLAYER_SCENE := preload("res://scenes/entity/player/player.tscn")
+const KING_SCENE := preload("res://scenes/entity/god_himself/KING.tscn")
 
 var textbox : TextBox
 var _tbBgOffset : Vector2 = Vector2.ZERO
@@ -11,6 +12,7 @@ var focusActor : Node2D = null
 var exiting : bool = false
 
 onready var player : PlayerActor = PLAYER_SCENE.instance() as PlayerActor
+onready var king : KingActor = KING_SCENE.instance() as KingActor
 
 func _notification(what):
 	match what:

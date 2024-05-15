@@ -43,7 +43,7 @@ func _on_inventory_item_added(new_item_id : int):
 func fish_under_consent_of_king():
 	var fish_count := Global.player.inventory.wipe()
 	
-	#Global.king.fish_count += fish_count
+	Global.king.fish_count += fish_count
 	
 func _on_inventory_item_deleted(item_id):
 	subtraction_stack += 1

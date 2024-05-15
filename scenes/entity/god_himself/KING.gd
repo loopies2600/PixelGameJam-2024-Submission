@@ -1,0 +1,2 @@
+extends KinematicActor
+class_name KingActor

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/entity/object/lamp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/entity/object/searock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/entity/god_himself/KING.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.765363 )
@@ -132,6 +133,9 @@ position = Vector2( 384, 248 )
 
 [node name="AnimatedSprite" parent="det/rock5" index="0"]
 animation = "5"
+
+[node name="KING" parent="." instance=ExtResource( 5 )]
+position = Vector2( 240, 168 )
 
 [editable path="det/rock2"]
 [editable path="det/rock3"]
