@@ -1,6 +1,8 @@
 extends KinematicActor
 class_name KingActor
 
+const TROLL_DELAY := 0.25
+
 var fish_count := 0
 
 enum States {
@@ -87,6 +89,10 @@ func _on_damage_taken(damage_amount : int, source):
 	
 	if source is PlayerActor:
 		source.take_damage(self, damage_amount)
+	
+	yield(get_tree().create_timer(TROLL_DELAY), "timeout")
+	
+	set_state(States.ATTACK)
 	
 func set_state(new_state_id : int):
 	_on_state_exit(current_state)
