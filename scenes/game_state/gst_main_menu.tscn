@@ -93,7 +93,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 8 ),
+"times": PoolRealArray( 7.8 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 4.0 ]
@@ -129,7 +129,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 8 ),
+"times": PoolRealArray( 0, 9.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -139,7 +139,7 @@ tracks/7/path = NodePath("PanyKey:rect_scale")
 tracks/7/interp = 2
 tracks/7/loop_wrap = true
 tracks/7/imported = false
-tracks/7/enabled = true
+tracks/7/enabled = false
 tracks/7/keys = {
 "times": PoolRealArray( 8, 8.8 ),
 "transitions": PoolRealArray( 1, 1 ),

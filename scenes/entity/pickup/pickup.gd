@@ -4,7 +4,7 @@ class_name Pickup
 export (float) var base_gravity := 9.8
 export (float) var damping := 0.8
 export (float) var pickbox_delay := 1.0
-export (float) var attraction_distance := 32.0
+export (float) var attraction_distance := 64.0
 
 var velocity : Vector3 = Vector3.ZERO
 
