@@ -5,7 +5,7 @@ const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
 const LERP_WEIGHT := 8.0
 
-const HURT_FREEZE_TIME := 0.5
+const HURT_FREEZE_TIME := 0.3
 
 const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
 
