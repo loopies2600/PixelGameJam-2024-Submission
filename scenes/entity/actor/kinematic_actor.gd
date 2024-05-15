@@ -24,6 +24,8 @@ export (int) var loot_multiplier := 1
 var direction : Vector2 = Vector2.ZERO
 var velocity : Vector2 = Vector2.ZERO
 
+var look_angle : Vector2 = Vector2.ZERO
+
 var dead : bool = false
 var attacking : bool = false
 var frozen : bool = false
@@ -40,11 +42,12 @@ func _ready():
 	connect("took_damage", self, "_on_damage_taken")
 	connect("died", self, "_on_death")
 	
-func _on_damage_taken(damage_amount, source):
+func _on_damage_taken(damage_amount : int, source : Node):
 	pass
 	
-func _on_death(damage_amount, source):
-	_drop_loot()
+func _on_death(damage_amount : int, source : Node):
+	if not death_drops.empty():
+		_drop_loot()
 	
 func _get_random_item_spread(max_spread := max_item_spread) -> Vector3:
 	randomize()
@@ -108,6 +111,7 @@ func take_damage(source, damage_amount : int):
 	
 	if health <= 0:
 		dead = true
+		emit_signal("took_damage", damage_amount, source)
 		emit_signal("died", damage_amount, source)
 	else:
 		emit_signal("took_damage", damage_amount, source)

@@ -1,7 +1,35 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/entity/god_himself/KING.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/objects/sprsh_king.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 160, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 480, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 160, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 160, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -14,14 +42,6 @@ region = Rect2( 0, 0, 160, 160 )
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 160, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 480, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
@@ -41,6 +61,36 @@ region = Rect2( 160, 160, 160, 160 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "attack_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "attack_h",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "attack_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "chase_down",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "chase_h",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "chase_up",
+"speed": 20.0
+}, {
 "frames": [ SubResource( 1 ) ],
 "loop": true,
 "name": "idle_down",
@@ -72,17 +122,27 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 24, 24 )
+[sub_resource type="CircleShape2D" id=11]
+radius = 20.0
 
 [node name="KING" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource( 1 )
+base_speed = 64.0
+steering = 0.825
+max_health = 356
+strength = 356
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-animation = "idle_h"
+animation = "attack_up"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
 shape = SubResource( 11 )
+
+[node name="WanderTimer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true

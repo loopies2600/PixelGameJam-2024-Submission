@@ -36,8 +36,6 @@ var input_direction : Vector2 = Vector2.ZERO
 var can_input := true
 var lock_anim := false
 
-var look_angle : Vector2 = Vector2.ZERO
-
 var current_combo : int = 1
 
 onready var cam : Camera2D = $Camera2D
@@ -86,6 +84,10 @@ func _on_cutscene_end():
 	set_state(PlayerStates.IDLE)
 	
 func _on_damage_taken(damage_amount, source):
+	var lethal := health <= 0
+	
+	_play_punch_sound(lethal)
+	
 	set_state(PlayerStates.HURT)
 	
 func _on_death(damage_amount, source):
@@ -158,6 +160,11 @@ func _on_successful_punch(target : KinematicActor):
 	
 	var lethal := target.health <= 0
 	
+	_play_punch_sound(lethal)
+	
+func _play_punch_sound(lethal : bool):
+	punch_sound.stop()
+	
 	punch_sound.pitch_scale = rand_range(0.75, 1.75)
 	
 	if lethal:
@@ -203,6 +210,18 @@ func _on_state_enter(state : int):
 			frozen = false
 			
 			set_state(PlayerStates.IDLE)
+		PlayerStates.DEAD:
+			_play_punch_sound(true)
+			
+			yield(get_tree(), "idle_frame")
+			yield(get_tree(), "idle_frame")
+			
+			set_process(false)
+			set_physics_process(false)
+			set_process_input(false)
+			
+			visible = true
+			anim_sprite.animation = "dead_h"
 		_:
 			_reposition_sprite()
 	
