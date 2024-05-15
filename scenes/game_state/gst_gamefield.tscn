@@ -9,6 +9,9 @@
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="player" parent="." instance=ExtResource( 1 )]
+steering = 0.782
+
 [node name="MainHud" parent="." instance=ExtResource( 4 )]
 
 [node name="test_stage" type="TileMap" parent="."]
@@ -26,9 +29,6 @@ modulate = Color( 0.690196, 0.890196, 0.709804, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.12549, 0.12549, 0.12549, 1 )
-
-[node name="player" parent="." instance=ExtResource( 1 )]
-steering = 0.782
 
 [node name="loot_chest" parent="." instance=ExtResource( 7 )]
 position = Vector2( -120, -64 )

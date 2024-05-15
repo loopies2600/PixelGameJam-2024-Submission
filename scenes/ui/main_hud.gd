@@ -8,6 +8,6 @@ func _process(delta):
 func _update_health_progress():
 	if Global.player == null:
 		return
-		
+	
 	player_health_progress.max_value = Global.player.max_health
 	player_health_progress.value = Global.player.health

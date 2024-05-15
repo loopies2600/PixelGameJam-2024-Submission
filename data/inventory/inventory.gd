@@ -3,6 +3,9 @@ class_name Inventory
 
 var data : Dictionary = {}
 
+signal item_added(item_id)
+signal item_deleted(item_id)
+
 func get_item_count() -> int:
 	var item_count := 0
 	
@@ -23,7 +26,7 @@ func add_item(item_id : int):
 	
 	data[id_string] += 1
 	
-	print(get_item_count())
+	emit_signal("item_added", item_id)
 	
 func remove_item(item_id : int):
 	var item_def : ItemPickupDefinition = ItemData.get_definition(item_id)
@@ -34,3 +37,5 @@ func remove_item(item_id : int):
 		
 		if data[id_string] <= 0:
 			data.erase(id_string)
+			
+	emit_signal("item_deleted", item_id)
