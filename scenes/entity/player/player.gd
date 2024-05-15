@@ -5,7 +5,8 @@ const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
 const LERP_WEIGHT := 8.0
 
-const HURT_FREEZE_TIME := 0.3
+const HURT_FREEZE_TIME := 0.25
+const GRACE_TIME := 1.0
 
 const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
 
@@ -132,7 +133,15 @@ func _on_state_exit(state : int):
 		PlayerStates.ATTACK:
 			can_input = true
 			anim_sprite.offset = Vector2.ZERO
-	
+		PlayerStates.HURT:
+			var grace_timer := get_tree().create_timer(GRACE_TIME)
+			
+			invencible = true
+			
+			yield(grace_timer, "timeout")
+			
+			invencible = false
+			
 func _on_successful_punch(target : KinematicActor):
 	randomize()
 	

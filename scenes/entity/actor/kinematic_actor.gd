@@ -20,6 +20,7 @@ var dead : bool = false
 var attacking : bool = false
 var frozen : bool = false
 var parrying : bool = false
+var invencible : bool = false
 
 onready var health : int = max_health
 
@@ -44,6 +45,7 @@ func attack(victim : KinematicActor, damage_amount := strength) -> bool:
 	return true
 	
 func take_damage(source, damage_amount : int):
+	if invencible: return
 	if parrying: return
 	if frozen: return
 	if dead: return
@@ -67,6 +69,11 @@ func get_walk_velocity() -> Vector2:
 	return velocity.linear_interpolate(new_velocity, 1.0 - steering)
 	
 func _process(delta):
+	if invencible:
+		visible = !visible
+	else:
+		visible = true
+	
 	z_index = int(max(get_global_transform_with_canvas().origin.y, 0))
 	
 func _physics_process(delta):
