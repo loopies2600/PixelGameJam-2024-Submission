@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/sprites/comet_card.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/title/comet_logo.png" type="Texture" id=2]
 [ext_resource path="res://assets/shaders/wave.shader" type="Shader" id=3]
-[ext_resource path="res://assets/sprites/title/game_logo.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/title/game_logo_padding.png" type="Texture" id=4]
 [ext_resource path="res://assets/screenplayer/fonts/aquarius_bold.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/game_state/gst_main_menu.gd" type="Script" id=6]
 

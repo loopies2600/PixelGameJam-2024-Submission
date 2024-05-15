@@ -58,10 +58,6 @@ func _ready():
 	
 	anim_sprite.connect("frame_changed", self, "_on_anim_frame_update")
 	
-	yield(get_tree().create_timer(5.0), "timeout")
-	
-	take_damage(self, 5)
-	
 func _on_anim_frame_update():
 	if anim_sprite.animation.begins_with("attack"):
 		_check_attack_hit()
