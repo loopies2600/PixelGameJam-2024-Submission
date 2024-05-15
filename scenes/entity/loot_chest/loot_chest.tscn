@@ -13,6 +13,7 @@ shader_param/opacity = 1.0
 
 [sub_resource type="AtlasTexture" id=8]
 resource_local_to_scene = true
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 38, 25 )
 
