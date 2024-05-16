@@ -141,6 +141,38 @@ func find_player() -> bool:
 	
 	return found
 	
+func _get_shape_query_from_shape_cast_2d(shape_cast : ShapeCast2D) -> Physics2DShapeQueryParameters:
+	var shape := Physics2DShapeQueryParameters.new()
+	
+	shape.collide_with_areas = shape_cast.collide_with_areas
+	shape.collide_with_bodies = shape_cast.collide_with_bodies
+	shape.collision_layer = shape_cast.collision_mask
+	shape.exclude = [self]
+	shape.margin = shape_cast.margin
+	shape.motion = shape_cast.target_position
+	shape.transform = shape_cast.global_transform
+	shape.shape_rid = shape_cast.shape.get_rid()
+	
+	return shape
+	
+func _scan_for_actors(shape_cast : ShapeCast2D) -> PoolIntArray:
+	var space_state := get_world_2d().direct_space_state
+	
+	var hit_test_shape := _get_shape_query_from_shape_cast_2d(shape_cast)
+	
+	var hit_test_results := space_state.intersect_shape(hit_test_shape, shape_cast.max_results)
+	
+	var actors : PoolIntArray = []
+	
+	for i in range(hit_test_results.size()):
+		var result : Dictionary = hit_test_results[i]
+		var instance_id : int = result.collider.get_instance_id()
+		
+		if not actors.has(instance_id):
+			actors.append(instance_id)
+	
+	return actors
+	
 func attack(victim : KinematicActor, damage_amount := strength) -> bool:
 	if frozen: return false
 	if attacking: return false

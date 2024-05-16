@@ -56,7 +56,6 @@ func wipe() -> int:
 	
 	for i in range(ItemData.GameItems.size()):
 		var item_def : ItemPickupDefinition = ItemData.get_definition(i)
-		print(item_def.identifier)
 		
 		while data.has(item_def.identifier):
 			remove_item(i)

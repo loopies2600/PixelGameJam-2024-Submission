@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/shaders/wave.shader" type="Shader" id=9]
 [ext_resource path="res://scenes/entity/object/statueposd.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/screenplayer/util/static_dpt.gd" type="Script" id=11]
+[ext_resource path="res://assets/streams/music/level1.mp3" type="AudioStream" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -286,6 +287,10 @@ position = Vector2( 864, 640 )
 
 [node name="pufferfish" parent="entity" instance=ExtResource( 7 )]
 position = Vector2( 111, 231 )
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+autoplay = true
 
 [editable path="det/rock2"]
 [editable path="det/rock8"]

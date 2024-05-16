@@ -306,42 +306,8 @@ func check_input():
 	if Input.is_action_just_pressed("attack"):
 		set_state(PlayerStates.ATTACK)
 	
-func _get_shape_query_from_shape_cast_2d(shape_cast : ShapeCast2D) -> Physics2DShapeQueryParameters:
-	var shape := Physics2DShapeQueryParameters.new()
-	
-	shape.collide_with_areas = shape_cast.collide_with_areas
-	shape.collide_with_bodies = shape_cast.collide_with_bodies
-	shape.collision_layer = shape_cast.collision_mask
-	shape.exclude = [self]
-	shape.margin = shape_cast.margin
-	shape.motion = shape_cast.target_position
-	shape.transform = shape_cast.global_transform
-	shape.shape_rid = shape_cast.shape.get_rid()
-	
-	print(shape.transform)
-	
-	return shape
-	
-func _scan_for_actors() -> PoolIntArray:
-	var space_state := get_world_2d().direct_space_state
-	
-	var hit_test_shape := _get_shape_query_from_shape_cast_2d(attack_area)
-	
-	var hit_test_results := space_state.intersect_shape(hit_test_shape, attack_area.max_results)
-	
-	var actors : PoolIntArray = []
-	
-	for i in range(hit_test_results.size()):
-		var result : Dictionary = hit_test_results[i]
-		var instance_id : int = result.collider.get_instance_id()
-		
-		if not actors.has(instance_id):
-			actors.append(instance_id)
-	
-	return actors
-	
 func try_attack():
-	var actor_ids := _scan_for_actors()
+	var actor_ids := _scan_for_actors(attack_area)
 	
 	for i in range(actor_ids.size()):
 		var target = instance_from_id(actor_ids[i])

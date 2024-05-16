@@ -65,21 +65,21 @@ func _physics_process(delta):
 			rotation = 0.0
 			velocity.y = sin(elapsed_alive) * 8.0
 			
-			if find_player():
+			if find_player() && not Global.player.dead:
 				current_state = States.CHASE
 		States.PATROL_CALM:
 			velocity = velocity.linear_interpolate(patrol_direction * base_speed, 1.0 - steering)
 			
 			velocity += Vector2(0.0, sin(elapsed_alive) * 8.0).rotated(velocity.angle())
 			
-			if find_player():
+			if find_player() && not Global.player.dead:
 				current_state = States.CHASE
 		States.PATROL_ANGRY:
 			velocity = velocity.linear_interpolate(patrol_direction * (base_speed * 3.0), 1.0 - steering)
 	
 			rotation = velocity.angle()
 			
-			if find_player():
+			if find_player() && not Global.player.dead:
 				current_state = States.CHASE
 		States.CHASE:
 			var distance_to_player := global_position.distance_squared_to(Global.player.global_position)
@@ -90,9 +90,15 @@ func _physics_process(delta):
 			
 			velocity = Vector2.LEFT.rotated(angle_to_player) * (base_speed * 3.0)
 			
+			if Global.player.dead:
+				current_state = States.PATROL_CALM
+			
 			if can_attack(Global.player):
 				current_state = States.DASH
 		States.DASH:
+			if Global.player.dead:
+				current_state = States.PATROL_CALM
+				
 			if attack_timer.is_stopped():
 				attack_timer.start()
 				
@@ -116,6 +122,9 @@ func _physics_process(delta):
 			
 			velocity += Vector2.LEFT.rotated(angle_to_player) * (base_speed * dash_elapsed)
 		States.RETALIATE:
+			if Global.player.dead:
+				current_state = States.PATROL_ANGRY
+			
 			anim_sprite.animation = "default"
 			
 			var distance_to_player := global_position.distance_squared_to(Global.player.global_position)
