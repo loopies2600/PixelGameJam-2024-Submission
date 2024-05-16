@@ -50,12 +50,15 @@ func _physics_process(delta):
 			
 			velocity = (Vector2.RIGHT.rotated(deg2rad(base_angle)) * base_speed) * dir
 			
-			if _scan_for_actors(danger_area):
+			if _scan_for_actors(danger_area) && Global.player.dead == false:
 				current_state = States.INFLATE
 			
 			if _find_wall():
 				dir = -dir
 		States.INFLATE:
+			if Global.player.dead:
+				current_state = States.BACK_AND_FORTH
+			
 			if extra_anim.current_animation != "Inflate":
 				extra_anim.play("Inflate")
 			

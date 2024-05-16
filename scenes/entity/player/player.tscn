@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://data/player/animframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/entity/player/player.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/streams/sounds/sword_swing.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/shaders/flash.shader" type="Shader" id=6]
 [ext_resource path="res://assets/streams/sounds/snd_pickup.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/entity/player/player_camera.gd" type="Script" id=8]
 
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
@@ -105,6 +106,7 @@ tracks/1/keys = {
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 118
 script = ExtResource( 2 )
+trail_color = Color( 0.521569, 0.87451, 0.886275, 1 )
 
 [node name="MainSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 3 )
@@ -136,6 +138,7 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 process_mode = 0
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -166,7 +169,8 @@ anims/Hurt = SubResource( 4 )
 anims/Idle = SubResource( 6 )
 anims/RESET = SubResource( 5 )
 
-[node name="SuicideTimer" type="Timer" parent="."]
+[node name="DiveTrailTimer" type="Timer" parent="."]
+wait_time = 0.075
 autostart = true
 
 [node name="PickupSound" type="AudioStreamPlayer" parent="."]

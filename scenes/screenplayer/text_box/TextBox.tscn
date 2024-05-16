@@ -1,26 +1,13 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/screenplayer/text_box/TextBox.gd" type="Script" id=1]
 [ext_resource path="res://assets/screenplayer/text_box/spr_textbox_base.png" type="Texture" id=2]
-[ext_resource path="res://assets/screenplayer/text_box/text_bg.png" type="Texture" id=3]
 [ext_resource path="res://assets/screenplayer/text_box/spr_textbox_line_tall.png" type="Texture" id=4]
-[ext_resource path="res://assets/screenplayer/text_box/spr_textbox_icon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/screenplayer/text_box/MultipleChoice/MultipleChoice.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/screenplayer/text_box/VoicePlayer.gd" type="Script" id=7]
 [ext_resource path="res://assets/screenplayer/fonts/aquarius_monospace.tres" type="DynamicFont" id=8]
 [ext_resource path="res://assets/screenplayer/fonts/aquarius_bold.tres" type="DynamicFont" id=9]
 [ext_resource path="res://scenes/screenplayer/text_box/RegexTools.gd" type="Script" id=10]
-
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 0, 0.0313726, 0.168627, 1, 0, 0.0705882, 0.254902, 1 )
-
-[sub_resource type="GradientTexture2D" id=4]
-flags = 0
-gradient = SubResource( 3 )
-width = 48
-height = 48
-fill_from = Vector2( 0.5, 1 )
-fill_to = Vector2( 0.5, 0 )
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 4 )
@@ -47,29 +34,11 @@ margin_bottom = 240.0
 texture = ExtResource( 2 )
 stretch_mode = 2
 
-[node name="Portrait" type="TextureRect" parent="."]
-margin_left = 8.0
-margin_top = 184.0
-margin_right = 56.0
-margin_bottom = 232.0
-expand = true
-stretch_mode = 1
-
-[node name="PortraitBg" type="Sprite" parent="Portrait"]
-show_behind_parent = true
-position = Vector2( 8, 24 )
-texture = ExtResource( 3 )
-region_enabled = true
-region_rect = Rect2( -832.17, -832.17, 40, 64 )
-
-[node name="FaceBg" type="Sprite" parent="Portrait"]
-show_behind_parent = true
-position = Vector2( 24, 24 )
-texture = SubResource( 4 )
-
-[node name="PortraitFrame" type="Sprite" parent="Portrait"]
-position = Vector2( 24, 24 )
-texture = ExtResource( 5 )
+[node name="Portrait" type="Sprite" parent="."]
+position = Vector2( 0, 154 )
+z_index = 2
+z_as_relative = false
+centered = false
 
 [node name="Text" type="RichTextLabel" parent="."]
 margin_left = 64.0
@@ -86,9 +55,9 @@ text = "¡Tenemos que destruir a cerdalord!"
 scroll_active = false
 
 [node name="Nameplate" type="Label" parent="."]
-margin_top = 161.0
+margin_top = 225.0
 margin_right = 42.0
-margin_bottom = 188.0
+margin_bottom = 252.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = true
 custom_colors/font_color = Color( 0, 0.0313726, 0.168627, 1 )

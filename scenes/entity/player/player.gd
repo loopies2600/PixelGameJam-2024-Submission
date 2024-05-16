@@ -19,6 +19,11 @@ export (float) var swing_dash := 300.0
 
 export (int, FLAGS, "Double Speed", "Loot Luck", "Double Strength", "FEVER???") var perks := 0
 
+export (Color) var trail_color := Color.cadetblue
+
+export (float) var hurt_cam_shake := 3.0
+export (float) var death_cam_shake := 5.0
+
 enum PlayerStates {
 	IDLE,
 	WALK,
@@ -66,14 +71,31 @@ func _ready():
 	
 	inventory.connect("item_added", self, "_on_item_added")
 	
+	$DiveTrailTimer.connect("timeout", self, "_spawn_dive_trail")
+	
 func _on_item_added(item_id : int):
 	pickup_sound.play()
-	#$SuicideTimer.connect("timeout", self, "_suicide_timer")
 	
-func _suicide_timer():
-	attacking = false
-	attack(self, 1)
-		
+func _spawn_dive_trail():
+	var diving : bool = current_state == PlayerStates.DIVE
+	var attacking : bool = current_state == PlayerStates.ATTACK
+	
+	var valid := attacking or diving
+	
+	if not valid:
+		return
+	
+	var ghost_spr := GHOST_SPRITE.instance()
+	
+	ghost_spr.texture = current_sprite
+	ghost_spr.global_transform = global_transform
+	ghost_spr.scale = anim_sprite.scale
+	ghost_spr.base_z_index = -1
+	ghost_spr.modulate = trail_color
+	
+	add_child(ghost_spr)
+	ghost_spr.set_as_toplevel(true)
+	
 func _on_anim_frame_update():
 	if anim_sprite.animation.begins_with("attack"):
 		_check_attack_hit()
@@ -165,6 +187,11 @@ func _on_successful_punch(target : KinematicActor):
 	
 	var lethal := target.health <= 0
 	
+	if lethal:
+		cam.shake(death_cam_shake * 0.75)
+	else:
+		cam.shake(hurt_cam_shake / 2.0)
+	
 	_play_punch_sound(lethal)
 	
 func _play_punch_sound(lethal : bool):
@@ -205,6 +232,7 @@ func _on_state_enter(state : int):
 			
 			set_state(PlayerStates.IDLE)
 		PlayerStates.HURT:
+			cam.shake(hurt_cam_shake)
 			extra_anim.play("Hurt")
 			frozen = true
 			
@@ -216,6 +244,7 @@ func _on_state_enter(state : int):
 			
 			set_state(PlayerStates.IDLE)
 		PlayerStates.DEAD:
+			cam.shake(death_cam_shake)
 			_play_punch_sound(true)
 			
 			yield(get_tree(), "idle_frame")

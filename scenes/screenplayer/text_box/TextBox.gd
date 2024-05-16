@@ -26,7 +26,6 @@ var lineStripped : String
 onready var nameplate := $Nameplate
 onready var message := $Text
 onready var portrait := $Portrait
-onready var portraitBg := $Portrait/PortraitBg
 onready var mChoice := $MultipleChoice
 onready var voice := $VoicePlayer
 onready var nameplateTail = nameplate.get_stylebox("normal")
@@ -61,9 +60,6 @@ func _input(event):
 		gotoNextLine()
 	
 func _process(delta):
-	portraitBg.region_rect.position += Vector2(-16, -8) * delta
-	Global._tbBgOffset = portraitBg.region_rect.position
-	
 	nextCharCnt -= 1
 	
 	if nextCharCnt == 0 && !typingEnded:
@@ -120,13 +116,6 @@ func gotoNextLine():
 func refresh():
 	waitTable.clear()
 	
-	flip = false
-	
-	if Global.focusActor != null:
-		flip = Global.focusActor.get_global_transform_with_canvas().origin.y >= FLIP_MARGIN
-	
-	portraitBg.region_rect.position = Global._tbBgOffset
-	
 	charPos = 0
 	nextCharCnt = baseCharacterDelay
 	
@@ -147,27 +136,6 @@ func refresh():
 	
 	message.rect_position = PORTRAIT_BOUNDS.position if hasPortrait else PORTRAITLESS_BOUNDS.position
 	message.rect_size = PORTRAIT_BOUNDS.size if hasPortrait else PORTRAITLESS_BOUNDS.size
-	
-	if flip:
-		scale.y = -1.0
-		offset.y = 240.0
-		message.rect_scale.y = -0.5
-		nameplate.rect_scale.y = -0.5
-		message.rect_position.y = 236
-		nameplate.rect_position.y = 175
-		portrait.rect_scale.y = -1
-		portrait.rect_position.y = 232
-		nameplateTail.region_rect.position.y = 12
-	else:
-		scale.y = 1.0
-		offset.y = 0.0
-		message.rect_scale.y = 0.5
-		nameplate.rect_scale.y = 0.5
-		message.rect_position.y = 180
-		nameplate.rect_position.y = 160
-		portrait.rect_scale.y = 1
-		portrait.rect_position.y = 184
-		nameplateTail.region_rect.position.y = 1
 	
 func destroy():
 	queue_free()
