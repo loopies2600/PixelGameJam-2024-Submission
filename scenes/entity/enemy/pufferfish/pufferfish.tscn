@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/entity/enemy/pufferfish/pufferfish.gd" type="Script" id=1]
+[ext_resource path="res://scenes/util/tool_rotate_line.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/fish/fish_2.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 20, 23 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 20, 0, 20, 23 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "inflate",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=4]
+
+[node name="EnemyPufferfish" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 38
+script = ExtResource( 1 )
+base_speed = 64.0
+max_health = 2
+strength = 2
+death_drops = [ 2 ]
+tracking_layers = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+animation = "idle"
+
+[node name="AngleDisplay" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 32, 0, 24, 8, 32, 0, 24, -8 )
+width = 2.0
+joint_mode = 1
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/entity/object/searock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/entity/enemy/red_fish/red_fish.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/entity/loot_chest/loot_chest.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/entity/enemy/pufferfish/pufferfish.tscn" type="PackedScene" id=7]
 
 [node name="level_1" type="Node2D"]
 
@@ -171,6 +172,9 @@ position = Vector2( 856, 232 )
 
 [node name="loot_chest10" parent="." instance=ExtResource( 6 )]
 position = Vector2( 800, 200 )
+
+[node name="pufferfish" parent="." instance=ExtResource( 7 )]
+position = Vector2( 111, 231 )
 
 [editable path="det/rock2"]
 [editable path="det/rock3"]

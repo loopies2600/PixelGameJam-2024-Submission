@@ -93,6 +93,29 @@ func _on_successful_punch(target : KinematicActor):
 		new_hit_star.global_position = target.global_position
 		get_parent().add_child(new_hit_star)
 	
+func get_dominant_facing() -> String:
+	var h_dir = sign(look_angle.dot(Vector2.RIGHT))
+	var v_dir = sign(look_angle.dot(Vector2.UP))
+	
+	var h_dot := abs(look_angle.dot(Vector2.RIGHT))
+	
+	var facing_name := "right"
+	
+	if v_dir == 1:
+		facing_name = "up"
+	elif v_dir == -1:
+		facing_name = "down"
+	
+	if h_dot > 0.7:
+		if h_dir == 1:
+			facing_name = "right"
+			scale.x = 1.0
+		elif h_dir == -1:
+			facing_name = "left"
+			scale.x = -1.0
+			
+	return facing_name
+	
 func can_attack(target : KinematicActor) -> bool:
 	if target.dead:
 		return false
