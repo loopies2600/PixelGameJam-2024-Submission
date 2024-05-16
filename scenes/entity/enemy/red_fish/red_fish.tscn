@@ -1,15 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/entity/enemy/red_fish/red_fish.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/fish/fish_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/streams/sounds/snd_hit.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 21, 0, 21, 23 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 21, 23 )
 
@@ -26,14 +25,62 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=4]
+
+[sub_resource type="Animation" id=5]
+resource_name = "Dash"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 6, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [node name="EnemyRedFish" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 1 )
+base_speed = 12.0
+steering = 0.762
 max_health = 1
 death_drops = [ 1 ]
+tracking_layers = 7
 
 [node name="MainSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
@@ -41,3 +88,19 @@ flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
+
+[node name="PatrolTurnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Dash = SubResource( 5 )
+anims/Idle = SubResource( 6 )
+anims/RESET = SubResource( 7 )
+
+[node name="PinchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -5.0
+pitch_scale = 4.0
+bus = "UnderwaterEcho"

@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/entity/object/lamp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/entity/object/searock.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/entity/god_himself/KING.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/entity/enemy/red_fish/red_fish.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.765363 )
@@ -134,8 +134,59 @@ position = Vector2( 384, 248 )
 [node name="AnimatedSprite" parent="det/rock5" index="0"]
 animation = "5"
 
-[node name="KING" parent="." instance=ExtResource( 5 )]
-position = Vector2( 240, 168 )
+[node name="EnemyRedFish" parent="." instance=ExtResource( 5 )]
+position = Vector2( 224, -56 )
+
+[node name="EnemyRedFish2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 168, -56 )
+
+[node name="EnemyRedFish3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 200, -88 )
+
+[node name="EnemyRedFish4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 112, -44 )
+
+[node name="EnemyRedFish5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 72, -76 )
+
+[node name="EnemyRedFish6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 112, -104 )
+
+[node name="EnemyRedFish7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 279, -87 )
+
+[node name="EnemyRedFish8" parent="." instance=ExtResource( 5 )]
+position = Vector2( 248, -104 )
+
+[node name="EnemyRedFish9" parent="." instance=ExtResource( 5 )]
+position = Vector2( 264, -44 )
+
+[node name="EnemyRedFish10" parent="." instance=ExtResource( 5 )]
+position = Vector2( 151, -98 )
+
+[node name="EnemyRedFish11" parent="." instance=ExtResource( 5 )]
+position = Vector2( 72, -40 )
+
+[node name="EnemyRedFish12" parent="." instance=ExtResource( 5 )]
+position = Vector2( 296, -44 )
+
+[node name="EnemyRedFish13" parent="." instance=ExtResource( 5 )]
+position = Vector2( 290, -115 )
+
+[node name="EnemyRedFish14" parent="." instance=ExtResource( 5 )]
+position = Vector2( 72, -109 )
+
+[node name="EnemyRedFish15" parent="." instance=ExtResource( 5 )]
+position = Vector2( 104, -144 )
+
+[node name="EnemyRedFish16" parent="." instance=ExtResource( 5 )]
+position = Vector2( 151, -144 )
+
+[node name="EnemyRedFish17" parent="." instance=ExtResource( 5 )]
+position = Vector2( 200, -144 )
+
+[node name="EnemyRedFish18" parent="." instance=ExtResource( 5 )]
+position = Vector2( 254, -144 )
 
 [editable path="det/rock2"]
 [editable path="det/rock3"]

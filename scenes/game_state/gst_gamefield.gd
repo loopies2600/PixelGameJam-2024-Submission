@@ -12,10 +12,9 @@ onready var level : Node = LEVELS[lv_id].instance()
 onready var main_hud := HUD.instance()
 
 func _ready():
-	main_hud.owner = self
-	
 	add_child(level)
 	Global.spawn_player()
 	
 	add_child(main_hud)
+	main_hud.owner = self
 	

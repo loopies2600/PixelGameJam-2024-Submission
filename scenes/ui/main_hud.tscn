@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sprites/hud/quexote_healthbar.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hud/health_bar_deplete.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sprites/hud/fishometer_front.png" type="Texture" id=6]
 [ext_resource path="res://scenes/ui/Fishometer.gd" type="Script" id=7]
 [ext_resource path="res://assets/screenplayer/fonts/aquarius_bold.tres" type="DynamicFont" id=8]
+[ext_resource path="res://assets/streams/music/success.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BaseAnim"
@@ -116,3 +117,8 @@ autoplay = "BaseAnim"
 anims/BaseAnim = SubResource( 1 )
 anims/GoOffscreen = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+
+[node name="FullStackJingle" type="AudioStreamPlayer" parent="Fishometer"]
+stream = ExtResource( 9 )
+pitch_scale = 1.7
+bus = "Music"

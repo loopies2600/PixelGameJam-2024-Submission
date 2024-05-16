@@ -21,6 +21,10 @@ export (Vector2) var max_item_spread := Vector2(-64, 64)
 
 export (int) var loot_multiplier := 1
 
+export (float) var tracking_distance := 128.0
+export (float) var attack_distance := 32.0
+export (int, LAYERS_2D_PHYSICS) var tracking_layers
+
 var direction : Vector2 = Vector2.ZERO
 var velocity : Vector2 = Vector2.ZERO
 
@@ -87,6 +91,25 @@ func _on_successful_punch(target : KinematicActor):
 		
 		new_hit_star.global_position = target.global_position
 		get_parent().add_child(new_hit_star)
+	
+func find_player() -> bool:
+	if Global.player.dead:
+		return false
+	
+	var found := false
+	
+	var player_nearby := global_position.distance_squared_to(Global.player.global_position) <= pow(tracking_distance, 2.0)
+	
+	if player_nearby:
+		var space_state := get_world_2d().direct_space_state
+		
+		var result := space_state.intersect_ray(global_position, Global.player.global_position, [self], tracking_layers)
+		
+		if result:
+			if result.collider.name == Global.player.name:
+				found = true
+	
+	return found
 	
 func attack(victim : KinematicActor, damage_amount := strength) -> bool:
 	if frozen: return false

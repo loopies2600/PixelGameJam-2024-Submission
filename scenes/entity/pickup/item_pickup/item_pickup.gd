@@ -21,5 +21,8 @@ func _refresh_pickup():
 
 func _on_picked_up(body : Node):
 	if body.name == Global.player.name:
+		if body.inventory.locked:
+			return
+		
 		body.inventory.add_item(item_id)
 		queue_free()

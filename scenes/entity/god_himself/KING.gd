@@ -131,7 +131,7 @@ func _physics_process(delta):
 			
 			var angle_to_player := global_position.angle_to_point(target_pos)
 			
-			if distance_to_player < pow(64.0, 2.0):
+			if distance_to_player < pow(attack_distance, 2.0):
 				var close_to_left := false
 				
 				var left_side := target_pos + Vector2(-32.0, 0.0)

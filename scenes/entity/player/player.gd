@@ -47,6 +47,7 @@ onready var punch_sound : AudioStreamPlayer = $SuccessfulPunchSound
 onready var attack_pivot : Node2D = $AttackHitPivot
 onready var swing_sound : AudioStreamPlayer = $SwordSwingSound
 onready var extra_anim : AnimationPlayer = $SpriteAnims
+onready var pickup_sound : AudioStreamPlayer = $PickupSound
 
 onready var _bwalk := walk_speed
 onready var _bswim := swim_speed
@@ -63,6 +64,10 @@ func _ready():
 	
 	anim_sprite.connect("frame_changed", self, "_on_anim_frame_update")
 	
+	inventory.connect("item_added", self, "_on_item_added")
+	
+func _on_item_added(item_id : int):
+	pickup_sound.play()
 	#$SuicideTimer.connect("timeout", self, "_suicide_timer")
 	
 func _suicide_timer():

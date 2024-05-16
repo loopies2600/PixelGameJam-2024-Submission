@@ -58,6 +58,9 @@ func _physics_process(delta):
 		_move_to_player(delta)
 		
 func _move_to_player(delta : float):
+	if Global.player.inventory.locked:
+		return
+	
 	var distance_to_player : float = Global.player.global_position.distance_squared_to(global_position)
 	
 	if distance_to_player < pow(attraction_distance, 2.0):

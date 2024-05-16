@@ -23,6 +23,7 @@ func _ready():
 	
 func _on_inventory_item_added(new_item_id : int):
 	if Global.player.inventory.get_item_count() >= MAX_FISHES:
+		$FullStackJingle.play()
 		anim.play("GoOffscreen")
 		Global.player.inventory.locked = true
 		return
