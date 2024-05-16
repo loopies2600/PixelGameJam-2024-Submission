@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/entity/god_himself/KING.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/objects/sprsh_king.png" type="Texture" id=2]
+[ext_resource path="res://assets/streams/sounds/king_deploy.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 2 )
@@ -147,3 +148,7 @@ shape = SubResource( 11 )
 [node name="WanderTimer" type="Timer" parent="."]
 wait_time = 8.0
 autostart = true
+
+[node name="KingDeploy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true

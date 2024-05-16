@@ -24,6 +24,7 @@ func createTextbox(line := "", nameplate := "", portrait : Texture = null, sound
 	
 	if textbox: 
 		textbox.destroy()
+		return null
 	
 	if !line: return null
 	
@@ -45,3 +46,8 @@ func createTextbox(line := "", nameplate := "", portrait : Texture = null, sound
 	
 func spawn_player(where := get_tree().current_scene, position := Vector2.ZERO):
 	where.add_child(player)
+	player.global_position = position
+	
+func spawn_king(where := get_tree().current_scene, position := Vector2.ZERO):
+	where.add_child(king)
+	king.global_position = position
