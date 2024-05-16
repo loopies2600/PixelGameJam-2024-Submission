@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/screenplayer/util/BitwiseUtil.gd"
 }, {
+"base": "Node2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://scenes/entity/bullet/bullet_basic.gd"
+}, {
 "base": "Node",
 "class": "Cutscene",
 "language": "GDScript",
@@ -109,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/entity/player/player.gd"
 }, {
+"base": "KinematicActor",
+"class": "PufferfishActor",
+"language": "GDScript",
+"path": "res://scenes/entity/enemy/pufferfish/pufferfish.gd"
+}, {
 "base": "Node",
 "class": "ScrollingSelector",
 "language": "GDScript",
@@ -132,6 +142,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AttackStateData": "",
 "BitwiseUtil": "",
+"Bullet": "",
 "Cutscene": "res://assets/screenplayer/icons/clapboard.png",
 "CutsceneCommand": "",
 "CutsceneCommandCall": "",
@@ -150,6 +161,7 @@ _global_script_class_icons={
 "KingActor": "",
 "Pickup": "",
 "PlayerActor": "",
+"PufferfishActor": "",
 "ScrollingSelector": "",
 "TextBox": "",
 "TextBoxManager": "",

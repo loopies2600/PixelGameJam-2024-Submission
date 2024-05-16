@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/sprites/particles/animframes_bullet.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/entity/bullet/bullet_parry.gd" type="Script" id=2]
+[ext_resource path="res://scenes/entity/actor/kinematic_actor.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 48.0
+
+[node name="bullet_parry_small" type="AnimatedSprite"]
+frames = ExtResource( 1 )
+animation = "small"
+script = ExtResource( 2 )
+
+[node name="Hitbox" type="ShapeCast2D" parent="."]
+enabled = false
+shape = SubResource( 1 )
+target_position = Vector2( 0, 0 )
+
+[node name="ParryZone" type="ShapeCast2D" parent="."]
+enabled = false
+shape = SubResource( 2 )
+target_position = Vector2( 0, 0 )
+
+[node name="FakeActor" type="KinematicBody2D" parent="."]
+script = ExtResource( 3 )
+max_health = 444444

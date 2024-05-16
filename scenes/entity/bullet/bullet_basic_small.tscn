@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/particles/spr_bullet.png" type="Texture" id=1]
+[ext_resource path="res://scenes/entity/bullet/bullet_basic.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.0
+
+[node name="bullet_basic_small" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Hitbox" type="ShapeCast2D" parent="."]
+enabled = false
+shape = SubResource( 1 )
+target_position = Vector2( 0, 0 )

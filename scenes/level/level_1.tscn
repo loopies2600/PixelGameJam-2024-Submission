@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/entity/object/statueposd.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/screenplayer/util/static_dpt.gd" type="Script" id=11]
 [ext_resource path="res://assets/streams/music/level1.mp3" type="AudioStream" id=12]
+[ext_resource path="res://scenes/entity/enemy/bombfish/bombfish.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -284,6 +285,9 @@ position = Vector2( 856, 232 )
 
 [node name="loot_chest10" parent="entity" instance=ExtResource( 6 )]
 position = Vector2( 864, 640 )
+
+[node name="EnemyBombfish" parent="entity" instance=ExtResource( 13 )]
+position = Vector2( 145, -40 )
 
 [node name="pufferfish" parent="entity" instance=ExtResource( 7 )]
 position = Vector2( 111, 231 )
