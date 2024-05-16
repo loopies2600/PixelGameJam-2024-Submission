@@ -40,6 +40,8 @@ func _check_parry():
 			
 			instance._on_successful_punch($FakeActor)
 			
+			elapsed_alive = 0.0
+			
 			velocity = base_speed * instance.look_angle.normalized()
 			parried = true
 	
