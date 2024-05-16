@@ -177,8 +177,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://scenes/autoload/global.gd"
 CutsceneManager="*res://scenes/screenplayer/cutscene/CutsceneManager.gd"
+Global="*res://scenes/autoload/Global.tscn"
 
 [debug]
 

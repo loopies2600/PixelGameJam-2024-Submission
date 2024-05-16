@@ -4,10 +4,13 @@ class_name KinematicActor
 const ITEM_PICKUP_SCENE : PackedScene = preload("res://scenes/entity/pickup/item_pickup/item_pickup.tscn")
 const HIT_STARS : PackedScene = preload("res://scenes/particles/hit_stars.tscn")
 const GHOST_SPRITE : PackedScene = preload("res://scenes/particles/ghost_sprite.tscn")
+const EXPLOSION_EFFECT : PackedScene = preload("res://scenes/particles/explosion_radial.tscn")
 
 signal attacked(victim, damage_amount)
 signal took_damage(amount, attacker)
 signal died(amount, attacker)
+
+export (Vector2) var stars_amount := Vector2(4, 15)
 
 export (float) var base_speed := 128.0
 export (float, 0.0, 0.99) var steering := 0.0
@@ -85,7 +88,7 @@ func _drop_loot():
 func _on_successful_punch(target : KinematicActor):
 	randomize()
 	
-	var star_amount := 4 + (randi() % 11)
+	var star_amount := int(stars_amount.x) + (randi() % int(stars_amount.y - stars_amount.x))
 	
 	for j in range(star_amount):
 		var new_hit_star = HIT_STARS.instance()

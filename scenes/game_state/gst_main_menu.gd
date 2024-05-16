@@ -6,7 +6,7 @@ onready var pany_label : Label = $PanyKey
 
 func _input(event):
 	if event is InputEventKey:
-		get_tree().change_scene_to(CUTSCENE_1)
+		Global.change_scene(CUTSCENE_1)
 		
 		if pany_label.visible:
-			get_tree().change_scene_to(CUTSCENE_1)
+			Global.change_scene(CUTSCENE_1)

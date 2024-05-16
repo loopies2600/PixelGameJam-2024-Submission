@@ -10,9 +10,11 @@ var _tbBgOffset : Vector2 = Vector2.ZERO
 var focusActor : Node2D = null
 
 var exiting : bool = false
+var transitioning : bool = false
 
 onready var player : PlayerActor = PLAYER_SCENE.instance() as PlayerActor
 onready var king : KingActor = KING_SCENE.instance() as KingActor
+onready var transition_anim : AnimationPlayer = $TransitionLayer/AnimationPlayer
 
 func _notification(what):
 	match what:
@@ -51,3 +53,17 @@ func spawn_player(where := get_tree().current_scene, position := Vector2.ZERO):
 func spawn_king(where := get_tree().current_scene, position := Vector2.ZERO):
 	where.add_child(king)
 	king.global_position = position
+	
+func change_scene(next : PackedScene):
+	if transitioning:
+		return
+	
+	transition_anim.play("in")
+	transitioning = true
+	
+	yield(transition_anim, "animation_finished")
+	
+	get_tree().change_scene_to(next)
+	
+	transitioning = false
+	transition_anim.play("out")

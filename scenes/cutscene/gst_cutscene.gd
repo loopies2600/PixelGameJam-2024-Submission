@@ -19,4 +19,4 @@ func _ready():
 			cutscene_running = true
 
 func _on_cutscene_end():
-	get_tree().change_scene_to(GAME_STATE)
+	Global.change_scene(GAME_STATE)

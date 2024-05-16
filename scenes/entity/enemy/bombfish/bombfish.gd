@@ -3,7 +3,22 @@ extends PufferfishActor
 onready var emitter := $bullet_emitter
 
 func _pre_inflation():
+	_explode()
+	
+func _explode():
+	var explosion = EXPLOSION_EFFECT.instance()
+	
+	get_parent().add_child(explosion)
+	explosion.global_position = global_position
+	
+	remove_child(emitter)
+	
+	get_parent().add_child(emitter)
+	emitter.global_position = global_position
+	
 	emitter.fire()
+	
+	Global.player.attack(self, 9999)
 
 func _tick_baf(delta : float):
 	anim_sprite.animation = "idle"
