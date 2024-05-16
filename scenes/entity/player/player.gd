@@ -247,6 +247,9 @@ func _on_state_enter(state : int):
 			cam.shake(death_cam_shake)
 			_play_punch_sound(true)
 			
+			dead = true
+			health = 0
+			
 			yield(get_tree(), "idle_frame")
 			yield(get_tree(), "idle_frame")
 			
