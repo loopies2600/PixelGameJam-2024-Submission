@@ -3,6 +3,8 @@ class_name Cutscene, "res://assets/screenplayer/icons/clapboard.png"
 
 var currentSequence := "sequence"
 
+onready var cam : Camera2D = Global.player.cam
+
 func sequence():
 	pass
 	
@@ -65,10 +67,10 @@ func moveCam(pos := Vector2.ZERO, timeSec := 0.0, globalCoords := false):
 	if globalCoords:
 		finalPos -= Global.player.global_position
 	
-	moveNode(Global.player.cam, finalPos, timeSec)
+	moveNode(cam, finalPos, timeSec)
 	
 func camReset(timeSec := 0.0):
-	moveNode(Global.player.cam, Global.player.position + Global.player.CAMERA_OFFSET, timeSec)
+	moveNode(cam, Global.player.position + Global.player.CAMERA_OFFSET, timeSec)
 	
 func chatter(line : String):
 	var cmd := CutsceneCommandTextbox.new(

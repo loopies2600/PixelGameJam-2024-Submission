@@ -120,7 +120,10 @@ func gotoNextLine():
 func refresh():
 	waitTable.clear()
 	
-	flip = Global.focusActor.get_global_transform_with_canvas().origin.y >= FLIP_MARGIN
+	flip = false
+	
+	if Global.focusActor != null:
+		flip = Global.focusActor.get_global_transform_with_canvas().origin.y >= FLIP_MARGIN
 	
 	portraitBg.region_rect.position = Global._tbBgOffset
 	
