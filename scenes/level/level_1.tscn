@@ -159,10 +159,13 @@ position = Vector2( 176, 80 )
 position = Vector2( 48, 320 )
 
 [node name="rock2" parent="det" instance=ExtResource( 4 )]
-position = Vector2( 344, 88 )
+position = Vector2( 368, 80 )
 
 [node name="AnimatedSprite" parent="det/rock2" index="0"]
 animation = "2"
+
+[node name="CollisionShape2D" parent="det/rock2" index="1"]
+position = Vector2( 0, 8 )
 
 [node name="rock8" parent="det" instance=ExtResource( 4 )]
 position = Vector2( 400, 648 )
@@ -174,7 +177,7 @@ animation = "2"
 position = Vector2( 416, 240 )
 
 [node name="rock3" parent="det" instance=ExtResource( 4 )]
-position = Vector2( 80, 128 )
+position = Vector2( 0, 160 )
 
 [node name="AnimatedSprite" parent="det/rock3" index="0"]
 animation = "5"
@@ -252,7 +255,7 @@ position = Vector2( 32, 416 )
 position = Vector2( 96, 416 )
 
 [node name="loot_chest3" parent="entity" instance=ExtResource( 6 )]
-position = Vector2( 808, 336 )
+position = Vector2( 360, 632 )
 
 [node name="loot_chest4" parent="entity" instance=ExtResource( 6 )]
 position = Vector2( 976, 224 )
@@ -267,10 +270,10 @@ position = Vector2( 88, 80 )
 position = Vector2( 904, 248 )
 
 [node name="loot_chest6" parent="entity" instance=ExtResource( 6 )]
-position = Vector2( 792, 272 )
+position = Vector2( 216, 720 )
 
 [node name="loot_chest7" parent="entity" instance=ExtResource( 6 )]
-position = Vector2( 872, 288 )
+position = Vector2( 768, 624 )
 
 [node name="loot_chest8" parent="entity" instance=ExtResource( 6 )]
 position = Vector2( 936, 344 )
@@ -279,7 +282,7 @@ position = Vector2( 936, 344 )
 position = Vector2( 856, 232 )
 
 [node name="loot_chest10" parent="entity" instance=ExtResource( 6 )]
-position = Vector2( 800, 200 )
+position = Vector2( 864, 640 )
 
 [node name="pufferfish" parent="entity" instance=ExtResource( 7 )]
 position = Vector2( 111, 231 )
