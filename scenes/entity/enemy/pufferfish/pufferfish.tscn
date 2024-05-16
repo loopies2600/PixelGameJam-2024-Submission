@@ -26,9 +26,10 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=4]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 24.0
+radius = 15.0
 
 [sub_resource type="Animation" id=6]
 resource_name = "Idle"
