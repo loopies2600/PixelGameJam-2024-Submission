@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/entity/object/lamp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/entity/object/searock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/entity/enemy/red_fish/red_fish.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/entity/loot_chest/loot_chest.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.765363 )
@@ -187,6 +188,12 @@ position = Vector2( 200, -144 )
 
 [node name="EnemyRedFish18" parent="." instance=ExtResource( 5 )]
 position = Vector2( 254, -144 )
+
+[node name="loot_chest" parent="." instance=ExtResource( 6 )]
+position = Vector2( 88, 80 )
+
+[node name="loot_chest" parent="loot_chest" instance=ExtResource( 6 )]
+position = Vector2( 192, 64 )
 
 [editable path="det/rock2"]
 [editable path="det/rock3"]
