@@ -5,6 +5,7 @@ const ITEM_PICKUP_SCENE : PackedScene = preload("res://scenes/entity/pickup/item
 const HIT_STARS : PackedScene = preload("res://scenes/particles/hit_stars.tscn")
 const GHOST_SPRITE : PackedScene = preload("res://scenes/particles/ghost_sprite.tscn")
 
+signal attacked(victim, damage_amount)
 signal took_damage(amount, attacker)
 signal died(amount, attacker)
 
@@ -92,6 +93,12 @@ func _on_successful_punch(target : KinematicActor):
 		new_hit_star.global_position = target.global_position
 		get_parent().add_child(new_hit_star)
 	
+func can_attack(target : KinematicActor) -> bool:
+	if target.dead:
+		return false
+	
+	return target.global_position.distance_squared_to(global_position) < pow(attack_distance, 2.0)
+	
 func find_player() -> bool:
 	if Global.player.dead:
 		return false
@@ -117,6 +124,7 @@ func attack(victim : KinematicActor, damage_amount := strength) -> bool:
 	if dead: return false
 	
 	victim.take_damage(self, damage_amount)
+	emit_signal("attacked", victim, damage_amount)
 	_on_successful_punch(victim)
 	
 	return true
