@@ -2,6 +2,8 @@ extends Node2D
 
 var cutscene_running := false
 
+onready var music : AudioStreamPlayer = $BGMusic
+
 func _ready():
 	for i in range(get_child_count()):
 		var child = get_child(i)

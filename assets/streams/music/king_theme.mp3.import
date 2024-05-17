@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/king_theme.mp3-c5444360d2013d629ebd91699323bbe0.mp3str"
+
+[deps]
+
+source_file="res://assets/streams/music/king_theme.mp3"
+dest_files=[ "res://.import/king_theme.mp3-c5444360d2013d629ebd91699323bbe0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

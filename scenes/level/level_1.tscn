@@ -73,9 +73,6 @@ material = SubResource( 2 )
 position = Vector2( 99, 33 )
 texture = ExtResource( 8 )
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.784314, 0.862745, 0.890196, 1 )
-
 [node name="1" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )

@@ -15,6 +15,7 @@ var previous_state : int = States.WALK
 var current_state : int = States.CHASE
 
 var lock_anim : bool = false
+var active : bool = false
 
 var wander_direction : Vector2 = Vector2.RIGHT
 
