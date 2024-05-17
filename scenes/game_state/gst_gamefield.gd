@@ -40,6 +40,8 @@ func _input(event):
 			get_tree().reload_current_scene()
 	
 func _on_king_timer_timeout():
+	main_hud.show_king_is_here()
+	
 	Global.spawn_king(self, Global.player.global_position - Vector2(0.0, 1024.0))
 	
 	Global.king.active = true
