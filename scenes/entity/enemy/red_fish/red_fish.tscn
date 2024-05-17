@@ -76,6 +76,7 @@ tracks/0/keys = {
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 1 )
+stars_amount = Vector2( 2, 10 )
 base_speed = 30.0
 steering = 0.801
 damping = 0.621

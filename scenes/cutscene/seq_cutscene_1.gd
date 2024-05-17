@@ -25,7 +25,7 @@ func sequence():
 	setPortrait(PRT_QUEJONTE)
 	chatter("Can I go swim?")
 	
-	setNameplate("Burg. R. King")
+	setNameplate("The Great King")
 	setPortrait(PRT_KING)
 	chatter("yeah sure.")
 	chatter("you have thirty seconds from now.")

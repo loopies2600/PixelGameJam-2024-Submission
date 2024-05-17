@@ -278,6 +278,7 @@ tracks/3/keys = {
 collision_layer = 32
 collision_mask = 32
 script = ExtResource( 1 )
+stars_amount = Vector2( 2, 10 )
 max_health = 2
 
 [node name="Sprite" type="Sprite" parent="."]

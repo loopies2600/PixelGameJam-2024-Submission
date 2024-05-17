@@ -1,8 +1,10 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://assets/screenplayer/fonts/Aquarius.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/screenplayer/fonts/visitor1.ttf" type="DynamicFontData" id=1]
 
 [resource]
+size = 20
+outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_top = 4
 extra_spacing_char = 2
 font_data = ExtResource( 1 )
