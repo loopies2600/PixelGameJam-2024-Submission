@@ -4,12 +4,14 @@ class_name PlayerActor
 const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
 const LERP_WEIGHT := 8.0
+const GAME_OVER_DELAY := 5.0
 
 const HURT_FREEZE_TIME := 0.25
 const GRACE_TIME := 1.0
 
 const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
 const BLOOD_PUDDLE := preload("res://scenes/entity/player/blood_puddle.tscn")
+const GAME_OVER_SCENE := preload("res://scenes/game_state/gst_game_over.tscn")
 
 export (float, 0.0, 0.99) var walk_steering := 0.3
 export (float, 0.0, 0.99) var swim_steering := 0.96
@@ -46,6 +48,8 @@ var times_hit := 0
 var current_combo : int = 1
 
 var current_sprite : Texture = null
+
+var gover_timer : SceneTreeTimer
 
 onready var cam : Camera2D = $Camera2D
 onready var interaction_ray : RayCast2D = $InteractionRay
@@ -284,6 +288,16 @@ func _on_state_enter(state : int):
 			
 			visible = true
 			anim_sprite.animation = "dead_h"
+			
+			if gover_timer != null:
+				return
+			
+			gover_timer = get_tree().create_timer(GAME_OVER_DELAY)
+			
+			yield(gover_timer, "timeout")
+			
+			gover_timer = null
+			Global.change_scene(GAME_OVER_SCENE)
 		_:
 			_reposition_sprite()
 	

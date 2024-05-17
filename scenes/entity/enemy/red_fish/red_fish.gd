@@ -56,10 +56,13 @@ func _on_attack_timer_timeout():
 	attacking = true
 	
 func _on_successful_punch(target : KinematicActor):
+	pinch_sound.play()
+	
+	if target.invencible: return
+	
 	dash_elapsed = 0.0
 	
 	._on_successful_punch(target)
-	pinch_sound.play()
 	
 func _physics_process(delta):
 	match current_state:

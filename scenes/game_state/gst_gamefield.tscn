@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/streams/music/king_theme.mp3" type="AudioStream" id=1]
 [ext_resource path="res://scenes/level/king_overlay.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game_state/gst_gamefield.gd" type="Script" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 3 )
@@ -18,7 +17,3 @@ volume_db = -80.0
 
 [node name="GameModulate" parent="." instance=ExtResource( 2 )]
 color = Color( 0.784314, 0.862745, 0.890196, 1 )
-
-[node name="Icon" type="Sprite" parent="."]
-position = Vector2( 8, 80 )
-texture = ExtResource( 4 )

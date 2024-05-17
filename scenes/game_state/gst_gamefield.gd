@@ -24,7 +24,6 @@ func _ready():
 	
 	add_child(main_hud)
 	main_hud.owner = self
-	main_hud.hide()
 	
 	king_timer.connect("timeout", self, "_on_king_timer_timeout")
 	

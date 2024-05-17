@@ -93,6 +93,7 @@ tracks/0/keys = {
 
 [node name="MainHud" type="CanvasLayer"]
 layer = 16
+visible = false
 script = ExtResource( 4 )
 
 [node name="KingTimeLeft" type="Label" parent="."]

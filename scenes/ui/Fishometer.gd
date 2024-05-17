@@ -50,7 +50,11 @@ func _on_inventory_item_added(new_item_id : int):
 	fish_positions.append(Vector2(random_x_pos, -20 - y_elevation))
 	
 func fish_under_consent_of_king():
-	var fish_count := Global.player.inventory.get_item_count()
+	var fish_count := 0
+	
+	if Global.player.inventory.get_item_count() != null:
+		fish_count = Global.player.inventory.get_item_count()
+		
 	var king_timer : Timer = get_tree().current_scene.king_timer
 	
 	king_timer.start()

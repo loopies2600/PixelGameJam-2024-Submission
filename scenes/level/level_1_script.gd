@@ -5,6 +5,10 @@ var cutscene_running := false
 onready var music : AudioStreamPlayer = $BGMusic
 
 func _ready():
+	if Global.level_cutscene_seen():
+		_on_cutscene_end()
+		return
+	
 	for i in range(get_child_count()):
 		var child = get_child(i)
 		
@@ -21,3 +25,4 @@ func _ready():
 func _on_cutscene_end():
 	get_parent().on_level_initial_cutscene_end()
 	$BGMusic.play()
+	Global.saw_initial_cutscene[Global.level_id] = true

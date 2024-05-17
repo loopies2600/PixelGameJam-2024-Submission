@@ -13,6 +13,7 @@ var exiting : bool = false
 var transitioning : bool = false
 
 var level_id := 0
+var saw_initial_cutscene := [false]
 
 var player_spawn_pos := Vector2(128, 128)
 
@@ -78,6 +79,9 @@ func play_sound(sound_path := ""):
 	yield(audio_stream, "finished")
 	
 	audio_stream.queue_free()
+	
+func level_cutscene_seen() -> bool:
+	return saw_initial_cutscene[level_id]
 	
 func change_scene(next : PackedScene):
 	if transitioning:
