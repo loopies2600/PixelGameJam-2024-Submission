@@ -3,5 +3,5 @@
 [ext_resource path="res://assets/screenplayer/fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 20
+size = 19
 font_data = ExtResource( 1 )
