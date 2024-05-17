@@ -38,7 +38,7 @@ func sequence():
 	chatter("Quejonte, your death shall be postponed, and I will instead assign a new mission to you!")
 	chatter("You see, our citizens are starving since I ate all the food left in the kingdom!")
 	chatter("Unfortunately, I'm still hungry, so go get me some fish!")
-	chatter("Every three minutes I'll be collecting your findings, and if you don't have enough fish by then, well...")
+	chatter("Every three minutes I'll be collecting your findings, and if you don't have at least 200 fish by then, well...")
 	chatter("I would recommend you to say your prayers, but I am the sole god of this land!")
 	
 	setNameplate("Sir Quejonte")
