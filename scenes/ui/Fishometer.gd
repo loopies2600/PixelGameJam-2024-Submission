@@ -50,6 +50,9 @@ func _on_inventory_item_added(new_item_id : int):
 	
 func fish_under_consent_of_king():
 	var fish_count := Global.player.inventory.get_item_count()
+	var king_timer : Timer = get_tree().current_scene.king_timer
+	
+	king_timer.start()
 	
 	Global.king.fish_count += fish_count
 	

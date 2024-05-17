@@ -5,6 +5,8 @@ const PICKUP_SCENE : PackedScene = preload("res://scenes/entity/pickup/pickup.ts
 const LID_SPRITE := preload("res://assets/sprites/objects/spr_chest_lid.png")
 const LOCK_SPRITE := preload("res://assets/sprites/objects/spr_chest_lock.png")
 
+export (Vector2) var random_fish_loot_amount := Vector2(20, 20)
+
 onready var anim : AnimationPlayer = $AnimationPlayer
 
 func _ready():
@@ -12,8 +14,10 @@ func _ready():
 	
 	death_drops.clear()
 	
-	for i in range(20):
-		var random_integer : int = [0, 1, 2, 3].pick_random()
+	var random_amount := int(rand_range(random_fish_loot_amount.x, random_fish_loot_amount.y))
+	
+	for i in range(random_amount):
+		var random_integer : int = randi() % ItemData.GameItems.size()
 		
 		death_drops.append(random_integer)
 	
