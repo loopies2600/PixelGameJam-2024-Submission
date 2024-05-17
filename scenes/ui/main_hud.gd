@@ -67,6 +67,6 @@ func _update_health_progress():
 	
 	var player_health := PoolIntArray([Global.player.max_health, Global.player.health])
 	
-	health_counter.text = "hp: %02d / %02d" % [player_health[1], player_health[0]]
+	health_counter.text = "%02d / %02d" % [player_health[1], player_health[0]]
 	player_health_progress.max_value = player_health[0]
 	player_health_progress.value = player_health[1]

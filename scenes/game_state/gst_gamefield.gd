@@ -8,9 +8,7 @@ const LEVELS := [
 
 const HUD := preload("res://scenes/ui/main_hud.tscn")
 
-export (int) var lv_id := 0
-
-onready var level : Node = LEVELS[lv_id].instance()
+onready var level : Node = LEVELS[Global.level_id].instance()
 onready var main_hud := HUD.instance()
 
 onready var king_timer : Timer = $KingTimer

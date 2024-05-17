@@ -129,7 +129,8 @@ margin_right = 86.0
 margin_bottom = 48.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "hp: 0 / 0"
+text = "00 / 00"
+align = 1
 
 [node name="Fishometer" type="Sprite" parent="."]
 position = Vector2( 288, 216 )

@@ -12,6 +12,8 @@ var focusActor : Node2D = null
 var exiting : bool = false
 var transitioning : bool = false
 
+var level_id := 0
+
 var player_spawn_pos := Vector2(128, 128)
 
 onready var player : PlayerActor = PLAYER_SCENE.instance() as PlayerActor
@@ -71,6 +73,7 @@ func play_sound(sound_path := ""):
 	add_child(audio_stream)
 	
 	audio_stream.play()
+	audio_stream.bus = "Sound"
 	
 	yield(audio_stream, "finished")
 	
