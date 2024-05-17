@@ -52,8 +52,9 @@ func _on_inventory_item_added(new_item_id : int):
 func fish_under_consent_of_king():
 	var fish_count := 0
 	
-	if Global.player.inventory.get_item_count() != null:
+	if Global.player != null:
 		fish_count = Global.player.inventory.get_item_count()
+		Global.player.health = Global.player.max_health
 		
 	var king_timer : Timer = get_tree().current_scene.king_timer
 	
