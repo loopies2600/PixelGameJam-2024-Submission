@@ -396,6 +396,12 @@ position = Vector2( 1144, 520 )
 [node name="loot_chest9" parent="entity" instance=ExtResource( 6 )]
 position = Vector2( 856, 232 )
 
+[node name="loot_chest11" parent="entity" instance=ExtResource( 6 )]
+position = Vector2( 888, 200 )
+
+[node name="loot_chest12" parent="entity" instance=ExtResource( 6 )]
+position = Vector2( 920, 184 )
+
 [node name="loot_chest10" parent="entity" instance=ExtResource( 6 )]
 position = Vector2( 904, 776 )
 
