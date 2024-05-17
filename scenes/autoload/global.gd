@@ -60,6 +60,22 @@ func spawn_king(where := get_tree().current_scene, position := Vector2.ZERO):
 	where.add_child(king)
 	king.global_position = position
 	
+func play_sound(sound_path := ""):
+	if sound_path.empty():
+		return
+	
+	var audio_stream := AudioStreamPlayer.new()
+	
+	audio_stream.stream = load(sound_path)
+	
+	add_child(audio_stream)
+	
+	audio_stream.play()
+	
+	yield(audio_stream, "finished")
+	
+	audio_stream.queue_free()
+	
 func change_scene(next : PackedScene):
 	if transitioning:
 		return

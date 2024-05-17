@@ -135,3 +135,6 @@ func changeSequence(newSeqMethod := "sequence", stopCurrent := true):
 	var cmd := CutsceneCommandResetCutscene.new(stopCurrent, self, newSeqMethod)
 	
 	CutsceneManager.commands.append(cmd)
+	
+func playSound(soundPath := ""):
+	callSeq(Global, "play_sound", [soundPath])

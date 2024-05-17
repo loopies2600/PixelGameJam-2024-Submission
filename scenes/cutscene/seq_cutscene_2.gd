@@ -10,9 +10,11 @@ func sequence():
 	setPortrait(PRT_QUEJONTE)
 	chatter("Huh, I don't remember seeing this down here.")
 	
-	sleep(2)
+	sleep(1)
 	
-	s
+	playSound("res://assets/streams/sounds/ringtone.wav")
+	
+	sleep(2)
 	
 	setNameplate("The Great King")
 	setPortrait(PRT_KING)
