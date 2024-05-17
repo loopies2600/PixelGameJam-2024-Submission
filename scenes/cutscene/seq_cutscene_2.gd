@@ -4,10 +4,15 @@ const PRT_KING := preload("res://assets/sprites/portraits/port_sir_burgking.png"
 const PRT_QUEJONTE := preload("res://assets/sprites/portraits/port_sir_quejonte.tres")
 
 func sequence():
+	sleep(2)
 	
 	setNameplate("Sir Quejonte")
 	setPortrait(PRT_QUEJONTE)
 	chatter("Huh, I don't remember seeing this down here.")
+	
+	sleep(2)
+	
+	s
 	
 	setNameplate("The Great King")
 	setPortrait(PRT_KING)
