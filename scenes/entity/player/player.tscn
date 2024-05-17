@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://data/player/animframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/entity/player/player.gd" type="Script" id=2]
@@ -8,6 +8,18 @@
 [ext_resource path="res://assets/shaders/flash.shader" type="Shader" id=6]
 [ext_resource path="res://assets/streams/sounds/snd_pickup.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/entity/player/player_camera.gd" type="Script" id=8]
+[ext_resource path="res://assets/shaders/outline.gdshader" type="Shader" id=9]
+[ext_resource path="res://assets/sprites/hud/gameover.png" type="Texture" id=10]
+[ext_resource path="res://scenes/entity/player/player_dead_hacky.gd" type="Script" id=11]
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 9 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/width = 1.0
+shader_param/pattern = 0
+shader_param/inside = false
+shader_param/add_margins = true
+shader_param/number_of_images = Vector2( 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
@@ -21,6 +33,70 @@ extents = Vector2( 32, 32 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 12, 12 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "Dead"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainSprite:material:shader_param/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.976471, 0.164706, 0.164706, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PulpedSchtick:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("PulpedSchtick/Sprite:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 0.482968, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -72 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("PulpedSchtick/Sprite:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 2.73208, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.25, 0.5 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ), Vector2( 0.875, 1.129 ), Vector2( 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Hurt"
@@ -47,6 +123,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 0.976471, 0.164706, 0.164706, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PulpedSchtick:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -75,6 +163,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("PulpedSchtick:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=5]
 length = 0.001
@@ -102,6 +202,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("PulpedSchtick:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("PulpedSchtick/Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -72 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("PulpedSchtick/Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
 [sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.57143, 0.0, 0, 0 ]
@@ -111,6 +247,24 @@ collision_mask = 118
 script = ExtResource( 2 )
 max_health = 20
 trail_color = Color( 0.521569, 0.87451, 0.886275, 1 )
+
+[node name="WhilePlayerDead" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 11 )
+
+[node name="PulpedSchtick" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 15
+visible = false
+offset = Vector2( 160, 120 )
+transform = Transform2D( 1, 0, 0, 1, 160, 120 )
+
+[node name="Sprite" type="Sprite" parent="PulpedSchtick"]
+pause_mode = 2
+material = SubResource( 9 )
+position = Vector2( 0, -72 )
+z_index = 1
+texture = ExtResource( 10 )
 
 [node name="MainSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 3 )
@@ -165,10 +319,13 @@ bus = "UnderwaterEcho"
 
 [node name="SwordSwingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = 8.0
 bus = "UnderwaterEcho"
 
 [node name="SpriteAnims" type="AnimationPlayer" parent="."]
+pause_mode = 2
 autoplay = "Idle"
+anims/Dead = SubResource( 10 )
 anims/Hurt = SubResource( 4 )
 anims/Idle = SubResource( 6 )
 anims/RESET = SubResource( 5 )

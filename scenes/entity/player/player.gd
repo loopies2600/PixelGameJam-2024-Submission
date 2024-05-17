@@ -4,7 +4,7 @@ class_name PlayerActor
 const INTERACTION_OFFSET := Vector2(32, 0)
 const CAMERA_OFFSET := Vector2(0, -14)
 const LERP_WEIGHT := 8.0
-const GAME_OVER_DELAY := 5.0
+const GAME_OVER_DELAY := 3.0
 
 const HURT_FREEZE_TIME := 0.25
 const GRACE_TIME := 1.0
@@ -262,7 +262,9 @@ func _on_state_enter(state : int):
 			blood_splat.scale = anim_sprite.scale
 			
 			cam.shake(hurt_cam_shake)
+			
 			extra_anim.play("Hurt")
+			
 			frozen = true
 			
 			var freeze_timer := get_tree().create_timer(HURT_FREEZE_TIME)
@@ -278,6 +280,8 @@ func _on_state_enter(state : int):
 			
 			dead = true
 			health = 0
+			
+			$WhilePlayerDead.active = true
 			
 			yield(get_tree(), "idle_frame")
 			yield(get_tree(), "idle_frame")
@@ -297,7 +301,7 @@ func _on_state_enter(state : int):
 			yield(gover_timer, "timeout")
 			
 			gover_timer = null
-			Global.change_scene(GAME_OVER_SCENE)
+			Global.change_scene(GAME_OVER_SCENE, false, {"player_facing" : anim_sprite.scale})
 		_:
 			_reposition_sprite()
 	
