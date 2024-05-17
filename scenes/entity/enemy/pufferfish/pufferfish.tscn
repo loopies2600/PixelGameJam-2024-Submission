@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/entity/enemy/pufferfish/pufferfish.gd" type="Script" id=1]
 [ext_resource path="res://scenes/util/tool_rotate_line.gd" type="Script" id=2]
@@ -27,9 +27,6 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 8.0
-
-[sub_resource type="CircleShape2D" id=5]
-radius = 15.0
 
 [sub_resource type="Animation" id=6]
 resource_name = "Idle"
@@ -86,6 +83,7 @@ base_speed = 64.0
 max_health = 2
 strength = 2
 death_drops = [ 2 ]
+tracking_distance = 32.0
 tracking_layers = 1
 
 [node name="Flipdude" type="Node2D" parent="."]
@@ -103,13 +101,6 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
-
-[node name="DangerCast" type="ShapeCast2D" parent="."]
-modulate = Color( 0.976471, 0.117647, 0.117647, 1 )
-enabled = false
-shape = SubResource( 5 )
-target_position = Vector2( 0, 0 )
-max_results = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

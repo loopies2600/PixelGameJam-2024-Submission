@@ -2,7 +2,7 @@ extends KinematicActor
 class_name PufferfishActor
 
 export (float, 0.0, 360.0) var base_angle := 0
-export (Vector2) var wall_scan_ray_length := Vector2(32.0, 0.0)
+export (Vector2) var wall_scan_ray_length := Vector2(16.0, 0.0)
 
 enum States {
 	BACK_AND_FORTH,
@@ -14,7 +14,6 @@ var current_state : int = States.BACK_AND_FORTH
 var dir : int = 1
 
 onready var anim_sprite : AnimatedSprite = $Flipdude/AnimatedSprite
-onready var danger_area : ShapeCast2D = $DangerCast
 onready var extra_anim : AnimationPlayer = $AnimationPlayer
 
 func _process(delta):
@@ -32,14 +31,8 @@ func _find_wall() -> bool:
 func try_attack():
 	if attacking: return
 	
-	var actor_ids := _scan_for_actors(danger_area)
+	attack(Global.player)
 	
-	for i in range(actor_ids.size()):
-		var target = instance_from_id(actor_ids[i])
-		
-		if target is KinematicActor:
-			attack(target)
-			
 	attacking = true
 	
 func _tick_baf(delta : float):
@@ -49,7 +42,7 @@ func _tick_baf(delta : float):
 	
 	velocity = (Vector2.RIGHT.rotated(deg2rad(base_angle)) * base_speed) * dir
 	
-	if _scan_for_actors(danger_area) && Global.player.dead == false:
+	if find_player() && Global.player.dead == false:
 		current_state = States.INFLATE
 	
 	if _find_wall():
