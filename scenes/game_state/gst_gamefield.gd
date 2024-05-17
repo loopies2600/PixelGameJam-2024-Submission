@@ -14,15 +14,24 @@ onready var main_hud := HUD.instance()
 onready var king_timer : Timer = $KingTimer
 
 func _ready():
+	Global.spawn_player(self, Global.player_spawn_pos)
+	
 	add_child(level)
-	Global.spawn_player()
 	
 	add_child(main_hud)
 	main_hud.owner = self
-	
-	king_timer.start()
+	main_hud.hide()
 	
 	king_timer.connect("timeout", self, "_on_king_timer_timeout")
+	
+func on_level_initial_cutscene_end():
+	main_hud.show()
+	king_timer.start()
+	
+func _input(event):
+	if event is InputEventKey:
+		if event.scancode == KEY_F4:
+			get_tree().reload_current_scene()
 	
 func _on_king_timer_timeout():
 	Global.spawn_king(self, Global.player.global_position - Vector2(0.0, 256.0))

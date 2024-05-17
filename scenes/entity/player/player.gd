@@ -9,6 +9,7 @@ const HURT_FREEZE_TIME := 0.25
 const GRACE_TIME := 1.0
 
 const ATTACK_1_DATA : AttackStateData = preload("res://data/player/attack1_state_data.tres")
+const BLOOD_PUDDLE := preload("res://scenes/entity/player/blood_puddle.tscn")
 
 export (float, 0.0, 0.99) var walk_steering := 0.3
 export (float, 0.0, 0.99) var swim_steering := 0.96
@@ -41,7 +42,10 @@ var input_direction : Vector2 = Vector2.ZERO
 var can_input := true
 var lock_anim := false
 
+var times_hit := 0
 var current_combo : int = 1
+
+var current_sprite : Texture = null
 
 onready var cam : Camera2D = $Camera2D
 onready var interaction_ray : RayCast2D = $InteractionRay
@@ -53,12 +57,11 @@ onready var attack_pivot : Node2D = $AttackHitPivot
 onready var swing_sound : AudioStreamPlayer = $SwordSwingSound
 onready var extra_anim : AnimationPlayer = $SpriteAnims
 onready var pickup_sound : AudioStreamPlayer = $PickupSound
+onready var blood_splat : CPUParticles2D = $BloodSplat
 
 onready var _bwalk := walk_speed
 onready var _bswim := swim_speed
 onready var _bdash := swing_dash
-
-var current_sprite : Texture = null
 
 func _ready():
 	Global.player = self
@@ -144,6 +147,9 @@ func get_dominant_facing() -> String:
 	return facing_name
 	
 func _animate():
+	if current_state == PlayerStates.CUTSCENE:
+		return
+	
 	if lock_anim:
 		return
 	
@@ -232,6 +238,25 @@ func _on_state_enter(state : int):
 			
 			set_state(PlayerStates.IDLE)
 		PlayerStates.HURT:
+			times_hit += 1
+			
+			if times_hit % 2 == 0:
+				var puddle_count := randi() % 4
+				
+				for i in range(puddle_count):
+					var new_puddle := BLOOD_PUDDLE.instance()
+					
+					var random_x := rand_range(-16, 16)
+					var random_y := rand_range(-8, 8)
+					
+					new_puddle.global_position = global_position + Vector2(random_x, random_y)
+					get_parent().add_child(new_puddle)
+			
+			blood_splat.set_as_toplevel(true)
+			blood_splat.emitting = true
+			blood_splat.global_position = global_position + (Vector2(16, -8) * anim_sprite.scale)
+			blood_splat.scale = anim_sprite.scale
+			
 			cam.shake(hurt_cam_shake)
 			extra_anim.play("Hurt")
 			frozen = true

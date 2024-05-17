@@ -12,6 +12,8 @@ var focusActor : Node2D = null
 var exiting : bool = false
 var transitioning : bool = false
 
+var player_spawn_pos := Vector2(128, 128)
+
 onready var player : PlayerActor = PLAYER_SCENE.instance() as PlayerActor
 onready var king : KingActor = KING_SCENE.instance() as KingActor
 onready var transition_anim : AnimationPlayer = $TransitionLayer/AnimationPlayer
@@ -47,10 +49,14 @@ func createTextbox(line := "", nameplate := "", portrait : Texture = null, sound
 	return textbox
 	
 func spawn_player(where := get_tree().current_scene, position := Vector2.ZERO):
+	player = PLAYER_SCENE.instance() as PlayerActor
+	
 	where.add_child(player)
 	player.global_position = position
 	
 func spawn_king(where := get_tree().current_scene, position := Vector2.ZERO):
+	king = KING_SCENE.instance() as KingActor
+	
 	where.add_child(king)
 	king.global_position = position
 	

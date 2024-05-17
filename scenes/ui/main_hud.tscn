@@ -74,7 +74,7 @@ tracks/0/keys = {
 }
 
 [node name="MainHud" type="CanvasLayer"]
-layer = 128
+layer = 16
 script = ExtResource( 4 )
 
 [node name="QuexoteHealthbar" type="Sprite" parent="."]
