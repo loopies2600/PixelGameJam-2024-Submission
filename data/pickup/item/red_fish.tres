@@ -1,11 +1,9 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://data/pickup/item/item_pickup_definition.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/fish/fish_1.png" type="Texture" id=2]
 [ext_resource path="res://data/pickup/hitbox/item/item_hitbox_0.tres" type="Shape2D" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
 region = Rect2( 47, 5, 13.1605, 14 )
 
 [resource]
