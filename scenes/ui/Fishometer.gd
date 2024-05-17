@@ -15,8 +15,6 @@ onready var fish_count : Label = $FishCount
 onready var anim : AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	return
-	
 	yield(owner, "ready")
 	
 	if Global.player:
