@@ -22,12 +22,13 @@ func _ready():
 		Global.player.inventory.connect("item_deleted", self, "_on_inventory_item_deleted")
 	
 func _on_inventory_item_added(new_item_id : int):
-	if Global.player.inventory.get_item_count() >= MAX_FISHES:
-		$FullStackJingle.play()
-		anim.play("GoOffscreen")
-		Global.player.inventory.locked = true
-		return
-	
+	if not Global.king.active:
+		if Global.player.inventory.get_item_count() >= MAX_FISHES:
+			$FullStackJingle.play()
+			anim.play("GoOffscreen")
+			Global.player.inventory.locked = true
+			return
+		
 	addition_stack += 1
 	
 	if addition_stack != STACK_COUNT:

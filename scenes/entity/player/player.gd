@@ -352,6 +352,9 @@ func look_at_cursor() -> Vector2:
 	return Vector2.RIGHT.rotated(angle_to_cursor)
 	
 func check_input():
+	if CutsceneManager.running:
+		return
+		
 	input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	if is_input_moving():
