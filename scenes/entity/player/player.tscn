@@ -19,8 +19,8 @@ shader_param/opacity = 1.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 16.0
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 12, 12 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "Hurt"
@@ -109,6 +109,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.57143, 0.0, 0, 0 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 118
 script = ExtResource( 2 )
+max_health = 20
 trail_color = Color( 0.521569, 0.87451, 0.886275, 1 )
 
 [node name="MainSprite" type="AnimatedSprite" parent="."]
@@ -133,7 +134,7 @@ collide_with_areas = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 9 )
-shape = SubResource( 1 )
+shape = SubResource( 8 )
 __meta__ = {
 "_edit_group_": true
 }

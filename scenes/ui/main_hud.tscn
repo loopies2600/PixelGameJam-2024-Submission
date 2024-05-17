@@ -122,6 +122,15 @@ value = 100.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 3 )
 
+[node name="HealthCount" type="Label" parent="QuexoteHealthbar"]
+margin_left = 1.0
+margin_top = 35.0
+margin_right = 86.0
+margin_bottom = 48.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "hp: 0 / 0"
+
 [node name="Fishometer" type="Sprite" parent="."]
 position = Vector2( 288, 216 )
 texture = ExtResource( 6 )
@@ -152,7 +161,7 @@ anims/RESET = SubResource( 3 )
 [node name="FullStackJingle" type="AudioStreamPlayer" parent="Fishometer"]
 stream = ExtResource( 9 )
 pitch_scale = 1.7
-bus = "Music"
+bus = "UnderwaterEcho"
 
 [node name="KingHereLabel" type="Label" parent="."]
 margin_left = 64.0
@@ -162,4 +171,3 @@ margin_bottom = 218.0
 custom_fonts/font = ExtResource( 11 )
 text = "The king is here."
 uppercase = true
-percent_visible = -0.0714286

@@ -3,6 +3,8 @@ extends CanvasLayer
 const TYPEWRITER_DELAY := 0.4
 
 onready var player_health_progress : TextureProgress = $QuexoteHealthbar/HealthProgress
+onready var health_counter : Label = $QuexoteHealthbar/HealthCount
+
 onready var kh_label : Label = $KingHereLabel
 
 onready var king_here_text : String = kh_label.text
@@ -63,5 +65,8 @@ func _update_health_progress():
 	if Global.player == null:
 		return
 	
-	player_health_progress.max_value = Global.player.max_health
-	player_health_progress.value = Global.player.health
+	var player_health := PoolIntArray([Global.player.max_health, Global.player.health])
+	
+	health_counter.text = "hp: %02d / %02d" % [player_health[1], player_health[0]]
+	player_health_progress.max_value = player_health[0]
+	player_health_progress.value = player_health[1]

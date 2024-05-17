@@ -56,6 +56,8 @@ func _on_attack_timer_timeout():
 	attacking = true
 	
 func _on_successful_punch(target : KinematicActor):
+	dash_elapsed = 0.0
+	
 	._on_successful_punch(target)
 	pinch_sound.play()
 	
