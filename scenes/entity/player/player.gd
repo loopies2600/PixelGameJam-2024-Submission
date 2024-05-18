@@ -152,6 +152,7 @@ func get_dominant_facing() -> String:
 	
 func _animate():
 	if current_state == PlayerStates.CUTSCENE:
+		anim_sprite.play("idle_h")
 		return
 	
 	if lock_anim:
@@ -302,6 +303,8 @@ func _on_state_enter(state : int):
 			
 			gover_timer = null
 			Global.change_scene(GAME_OVER_SCENE, false, {"player_facing" : anim_sprite.scale})
+		PlayerStates.CUTSCENE:
+			_animate()
 		_:
 			_reposition_sprite()
 	

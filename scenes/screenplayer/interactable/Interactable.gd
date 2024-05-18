@@ -6,6 +6,9 @@ export (int) var cutsceneEvent = 0
 var interacting := false
 
 func interact():
+	if interacting:
+		return
+	
 	interacting = true
 	
 	yield(runEvents(), "completed")

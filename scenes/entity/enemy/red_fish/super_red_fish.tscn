@@ -1,25 +1,25 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/entity/enemy/red_fish/red_fish.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/fish/fish_1.png" type="Texture" id=2]
 [ext_resource path="res://assets/streams/sounds/snd_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sprites/fish/fish_4.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
 region = Rect2( 21, 0, 21, 23 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 21, 23 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "dash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ) ],
+"frames": [ SubResource( 8 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -77,10 +77,11 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource( 1 )
 stars_amount = Vector2( 2, 10 )
-base_speed = 30.0
+base_speed = 60.0
 steering = 0.801
 damping = 0.621
-max_health = 1
+max_health = 3
+strength = 2
 death_drops = [ 1 ]
 tracking_distance = 200.0
 attack_distance = 64.0
