@@ -5,14 +5,17 @@
 [ext_resource path="res://scenes/entity/bullet/bullet_emitter.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 23, 0, 23, 29 )
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 23, 29 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 46, 0, 23, 29 )
 
@@ -39,7 +42,7 @@ extents = Vector2( 12, 12 )
 
 [node name="enemy_turret" type="StaticBody2D"]
 script = ExtResource( 1 )
-cooldown = 5.0
+cooldown = 0.0
 
 [node name="MainSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
@@ -57,6 +60,6 @@ wait_time = 4.0
 
 [node name="bullet_emitter" parent="." instance=ExtResource( 3 )]
 bullet_type = 0
-bullet_count = 64
+bullet_count = 11
 bullet_base_speed = 96.0
 per_bullet_delay = 0.1

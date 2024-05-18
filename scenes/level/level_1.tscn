@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://scenes/level/invisible_checkpoint.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/cutscene/seq_cutscene_2.gd" type="Script" id=16]
 [ext_resource path="res://scenes/level/level_1_script.gd" type="Script" id=17]
+[ext_resource path="res://scenes/entity/enemy/wallman/wallman.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/entity/enemy/turret/enemy_turret.tscn" type="PackedScene" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -677,6 +679,18 @@ position = Vector2( -124, -44 )
 
 [node name="Cutscene" type="Node" parent="."]
 script = ExtResource( 16 )
+
+[node name="wallman" parent="." instance=ExtResource( 18 )]
+position = Vector2( 392, 768 )
+
+[node name="wallman2" parent="." instance=ExtResource( 18 )]
+position = Vector2( 1064, 752 )
+
+[node name="wallman3" parent="." instance=ExtResource( 18 )]
+position = Vector2( 1750, 704 )
+
+[node name="enemy_turret" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1713, 139 )
 
 [editable path="det/rock2"]
 [editable path="det/rock8"]
