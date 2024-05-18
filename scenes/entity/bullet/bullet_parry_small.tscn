@@ -27,4 +27,5 @@ target_position = Vector2( 0, 0 )
 
 [node name="FakeActor" type="KinematicBody2D" parent="."]
 script = ExtResource( 3 )
+stars_amount = Vector2( 1, 3 )
 max_health = 444444

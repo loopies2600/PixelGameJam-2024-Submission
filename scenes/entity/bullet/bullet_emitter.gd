@@ -18,32 +18,52 @@ enum BulletType {
 export (BulletType) var bullet_type : int = 0
 export (int, 1, 1000) var bullet_count := 16
 export (float) var bullet_base_speed := 128.0
+export (float) var per_bullet_delay := 0.0
 
 export (float, 0.0, 6.283185) var start_angle := 0.0
 export (float, 0.0, 6.283185) var spread := TAU
 
-var instance_count := 0
+var instance_counter := 0
+var elapsed := 0.0
+var enabled := false
 
 func _process(delta):
+	if enabled:
+		elapsed += delta
+		
+		var angles := get_bullet_angles()
+		
+		if elapsed > per_bullet_delay:
+			instance_counter += 1
+			
+			var cur_angle := angles[instance_counter]
+			
+			_spawn_bullet(cur_angle)
+			
+			elapsed = 0.0
+			
+			instance_counter += 1
+			
+			if instance_counter >= angles.size():
+				enabled = false
+	
 	update()
 	
-func fire():
-	var angles := get_bullet_angles()
+func _spawn_bullet(angle : float):
+	var bullet_instance = BULLETS[bullet_type].instance()
 	
-	for i in range(angles.size()):
-		var cur_angle := angles[i]
-		var bullet_instance = BULLETS[bullet_type].instance()
-		
-		bullet_instance.base_speed = bullet_base_speed
-		bullet_instance.velocity = Vector2.RIGHT.rotated(cur_angle) * bullet_instance.base_speed
-		
-		bullet_instance.global_transform = global_transform
-		
-		add_child(bullet_instance)
-		bullet_instance.set_as_toplevel(true)
-		
-		instance_count += 1
-		
+	bullet_instance.base_speed = bullet_base_speed
+	bullet_instance.velocity = Vector2.RIGHT.rotated(angle) * bullet_instance.base_speed
+	
+	bullet_instance.global_transform = global_transform
+	
+	add_child(bullet_instance)
+	bullet_instance.set_as_toplevel(true)
+	
+func fire():
+	instance_counter = 0
+	enabled = true
+	
 func get_bullet_angles() -> PoolRealArray:
 	var angles : PoolRealArray = []
 	

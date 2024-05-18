@@ -7,6 +7,7 @@ export (Color) var decision_color = Color.yellow
 
 var selected := 0
 var decision_made := false
+var active := false
 
 onready var decisions := [$DeadLayer/Decisions/Accept, $DeadLayer/Decisions/Cancel]
 onready var scroll_sound : AudioStreamPlayer = $ScrollSound
@@ -29,7 +30,14 @@ func _ready():
 	
 	update_decision()
 	
+	yield(get_tree().create_timer(2.0), "timeout")
+	
+	active = true
+	
 func _input(event):
+	if not active:
+		return
+	
 	if event.is_action_pressed("move_right"):
 		selected = wrapi(selected + 1, 0, 2)
 		scroll_sound.play()

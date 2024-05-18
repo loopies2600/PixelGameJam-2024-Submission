@@ -6,6 +6,8 @@ onready var music : AudioStreamPlayer = $BGMusic
 
 func _ready():
 	if Global.level_cutscene_seen():
+		CutsceneManager.emit_signal("cutscene_ended")
+		
 		_on_cutscene_end()
 		return
 	
