@@ -4,32 +4,38 @@
 [ext_resource path="res://assets/sprites/objects/sprsh_swordfish_sm.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 41 )
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 32, 41 )
-
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 41 )
 
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 41 )
+
 [sub_resource type="AtlasTexture" id=6]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 41 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 41 )
 
 [sub_resource type="AtlasTexture" id=1]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 41 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 3 ), SubResource( 5 ), SubResource( 4 ) ],
 "loop": true,
 "name": "attack",
 "speed": 5.0
@@ -57,13 +63,17 @@ extents = Vector2( 8, 12 )
 collision_layer = 8
 collision_mask = 46
 script = ExtResource( 1 )
-base_speed = 58.0
+base_speed = 75.0
 steering = 0.711
 max_health = 5
 strength = 2
 death_drops = [ 4, 4 ]
+tracking_distance = 64.0
+attack_chase_wait = 1.0
+attack_hit_frame = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -7, -9 )
 frames = SubResource( 2 )
 animation = "idle"
 playing = true
