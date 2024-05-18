@@ -124,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/screenplayer/util/ScrollingSelector.gd"
 }, {
+"base": "KinematicActor",
+"class": "SwordfishActor",
+"language": "GDScript",
+"path": "res://scenes/entity/enemy/swordfish/swordfish.gd"
+}, {
 "base": "CanvasLayer",
 "class": "TextBox",
 "language": "GDScript",
@@ -163,6 +168,7 @@ _global_script_class_icons={
 "PlayerActor": "",
 "PufferfishActor": "",
 "ScrollingSelector": "",
+"SwordfishActor": "",
 "TextBox": "",
 "TextBoxManager": "",
 "TextboxVoicePlayer": ""
