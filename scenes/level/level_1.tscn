@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://scenes/level/level_1_script.gd" type="Script" id=17]
 [ext_resource path="res://scenes/entity/enemy/wallman/wallman.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/entity/enemy/turret/enemy_turret.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/entity/enemy/swordfish/swordfish_big.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -670,6 +671,9 @@ position = Vector2( 1152, 208 )
 
 [node name="pufferfish2" parent="entity" instance=ExtResource( 7 )]
 position = Vector2( 280, 576 )
+
+[node name="EnemySwordfishBig" parent="entity" instance=ExtResource( 20 )]
+position = Vector2( 271, 219 )
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )

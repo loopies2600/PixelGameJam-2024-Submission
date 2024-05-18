@@ -4,6 +4,8 @@ class_name SwordfishActor
 const TROLL_DELAY := 0.25
 
 export (float) var attack_chase_wait := 2.0
+export (int) var attack_hit_frame := 2
+export (Vector2) var sprite_offset := Vector2(8, 0)
 
 var fish_count := 0
 
@@ -46,7 +48,7 @@ func _on_anim_frame_changed():
 			current_state = States.CHASE
 			
 		if current_state == States.ATTACK:
-			if anim_sprite.frame == 2:
+			if anim_sprite.frame == attack_hit_frame:
 				attacking = attack(Global.player)
 	
 func _animate():
@@ -66,7 +68,7 @@ func _animate():
 	if Global.player != null:
 		flip_h = true if Global.player.global_position.x > global_position.x else false
 	
-	anim_sprite.offset = Vector2(8, 0) if flip_h else Vector2(-8, 0)
+	anim_sprite.offset = sprite_offset if flip_h else -sprite_offset
 	anim_sprite.flip_h = flip_h
 	
 	var prev_anim_frame = anim_sprite.frame

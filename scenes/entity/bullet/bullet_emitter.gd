@@ -34,8 +34,6 @@ func _process(delta):
 		var angles := get_bullet_angles()
 		
 		if elapsed > per_bullet_delay:
-			instance_counter += 1
-			
 			var cur_angle := angles[instance_counter]
 			
 			_spawn_bullet(cur_angle)

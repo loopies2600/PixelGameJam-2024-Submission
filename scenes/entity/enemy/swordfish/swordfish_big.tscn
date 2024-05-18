@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/entity/enemy/swordfish/swordfish_big.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/objects/sprsh_swordfish_BIG.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 189, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 252, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 315, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 378, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 441, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 504, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 63, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 126, 0, 63, 66 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 63, 66 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "attack",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 18 ), SubResource( 20 ) ],
+"loop": true,
+"name": "chase",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 18 ), SubResource( 20 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 12, 20 )
+
+[node name="EnemySwordfishBig" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 46
+script = ExtResource( 1 )
+base_speed = 58.0
+steering = 0.711
+strength = 4
+death_drops = [ 4, 4 ]
+attack_chase_wait = 4.0
+attack_hit_frame = 4
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 10 )
+animation = "idle"
+playing = true
+
+[node name="WanderTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 4 )
+shape = SubResource( 21 )
