@@ -783,19 +783,15 @@ script = ExtResource( 16 )
 scroll_offset = Vector2( 100, 0 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="level2/ParallaxBackground"]
-motion_scale = Vector2( 0.3, 1 )
+motion_scale = Vector2( 0.3, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="level2/ParallaxBackground/ParallaxLayer"]
 material = SubResource( 4 )
-margin_left = 2504.0
-margin_top = 368.0
-margin_right = 7120.0
-margin_bottom = 884.0
+margin_top = -120.0
+margin_right = 5056.0
+margin_bottom = 120.0
 texture = ExtResource( 19 )
 stretch_mode = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="tile2" type="Node" parent="level2"]
 
