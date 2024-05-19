@@ -16,7 +16,7 @@ enum States {
 }
 
 var previous_state : int = States.WALK
-var current_state : int = States.CHASE
+var current_state : int = States.WALK
 
 var lock_anim : bool = false
 var active : bool = false
@@ -126,9 +126,6 @@ func _physics_process(delta):
 			if find_player():
 				current_state = States.CHASE
 		States.CHASE:
-			if not find_player():
-				current_state = States.WALK
-				
 			var distance_to_player := global_position.distance_squared_to(Global.player.global_position)
 			
 			var target_pos := Vector2.ZERO
