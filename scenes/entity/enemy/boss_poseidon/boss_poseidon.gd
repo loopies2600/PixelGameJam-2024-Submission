@@ -29,6 +29,17 @@ var state_elapsed := 0.0
 var dash_combo := 0
 var mad_bullet_counter := 0
 
+func is_visible_in_canvas() -> bool:
+	var vic := true
+	
+	var screen_pos := get_global_transform_with_canvas().origin
+	var padding := Vector2(32.0, 32.0)
+	
+	if screen_pos.x > 320.0 + padding.x || screen_pos.x < 0.0 - padding.x || screen_pos.y > 240.0 + padding.y || screen_pos.y < 0.0 - padding.y:
+		vic = false
+	
+	return vic
+	
 func _explode():
 	var explosion = EXPLOSION_EFFECT.instance()
 	
@@ -100,6 +111,9 @@ func get_direction_to_player() -> Vector2:
 	
 func _physics_process(delta):
 	state_elapsed += delta
+	
+	if not is_visible_in_canvas():
+		set_state(States.IDLE)
 	
 	match current_state:
 		States.IDLE:
