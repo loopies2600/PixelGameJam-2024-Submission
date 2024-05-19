@@ -123,7 +123,7 @@ func can_attack(target : KinematicActor) -> bool:
 	if target.dead:
 		return false
 	
-	return target.global_position.distance_squared_to(global_position) < pow(attack_distance, 2.0)
+	return abs(target.global_position.distance_to(global_position)) < attack_distance
 	
 func find_player() -> bool:
 	if Global.player.dead:
