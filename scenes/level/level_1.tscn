@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://scenes/entity/enemy/swordfish/EnemySwordfish.tscn" type="PackedScene" id=20]
 [ext_resource path="res://data/tile_set/tlevel2.tres" type="TileSet" id=21]
 [ext_resource path="res://scenes/entity/enemy/turret/enemy_turret.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/entity/enemy/swordfish/swordfish_big.tscn" type="PackedScene" id=23]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -727,7 +728,8 @@ position = Vector2( 1216, 336 )
 position = Vector2( 1648, 600 )
 
 [node name="EnemySwordfish8" parent="entity" instance=ExtResource( 20 )]
-position = Vector2( 1744, 592 )
+position = Vector2( 2696, 624 )
+attack_distance = 25.0
 
 [node name="EnemySwordfish9" parent="entity" instance=ExtResource( 20 )]
 position = Vector2( 1696, 592 )
@@ -825,6 +827,10 @@ format = 1
 tile_data = PoolIntArray( 2883769, 94, 0, 2883770, 43, 0, 2883771, 43, 0, 2883772, 43, 0, 2883773, 95, 0, 2949305, 16, 0, 2949306, 0, 0, 2949307, 0, 0, 2949308, 0, 0, 2949309, 17, 0, 3014841, 16, 0, 3014842, 0, 0, 3014843, 0, 0, 3014844, 0, 0, 3014845, 17, 0, 3080377, 16, 0, 3080378, 0, 0, 3080379, 0, 0, 3080380, 0, 0, 3080381, 17, 0, 3145913, 16, 0, 3408039, 95, 0 )
 
 [node name="entity" type="Node" parent="level2"]
+
+[node name="EnemySwordfishBig" parent="level2/entity" instance=ExtResource( 23 )]
+position = Vector2( 3208, 600 )
+attack_distance = 25.0
 
 [node name="lamp" parent="level2/entity" instance=ExtResource( 3 )]
 position = Vector2( 2936, 768 )
