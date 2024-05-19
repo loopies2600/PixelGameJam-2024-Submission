@@ -5,6 +5,16 @@ const MAINFONT := preload("res://assets/screenplayer/fonts/aquarius_monospace.tr
 const PLAYER_SCENE := preload("res://scenes/entity/player/player.tscn")
 const KING_SCENE := preload("res://scenes/entity/god_himself/KING.tscn")
 
+const LEVEL_MUSIC := [
+	preload("res://assets/streams/music/level1.mp3"),
+	preload("res://assets/streams/music/level2.mp3")
+]
+
+const LEVEL_SPAWN_POSITIONS := [
+	Vector2(128, 128),
+	Vector2(2632, 634)
+]
+
 var textbox : TextBox
 var _tbBgOffset : Vector2 = Vector2.ZERO
 var focusActor : Node2D = null
@@ -12,9 +22,10 @@ var focusActor : Node2D = null
 var exiting : bool = false
 var transitioning : bool = false
 
-var level_id := 0
-var saw_initial_cutscene := [false]
-var player_spawn_pos := Vector2(2632, 634)
+var level_id := 1
+var saw_initial_cutscene := [false, true]
+
+var player_spawn_pos : Vector2 = LEVEL_SPAWN_POSITIONS[level_id]
 #var player_spawn_pos := Vector2(128, 128)
 var persistent_data := {}
 var screen_texture : ImageTexture
@@ -37,9 +48,9 @@ func reset_game_state():
 	player = PLAYER_SCENE.instance() as PlayerActor
 	
 	level_id = 0
-	player_spawn_pos = Vector2(128, 128)
+	player_spawn_pos = LEVEL_SPAWN_POSITIONS[level_id]
 	persistent_data = {}
-	saw_initial_cutscene = [false]
+	saw_initial_cutscene = [false, true]
 	
 func createTextbox(line := "", nameplate := "", portrait : Texture = null, soundTable := [], pitchRange := Vector2.ONE, soundMode := 1) -> TextBox:
 	if exiting: return null

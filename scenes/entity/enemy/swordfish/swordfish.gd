@@ -7,16 +7,15 @@ export (float) var attack_chase_wait := 2.0
 export (int) var attack_hit_frame := 2
 export (Vector2) var sprite_offset := Vector2(8, 0)
 
-var fish_count := 0
-
 enum States {
+	IDLE,
 	WALK,
 	CHASE,
 	ATTACK
 }
 
-var previous_state : int = States.WALK
-var current_state : int = States.WALK
+var previous_state : int = States.IDLE
+var current_state : int = States.IDLE
 
 var lock_anim : bool = false
 var active : bool = false
@@ -25,6 +24,7 @@ var wander_direction : Vector2 = Vector2.RIGHT
 
 onready var wander_timer : Timer = $WanderTimer
 onready var anim_sprite : AnimatedSprite = $AnimatedSprite
+onready var visibility : VisibilityNotifier2D = $BaseVisibility
 
 func _ready():
 	anim_sprite.connect("frame_changed", self, "_on_anim_frame_changed")
@@ -33,7 +33,14 @@ func _ready():
 	
 	_refresh_wander_direction()
 	
-	yield(owner, "ready")
+	visibility.connect("screen_entered", self, "_on_screen_entered")
+	visibility.connect("screen_exited", self, "_on_screen_exited")
+	
+func _on_screen_entered():
+	set_state(States.WALK)
+	
+func _on_screen_exited():
+	set_state(States.IDLE)
 	
 func _on_anim_frame_changed():
 	if anim_sprite.animation == "attack":
@@ -117,6 +124,8 @@ func _physics_process(delta):
 		chase_direction = Vector2.RIGHT if Global.player.anim_sprite.animation.begins_with("attack") else Vector2.LEFT
 	
 	match current_state:
+		States.IDLE:
+			velocity *= 0.9
 		States.WALK:
 			var motion := wander_direction * base_speed
 			
@@ -124,7 +133,7 @@ func _physics_process(delta):
 			velocity = velocity.linear_interpolate(motion, 1.0 - steering)
 			
 			if find_player():
-				current_state = States.CHASE
+				set_state(States.CHASE)
 		States.CHASE:
 			var distance_to_player := global_position.distance_squared_to(Global.player.global_position)
 			

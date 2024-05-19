@@ -31,7 +31,7 @@ func _ready():
 	connect("body_entered", self, "_on_picked_up")
 	
 func _process(delta):
-	z_index = int(max(get_global_transform_with_canvas().origin.y - position_3d.y, 0))
+	z_index = int(clamp(get_global_transform_with_canvas().origin.y - position_3d.y, 0, VisualServer.CANVAS_ITEM_Z_MAX))
 	
 	lifetime += delta
 	

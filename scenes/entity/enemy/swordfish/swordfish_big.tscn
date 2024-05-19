@@ -109,3 +109,6 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4, 4 )
 shape = SubResource( 21 )
+
+[node name="BaseVisibility" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -128, -128, 256, 256 )

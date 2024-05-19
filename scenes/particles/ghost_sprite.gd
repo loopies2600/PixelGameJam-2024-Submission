@@ -10,7 +10,7 @@ onready var mat : ShaderMaterial = material as ShaderMaterial
 func _process(delta):
 	elapsed += delta
 	
-	z_index = base_z_index + max(get_global_transform_with_canvas().origin.y, 0)
+	z_index = base_z_index + int(clamp(get_global_transform_with_canvas().origin.y, 0, VisualServer.CANVAS_ITEM_Z_MAX))
 	
 	mat.set_shader_param("opacity", (lifetime - elapsed) / lifetime)
 	

@@ -4,32 +4,26 @@
 [ext_resource path="res://assets/sprites/objects/sprsh_swordfish_sm.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 41 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 41 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 41 )
 
 [sub_resource type="AtlasTexture" id=6]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 41 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 41 )
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 41 )
 
@@ -84,3 +78,6 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 0 )
 shape = SubResource( 8 )
+
+[node name="BaseVisibility" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -128, -128, 256, 256 )

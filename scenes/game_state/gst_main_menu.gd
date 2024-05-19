@@ -3,7 +3,6 @@ extends Node2D
 const CUTSCENE_1 := preload("res://scenes/cutscene/cutscene_1.tscn")
 
 onready var pany_label : Label = $PanyKey
-onready var cfg_layer : CanvasLayer = $ConfigLayer
 onready var base_anim : AnimationPlayer = $AnimationPlayer
 onready var base_cam : Camera2D = $Camera2D
 

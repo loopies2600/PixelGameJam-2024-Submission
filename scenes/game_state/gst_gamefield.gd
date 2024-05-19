@@ -8,7 +8,7 @@ const LEVELS := [
 
 const HUD := preload("res://scenes/ui/main_hud.tscn")
 
-onready var level : Node = LEVELS[Global.level_id].instance()
+onready var level : Node = LEVELS[0].instance()
 onready var main_hud := HUD.instance()
 
 onready var king_timer : Timer = $KingTimer
@@ -56,8 +56,3 @@ func _process(delta):
 		
 		king_music.volume_db = lerp(king_music.volume_db, 0.0, 0.1 * delta)
 		level.music.volume_db = lerp(level.music.volume_db, -80.0, 0.05 * delta)
-	else:
-		game_modulate.color = game_modulate.color.linear_interpolate(base_canvas_modulate, 1.0 * delta)
-		
-		king_music.volume_db = lerp(king_music.volume_db, -80.0, 0.1 * delta)
-		level.music.volume_db = lerp(level.music.volume_db, 0.0, 0.05 * delta)

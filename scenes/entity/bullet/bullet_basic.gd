@@ -11,6 +11,17 @@ onready var hitbox : ShapeCast2D = $Hitbox
 
 var elapsed_alive := 0.0
 
+func is_visible_in_canvas() -> bool:
+	var vic := true
+	
+	var screen_pos := get_global_transform_with_canvas().origin
+	var padding := Vector2(32.0, 32.0)
+	
+	if screen_pos.x > 320.0 + padding.x || screen_pos.x < 0.0 - padding.x || screen_pos.y > 240.0 + padding.y || screen_pos.y < 0.0 - padding.y:
+		vic = false
+	
+	return vic
+	
 func _get_shape_query_from_shape_cast_2d(shape_cast : ShapeCast2D) -> Physics2DShapeQueryParameters:
 	var shape := Physics2DShapeQueryParameters.new()
 	
@@ -57,6 +68,10 @@ func check_collision():
 			queue_free()
 	
 func _process(delta):
+	if not is_visible_in_canvas():
+		queue_free()
+		return
+	
 	elapsed_alive += delta
 	
 	if elapsed_alive >= life_time:

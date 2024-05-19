@@ -221,7 +221,7 @@ func _process(delta):
 	else:
 		visible = true
 	
-	z_index = int(max(get_global_transform_with_canvas().origin.y, 0))
+	z_index = int(clamp(get_global_transform_with_canvas().origin.y, 0, VisualServer.CANVAS_ITEM_Z_MAX))
 	
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.ZERO)
