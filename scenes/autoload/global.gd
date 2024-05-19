@@ -23,6 +23,10 @@ onready var player : PlayerActor = PLAYER_SCENE.instance() as PlayerActor
 onready var king : KingActor = KING_SCENE.instance() as KingActor
 onready var transition_anim : AnimationPlayer = $TransitionLayer/AnimationPlayer
 
+func _unhandled_input(event):
+	if event.is_action_pressed("fullscreen"):
+		OS.window_fullscreen = not OS.window_fullscreen
+		
 func _notification(what):
 	match what:
 		NOTIFICATION_WM_QUIT_REQUEST:

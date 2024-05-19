@@ -62,7 +62,7 @@ func _process(delta):
 	_update_health_progress()
 	
 func _update_health_progress():
-	if Global.player == null:
+	if not is_instance_valid(Global.player):
 		return
 	
 	var player_health := PoolIntArray([Global.player.max_health, Global.player.health])

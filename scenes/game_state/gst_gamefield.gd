@@ -48,6 +48,9 @@ func _on_king_timer_timeout():
 	king_music.play()
 	
 func _process(delta):
+	if not is_instance_valid(Global.king):
+		return
+		
 	if Global.king.active:
 		game_modulate.color = game_modulate.color.linear_interpolate(Color(KING_DARKNESS), 0.4 * delta)
 		

@@ -92,6 +92,7 @@ base_speed = 58.0
 steering = 0.711
 strength = 4
 death_drops = [ 4, 4 ]
+tracking_layers = 35
 attack_chase_wait = 4.0
 attack_hit_frame = 4
 

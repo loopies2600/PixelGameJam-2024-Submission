@@ -52,7 +52,7 @@ func _on_inventory_item_added(new_item_id : int):
 func fish_under_consent_of_king():
 	var fish_count := 0
 	
-	if Global.player != null:
+	if is_instance_valid(Global.player):
 		fish_count = Global.player.inventory.get_item_count()
 		Global.player.health = Global.player.max_health
 		
@@ -93,7 +93,7 @@ func _process(_delta):
 	fish_count.text = str(Global.player.inventory.get_item_count())
 	
 func _draw():
-	if Global.player == null:
+	if not is_instance_valid(Global.player):
 		return
 	
 	for i in range(fish_regions.size()):

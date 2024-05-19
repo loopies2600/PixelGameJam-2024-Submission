@@ -65,7 +65,7 @@ func _animate():
 	
 	var flip_h : bool = true
 	
-	if Global.player != null:
+	if is_instance_valid(Global.player):
 		flip_h = true if Global.player.global_position.x > global_position.x else false
 	
 	anim_sprite.offset = sprite_offset if flip_h else -sprite_offset
@@ -113,7 +113,7 @@ func _process(delta):
 func _physics_process(delta):
 	var chase_direction := Vector2.LEFT
 	
-	if Global.player != null:
+	if is_instance_valid(Global.player):
 		chase_direction = Vector2.RIGHT if Global.player.anim_sprite.animation.begins_with("attack") else Vector2.LEFT
 	
 	match current_state:
@@ -123,12 +123,17 @@ func _physics_process(delta):
 			motion *= wander_timer.time_left / wander_timer.wait_time
 			velocity = velocity.linear_interpolate(motion, 1.0 - steering)
 			
+			if find_player():
+				current_state = States.CHASE
 		States.CHASE:
+			if not find_player():
+				current_state = States.WALK
+				
 			var distance_to_player := global_position.distance_squared_to(Global.player.global_position)
 			
 			var target_pos := Vector2.ZERO
 			
-			if Global.player != null:
+			if is_instance_valid(Global.player):
 				target_pos = Global.player.global_position
 			
 			var angle_to_player := global_position.angle_to_point(target_pos)
@@ -151,11 +156,10 @@ func _physics_process(delta):
 					preferred_angle = angle_to_left_side
 					preferred_side = left_side
 				
-				if abs(global_position.y - preferred_side.y) < 8.0:
+				if abs(global_position.y - preferred_side.y) < 16.0:
 					velocity *= 0.9
 					
-					if velocity.length() < 8.0:
-						set_state(States.ATTACK)
+					set_state(States.ATTACK)
 				else:
 					velocity = chase_direction.rotated(preferred_angle) * base_speed
 			else:
