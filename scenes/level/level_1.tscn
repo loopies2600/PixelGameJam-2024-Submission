@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://scenes/entity/enemy/swordfish/swordfish_big.tscn" type="PackedScene" id=23]
 [ext_resource path="res://data/tile_set/tile_3.tres" type="TileSet" id=24]
 [ext_resource path="res://scenes/entity/object/pillar.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/entity/enemy/red_fish/super_red_fish.tscn" type="PackedScene" id=26]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -1252,6 +1253,161 @@ position = Vector2( 6424, -398 )
 [node name="pillar24" parent="level3/entity" instance=ExtResource( 25 )]
 position = Vector2( 6424, -638 )
 
+[node name="loot_chest" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6208, 752 )
+
+[node name="loot_chest2" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6176, 408 )
+
+[node name="loot_chest3" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6280, 408 )
+
+[node name="loot_chest4" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6424, 312 )
+
+[node name="loot_chest5" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6184, 72 )
+
+[node name="loot_chest6" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6176, -616 )
+
+[node name="loot_chest7" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6224, -616 )
+
+[node name="loot_chest8" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6392, -608 )
+
+[node name="loot_chest9" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6352, -608 )
+
+[node name="loot_chest10" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6176, -376 )
+
+[node name="loot_chest11" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6392, -376 )
+
+[node name="loot_chest12" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 6296, -840 )
+
+[node name="loot_chest13" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 5416, -920 )
+
+[node name="loot_chest14" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 5416, -680 )
+
+[node name="loot_chest15" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 5784, -680 )
+
+[node name="loot_chest16" parent="level3/entity" instance=ExtResource( 6 )]
+position = Vector2( 5784, -920 )
+
+[node name="EnemySwordfish" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 5440, 688 )
+
+[node name="EnemySwordfish2" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 5744, 688 )
+
+[node name="EnemySwordfish3" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 5912, 688 )
+
+[node name="EnemySwordfish4" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 5584, 688 )
+
+[node name="EnemySwordfishBig" parent="level3/entity" instance=ExtResource( 23 )]
+position = Vector2( 6296, 432 )
+
+[node name="enemy_turret" parent="level3/entity" instance=ExtResource( 22 )]
+position = Vector2( 6240, 696 )
+
+[node name="bullet_emitter" parent="level3/entity/enemy_turret" index="4"]
+bullet_type = 1
+bullet_count = 10
+per_bullet_delay = 1.0
+
+[node name="EnemySwordfishBig2" parent="level3/entity" instance=ExtResource( 23 )]
+position = Vector2( 6168, 432 )
+
+[node name="EnemySwordfishBig3" parent="level3/entity" instance=ExtResource( 23 )]
+position = Vector2( 6304, 152 )
+
+[node name="EnemySwordfish5" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 6256, 136 )
+
+[node name="EnemySwordfish6" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 6368, 128 )
+
+[node name="EnemySuperRedFish" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6408, 440 )
+
+[node name="EnemySuperRedFish2" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6384, 456 )
+
+[node name="EnemySuperRedFish3" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6424, 464 )
+
+[node name="EnemySuperRedFish4" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6400, 480 )
+
+[node name="EnemySuperRedFish5" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6200, 328 )
+
+[node name="EnemySuperRedFish6" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6216, 312 )
+
+[node name="EnemySuperRedFish7" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6192, -56 )
+
+[node name="EnemySuperRedFish8" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6208, -72 )
+
+[node name="EnemySuperRedFish9" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6216, -40 )
+
+[node name="enemy_turret2" parent="level3/entity" instance=ExtResource( 22 )]
+position = Vector2( 6280, -56 )
+
+[node name="enemy_turret" parent="level3/entity/enemy_turret2" instance=ExtResource( 22 )]
+position = Vector2( 8, -488 )
+
+[node name="EnemySuperRedFish10" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6192, -552 )
+
+[node name="EnemySuperRedFish11" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6208, -528 )
+
+[node name="EnemySuperRedFish12" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6176, -528 )
+
+[node name="EnemySuperRedFish13" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6192, -504 )
+
+[node name="EnemySuperRedFish14" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6400, -568 )
+
+[node name="EnemySuperRedFish15" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6416, -544 )
+
+[node name="EnemySuperRedFish16" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6384, -544 )
+
+[node name="EnemySuperRedFish17" parent="level3/entity" instance=ExtResource( 26 )]
+position = Vector2( 6400, -520 )
+
+[node name="EnemySwordfish7" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 6400, -480 )
+
+[node name="EnemySwordfish8" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 6400, -440 )
+
+[node name="EnemySwordfish9" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 6192, -464 )
+
+[node name="EnemySwordfish10" parent="level3/entity" instance=ExtResource( 20 )]
+position = Vector2( 6192, -424 )
+
+[node name="EnemySwordfishBig4" parent="level3/entity" instance=ExtResource( 23 )]
+position = Vector2( 6288, -608 )
+
 [editable path="det/rock2"]
 [editable path="det/rock8"]
 [editable path="det/rock13"]
@@ -1272,3 +1428,4 @@ position = Vector2( 6424, -638 )
 [editable path="level2/entity/enemy_turret2"]
 [editable path="level2/entity/enemy_turret3"]
 [editable path="level2/entity/enemy_turret4"]
+[editable path="level3/entity/enemy_turret"]
