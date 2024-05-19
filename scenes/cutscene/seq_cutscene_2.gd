@@ -14,7 +14,11 @@ func sequence():
 	
 	playSound("res://assets/streams/sounds/ringtone.wav")
 	
-	sleep(2)
+	sleep(0.5)
+	
+	playSound("res://assets/streams/sounds/beep.wav")
+	
+	sleep(0.5)
 	
 	setNameplate("The Great King")
 	setPortrait(PRT_KING)

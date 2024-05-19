@@ -34,7 +34,3 @@ func sequence():
 	setPortrait(null)
 	chatter("And so, Sir Quejonte went ahead and walked deep into the sea.")
 	chatter("With his armor still on for some reason, he sinked and sinked until he reached the bottom of the sea.")
-	
-	setNameplate("Sir Quejonte")
-	setPortrait(PRT_QUEJONTE)
-	chatter("Right, I can breathe underwater.")

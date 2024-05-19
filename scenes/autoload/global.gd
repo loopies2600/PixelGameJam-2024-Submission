@@ -14,8 +14,8 @@ var transitioning : bool = false
 
 var level_id := 0
 var saw_initial_cutscene := [false]
-
-var player_spawn_pos := Vector2(128, 128)
+var player_spawn_pos := Vector2(2632, 634)
+#var player_spawn_pos := Vector2(128, 128)
 var persistent_data := {}
 var screen_texture : ImageTexture
 
