@@ -27,9 +27,9 @@ func _ready():
 func _on_cutscene_end():
 	get_parent().on_level_initial_cutscene_end()
 	
-	$BGMusic.stream = Global.LEVEL_MUSIC[Global.level_id]
+	music.stream = Global.LEVEL_MUSIC[Global.level_id]
 	
-	if not $BGMusic.playing:
-		$BGMusic.play()
+	if not music.playing:
+		music.play()
 	
 	Global.saw_initial_cutscene[Global.level_id] = true
