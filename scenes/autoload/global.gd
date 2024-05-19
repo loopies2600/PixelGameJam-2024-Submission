@@ -7,12 +7,14 @@ const KING_SCENE := preload("res://scenes/entity/god_himself/KING.tscn")
 
 const LEVEL_MUSIC := [
 	preload("res://assets/streams/music/level1.mp3"),
+	preload("res://assets/streams/music/level2.mp3"),
 	preload("res://assets/streams/music/level2.mp3")
 ]
 
 const LEVEL_SPAWN_POSITIONS := [
 	Vector2(128, 128),
-	Vector2(2632, 634)
+	Vector2(2632, 634),
+	Vector2(5840, -810)
 ]
 
 var textbox : TextBox
@@ -22,8 +24,8 @@ var focusActor : Node2D = null
 var exiting : bool = false
 var transitioning : bool = false
 
-var level_id := 1
-var saw_initial_cutscene := [false, true]
+var level_id := 0
+var saw_initial_cutscene := [false, true, false]
 
 var player_spawn_pos : Vector2 = LEVEL_SPAWN_POSITIONS[level_id]
 #var player_spawn_pos := Vector2(128, 128)
@@ -50,7 +52,7 @@ func reset_game_state():
 	level_id = 0
 	player_spawn_pos = LEVEL_SPAWN_POSITIONS[level_id]
 	persistent_data = {}
-	saw_initial_cutscene = [false, true]
+	saw_initial_cutscene = [false, true, false]
 	
 func createTextbox(line := "", nameplate := "", portrait : Texture = null, soundTable := [], pitchRange := Vector2.ONE, soundMode := 1) -> TextBox:
 	if exiting: return null
@@ -106,8 +108,8 @@ func play_sound(sound_path := ""):
 	
 	audio_stream.queue_free()
 	
-func level_cutscene_seen() -> bool:
-	return saw_initial_cutscene[level_id]
+func level_cutscene_seen(which := level_id) -> bool:
+	return saw_initial_cutscene[which]
 	
 func save_screen():
 	var main_viewport_texture := get_viewport().get_texture()

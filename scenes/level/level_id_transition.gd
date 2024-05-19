@@ -7,14 +7,30 @@ var crossed := false
 func _ready():
 	connect("body_entered", self, "_on_body_entered")
 	
+func _play_cutscene():
+	for i in range(get_child_count()):
+		var child = get_child(i)
+		
+		if child is Cutscene:
+			child.cam = Global.player.cam
+			
+			child.execute()
+			CutsceneManager.connect("cutscene_ended", self, "_on_cutscene_end")
+			
 func _on_body_entered(body):
 	if crossed:
 		return
 	
 	if body.name == Global.player.name:
+		if Global.level_id == new_level_id:
+			return
+		
 		var level = get_tree().current_scene.level
 		
 		crossed = true
+		
+		_play_cutscene()
+		
 		Global.level_id = new_level_id
 		
 		var tween_volume := create_tween()
@@ -24,4 +40,5 @@ func _on_body_entered(body):
 		yield(tween_volume, "finished")
 		
 		level.music.volume_db = 0.0
+		
 		level._on_cutscene_end()
