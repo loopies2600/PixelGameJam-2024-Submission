@@ -29,7 +29,9 @@ func _ready():
 	
 func on_level_initial_cutscene_end():
 	main_hud.show()
-	king_timer.start()
+	
+	if king_timer.is_stopped():
+		king_timer.start()
 	
 func _on_king_timer_timeout():
 	main_hud.show_king_is_here()
