@@ -26,6 +26,7 @@ var current_state : int = States.IDLE
 
 var direction_to_player : Vector2 = Vector2.ZERO
 
+onready var anim_sprite : AnimatedSprite = $Sprite
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var emitter_mad := $MadBullets
 
@@ -33,6 +34,44 @@ var state_elapsed := 0.0
 var dash_combo := 0
 var mad_bullet_counter := 0
 
+func get_dominant_facing() -> String:
+	var h_dir = sign(look_angle.dot(Vector2.RIGHT))
+	var v_dir = sign(look_angle.dot(Vector2.UP))
+	
+	var h_dot := abs(look_angle.dot(Vector2.RIGHT))
+	
+	var facing_name := "right"
+	
+	if v_dir == 1:
+		facing_name = "up"
+	elif v_dir == -1:
+		facing_name = "down"
+	
+	if h_dot > 0.7:
+		if h_dir == 1:
+			facing_name = "right"
+			anim_sprite.scale.x = -1.0
+		elif h_dir == -1:
+			facing_name = "left"
+			anim_sprite.scale.x = 1.0
+			
+	return facing_name
+	
+func _animate_walk():
+	var anim_name := ""
+	
+	var suffix = "_" + get_dominant_facing()
+	
+	if suffix in ["_left", "_right"]:
+		suffix = "_h"
+	
+	anim_name = "move" + suffix
+	
+	var prev_anim_frame = anim_sprite.frame
+	
+	anim_sprite.play(anim_name)
+	anim_sprite.frame = prev_anim_frame
+	
 func is_visible_in_canvas() -> bool:
 	var vic := true
 	
@@ -55,8 +94,11 @@ func _on_damage_taken(damage_amount : int, source : Node):
 	anim.play("TakeDamage")
 	
 func _on_death(damage_amount : int, source : Node):
+	dead = true
+	
 	_explode()
-	global_position = Vector2(9999, 9999)
+	
+	anim_sprite.animation = "die"
 	
 	var ending_timer := get_tree().create_timer(ENDING_DELAY)
 	
@@ -68,6 +110,8 @@ func set_state(new_state_id : int):
 	_on_state_exit(current_state)
 	
 	state_elapsed = 0.0
+	anim_sprite.flip_h = false
+	anim_sprite.scale.x = 1.0
 	
 	previous_state = current_state
 	current_state = new_state_id
@@ -120,6 +164,15 @@ func get_direction_to_player() -> Vector2:
 	return dir
 	
 func _physics_process(delta):
+	if dead:
+		return
+	
+	if Global.player.dead:
+		set_state(States.IDLE)
+		return
+	
+	look_angle = velocity.normalized()
+	
 	state_elapsed += delta
 	
 	if not is_visible_in_canvas():
@@ -127,11 +180,20 @@ func _physics_process(delta):
 	
 	match current_state:
 		States.IDLE:
+			_animate_walk()
+			
 			velocity *= wheelchair_steering
 			
 			if state_elapsed >= idle_duration:
 				set_state(States.DASH)
 		States.DASH:
+			if attacking:
+				anim_sprite.animation = "speen"
+				
+				anim_sprite.flip_h = anim_sprite.frame == 3
+			else:
+				_animate_walk()
+			
 			if Global.player.dead:
 				set_state(States.IDLE)
 				
@@ -145,3 +207,6 @@ func _physics_process(delta):
 			
 			if state_elapsed >= dash_duration:
 				set_state(States.IDLE)
+		States.MAD_BULLET:
+			anim_sprite.flip_h = false
+			anim_sprite.animation = "use_trident"
