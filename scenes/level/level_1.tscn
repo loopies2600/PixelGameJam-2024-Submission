@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://data/tile_set/level_1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entity/object/seaweed.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://data/tile_set/tile_3.tres" type="TileSet" id=24]
 [ext_resource path="res://scenes/entity/object/pillar.tscn" type="PackedScene" id=25]
 [ext_resource path="res://scenes/entity/enemy/red_fish/super_red_fish.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scenes/level/level_id_transition.gd" type="Script" id=27]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -1142,9 +1143,34 @@ position = Vector2( 4808, 1080 )
 position = Vector2( 5144, 1128 )
 
 [node name="Area2D" type="Area2D" parent="level2"]
-position = Vector2( 2664, 624 )
+position = Vector2( 2728, 624 )
+script = ExtResource( 27 )
+new_level_id = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="level2/Area2D"]
+shape = SubResource( 5 )
+
+[node name="Area2D2" type="Area2D" parent="level2"]
+position = Vector2( 2608, 624 )
+script = ExtResource( 27 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level2/Area2D2"]
+shape = SubResource( 5 )
+
+[node name="Area2D3" type="Area2D" parent="level2"]
+position = Vector2( 5936, 696 )
+script = ExtResource( 27 )
+new_level_id = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level2/Area2D3"]
+shape = SubResource( 5 )
+
+[node name="Area2D4" type="Area2D" parent="level2"]
+position = Vector2( 5400, 696 )
+script = ExtResource( 27 )
+new_level_id = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level2/Area2D4"]
 shape = SubResource( 5 )
 
 [node name="level3" type="Node" parent="."]
