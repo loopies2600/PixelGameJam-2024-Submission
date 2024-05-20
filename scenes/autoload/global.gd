@@ -26,7 +26,7 @@ var focusActor : Node2D = null
 var exiting : bool = false
 var transitioning : bool = false
 
-var level_id := 3
+var level_id := 0
 var saw_initial_cutscene := [false, true, true, false]
 
 var player_spawn_pos : Vector2 = LEVEL_SPAWN_POSITIONS[level_id]

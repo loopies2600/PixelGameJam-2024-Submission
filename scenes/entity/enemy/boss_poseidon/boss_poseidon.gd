@@ -2,7 +2,7 @@ extends KinematicActor
 
 const ENDING_SCENE := preload("res://scenes/game_state/gst_game_end.tscn")
 
-const ENDING_DELAY := 2.0
+const ENDING_DELAY := 3.0
 
 enum States {
 	IDLE,
@@ -104,7 +104,7 @@ func _on_death(damage_amount : int, source : Node):
 	
 	yield(ending_timer, "timeout")
 	
-	Global.change_scene(ENDING_SCENE, false)
+	Global.change_scene(ENDING_SCENE)
 
 func set_state(new_state_id : int):
 	_on_state_exit(current_state)
@@ -129,6 +129,9 @@ func _on_state_enter(state : int):
 			attacking = false
 			mad_bullet_counter = 0
 		States.DASH:
+			$RamSound.play()
+			anim.play("TurboShake")
+			
 			attacking = false
 			
 			direction_to_player = get_direction_to_player()
@@ -139,6 +142,9 @@ func _on_state_enter(state : int):
 			fire_mad_bullets()
 	
 func fire_mad_bullets():
+	if dead:
+		return
+		
 	if Global.player.dead:
 		return
 	

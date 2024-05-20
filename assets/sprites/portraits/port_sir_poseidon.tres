@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=2]
+
+[ext_resource path="res://assets/sprites/portraits/port_sir_poseidon.png" type="Texture" id=1]
+
+[resource]
+atlas = ExtResource( 1 )
+region = Rect2( 0, -93, 65, 179 )
+margin = Rect2( 0, -32, 0, 0 )

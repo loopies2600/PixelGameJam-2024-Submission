@@ -9,8 +9,6 @@ var cutscene_running := false
 func _ready():
 	Global.player = Global.PLAYER_SCENE.instance()
 	
-	screen_tex_rect.texture = Global.screen_texture
-	
 	for i in range(get_child_count()):
 		var child = get_child(i)
 		
@@ -25,4 +23,6 @@ func _ready():
 			cutscene_running = true
 
 func _on_cutscene_end():
+	AudioServer.set_bus_mute(1, false)
+	Global.reset_game_state()
 	Global.change_scene(MAIN_MENU)

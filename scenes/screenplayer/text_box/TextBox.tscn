@@ -36,7 +36,6 @@ stretch_mode = 2
 
 [node name="Portrait" type="Sprite" parent="."]
 position = Vector2( 0, 154 )
-z_index = 2
 z_as_relative = false
 centered = false
 

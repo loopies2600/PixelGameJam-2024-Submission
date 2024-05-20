@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/entity/enemy/boss_poseidon/boss_poseidon.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/objects/spr_poseidon.png" type="Texture" id=2]
 [ext_resource path="res://assets/shaders/flash.shader" type="Shader" id=3]
 [ext_resource path="res://scenes/entity/bullet/bullet_emitter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/streams/sounds/ram.wav" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
@@ -305,6 +306,34 @@ tracks/3/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=16]
+resource_name = "TurboShake"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 24, -8 ), Vector2( 0, 0 ), Vector2( -16, 8 ), Vector2( 0, 0 ) ]
+}
+
 [node name="boss_poseidon" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 46
@@ -314,6 +343,7 @@ max_health = 30
 strength = 2
 attack_distance = 48.0
 tracking_layers = 1
+mad_bullet_rate = 3.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 6 )
@@ -333,8 +363,13 @@ anims/DamageOpen = SubResource( 2 )
 anims/Idle = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 anims/TakeDamage = SubResource( 5 )
+anims/TurboShake = SubResource( 16 )
 
 [node name="MadBullets" parent="." instance=ExtResource( 4 )]
 position = Vector2( -24, -24 )
 bullet_count = 32
-bullet_base_speed = 96.0
+bullet_base_speed = 48.0
+
+[node name="RamSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+pitch_scale = 1.5

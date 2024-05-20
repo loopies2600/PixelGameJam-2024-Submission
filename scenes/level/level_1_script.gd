@@ -8,6 +8,8 @@ var cutscene_running := false
 onready var music : AudioStreamPlayer = $BGMusic
 
 func _ready():
+	music.bus = "Music"
+	
 	if Global.level_id == 3:
 		spawn_poseidon()
 		

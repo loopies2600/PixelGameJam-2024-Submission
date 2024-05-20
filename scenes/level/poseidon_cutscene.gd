@@ -5,7 +5,7 @@ const PRT_POSEID := preload("res://assets/sprites/portraits/port_sir_poseidon.pn
 const PRT_KING := preload("res://assets/sprites/portraits/port_sir_burgking.png")
 
 func mute_level():
-	AudioServer.set_bus_volume_db(1, -80.0)
+	AudioServer.set_bus_mute(1, true)
 	
 func sequence():
 	callSeq(self, "mute_level")
@@ -39,4 +39,4 @@ func sequence():
 	callSeq(get_tree().current_scene.level, "spawn_poseidon")
 	
 func unmute_level():
-	AudioServer.set_bus_volume_db(1, 0.0)
+	AudioServer.set_bus_mute(1, false)
