@@ -31,11 +31,6 @@ func on_level_initial_cutscene_end():
 	main_hud.show()
 	king_timer.start()
 	
-func _input(event):
-	if event is InputEventKey:
-		if event.scancode == KEY_F4:
-			get_tree().reload_current_scene()
-	
 func _on_king_timer_timeout():
 	main_hud.show_king_is_here()
 	
