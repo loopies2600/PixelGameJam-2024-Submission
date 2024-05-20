@@ -18,7 +18,7 @@ onready var game_modulate : CanvasModulate = $GameModulate
 onready var base_canvas_modulate := game_modulate.color
 
 func _ready():
-	Global.spawn_player(self, Global.player_spawn_pos)
+	Global.spawn_player(self, Global.get_player_spawn_pos())
 	
 	add_child(level)
 	

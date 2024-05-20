@@ -28,6 +28,7 @@ var level_id := 0
 var saw_initial_cutscene := [false, true, false]
 
 var player_spawn_pos : Vector2 = LEVEL_SPAWN_POSITIONS[level_id]
+var spawn_pos_override : Vector2 = Vector2.ZERO
 #var player_spawn_pos := Vector2(128, 128)
 var persistent_data := {}
 var screen_texture : ImageTexture
@@ -51,9 +52,17 @@ func reset_game_state():
 	
 	level_id = 0
 	player_spawn_pos = LEVEL_SPAWN_POSITIONS[level_id]
+	spawn_pos_override = Vector2.ZERO
 	persistent_data = {}
 	saw_initial_cutscene = [false, true, false]
 	
+func get_player_spawn_pos() -> Vector2:
+	var spawn_pos : Vector2 = LEVEL_SPAWN_POSITIONS[level_id]
+	
+	if spawn_pos_override != Vector2.ZERO:
+		spawn_pos = spawn_pos_override
+		
+	return spawn_pos
 func createTextbox(line := "", nameplate := "", portrait : Texture = null, soundTable := [], pitchRange := Vector2.ONE, soundMode := 1) -> TextBox:
 	if exiting: return null
 	

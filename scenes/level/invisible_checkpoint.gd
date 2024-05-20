@@ -16,4 +16,4 @@ func _physics_process(delta):
 	var hit_test_results := space_state.intersect_shape(query, 32)
 	
 	if not hit_test_results.empty():
-		Global.player_spawn_pos = Global.player.global_position
+		Global.spawn_pos_override = Global.player.global_position
