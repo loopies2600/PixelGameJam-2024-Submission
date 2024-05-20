@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://data/player/animframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/entity/player/player.gd" type="Script" id=2]
@@ -8,18 +8,8 @@
 [ext_resource path="res://assets/shaders/flash.shader" type="Shader" id=6]
 [ext_resource path="res://assets/streams/sounds/snd_pickup.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/entity/player/player_camera.gd" type="Script" id=8]
-[ext_resource path="res://assets/shaders/outline.gdshader" type="Shader" id=9]
 [ext_resource path="res://assets/sprites/hud/gameover.png" type="Texture" id=10]
 [ext_resource path="res://scenes/entity/player/player_dead_hacky.gd" type="Script" id=11]
-
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 9 )
-shader_param/color = Color( 1, 1, 1, 1 )
-shader_param/width = 1.0
-shader_param/pattern = 0
-shader_param/inside = false
-shader_param/add_margins = true
-shader_param/number_of_images = Vector2( 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
@@ -261,7 +251,6 @@ transform = Transform2D( 1, 0, 0, 1, 160, 120 )
 
 [node name="Sprite" type="Sprite" parent="PulpedSchtick"]
 pause_mode = 2
-material = SubResource( 9 )
 position = Vector2( 0, -72 )
 z_index = 1
 texture = ExtResource( 10 )
