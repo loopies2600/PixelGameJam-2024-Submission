@@ -1,5 +1,9 @@
 extends KinematicActor
 
+const ENDING_SCENE := preload("res://scenes/game_state/gst_game_end.tscn")
+
+const ENDING_DELAY := 2.0
+
 enum States {
 	IDLE,
 	DASH,
@@ -52,7 +56,13 @@ func _on_damage_taken(damage_amount : int, source : Node):
 	
 func _on_death(damage_amount : int, source : Node):
 	_explode()
-	queue_free()
+	global_position = Vector2(9999, 9999)
+	
+	var ending_timer := get_tree().create_timer(ENDING_DELAY)
+	
+	yield(ending_timer, "timeout")
+	
+	Global.change_scene(ENDING_SCENE, false)
 
 func set_state(new_state_id : int):
 	_on_state_exit(current_state)

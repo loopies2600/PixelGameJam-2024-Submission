@@ -1,0 +1,131 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/screenplayer/fonts/aquarius_bold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/game_state/gst_game_end.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Default"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameEndLayer/OpacityController:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.7, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "GameEndFade"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameEndLayer/OpacityController:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.7, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameEndLayer/Notice:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "HideText"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameEndLayer/Notice:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameEndLayer/Notice:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameEndLayer/OpacityController:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="gst_game_end" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ScreenCopy" type="TextureRect" parent="."]
+margin_right = 320.0
+margin_bottom = 240.0
+expand = true
+
+[node name="GameEndLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="ColorRect" type="ColorRect" parent="GameEndLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0.0509804, 0.160784, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Notice" type="Label" parent="GameEndLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 64.0
+margin_bottom = -112.0
+rect_pivot_offset = Vector2( 136, 10 )
+custom_fonts/font = ExtResource( 1 )
+text = "I guess this is the end. i hope you liked this project!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="OpacityController" type="CanvasModulate" parent="GameEndLayer"]
+color = Color( 1, 1, 1, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "GameEndFade"
+anims/Default = SubResource( 1 )
+anims/GameEndFade = SubResource( 4 )
+anims/HideText = SubResource( 2 )
+anims/RESET = SubResource( 3 )

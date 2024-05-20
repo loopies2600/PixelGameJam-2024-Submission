@@ -32,6 +32,7 @@ func _on_body_entered(body):
 		_play_cutscene()
 		
 		Global.level_id = new_level_id
+		Global.spawn_pos_override = Vector2.ZERO
 		
 		var tween_volume := create_tween()
 		

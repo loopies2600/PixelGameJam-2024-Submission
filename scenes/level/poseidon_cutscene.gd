@@ -3,4 +3,4 @@ extends Cutscene
 func sequence():
 	chatter("EMPTY")
 	
-	sleep(0.1)
+	callSeq(get_tree().current_scene.level, "spawn_poseidon")
