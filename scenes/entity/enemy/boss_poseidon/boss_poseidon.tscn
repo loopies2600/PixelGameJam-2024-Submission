@@ -307,7 +307,7 @@ tracks/3/keys = {
 
 [node name="boss_poseidon" type="KinematicBody2D"]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 46
 script = ExtResource( 1 )
 steering = 0.88
 max_health = 30

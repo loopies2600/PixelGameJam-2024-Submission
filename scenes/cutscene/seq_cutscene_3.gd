@@ -12,7 +12,6 @@ func sequence():
 	chatter("I see your fast-food king sent you after my people in a mission to satiate his gargantuan hunger.")
 	chatter("It's just normal that you're also after me. Since I taste just like fish.")
 	
-		
 	playSound("res://assets/streams/sounds/ringtone.wav")
 	
 	sleep(0.3)
