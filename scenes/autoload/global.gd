@@ -9,7 +9,8 @@ const LEVEL_MUSIC := [
 	preload("res://assets/streams/music/level1.mp3"),
 	preload("res://assets/streams/music/level2.mp3"),
 	preload("res://assets/streams/music/king_theme.mp3"),
-	preload("res://assets/streams/music/level2.mp3")
+	preload("res://assets/streams/music/Nivel_3.mp3"),
+	preload("res://assets/streams/music/Boss_Fight.mp3")
 ]
 
 const LEVEL_SPAWN_POSITIONS := [
