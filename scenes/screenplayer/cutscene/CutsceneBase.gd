@@ -3,7 +3,7 @@ class_name Cutscene, "res://assets/screenplayer/icons/clapboard.png"
 
 var currentSequence := "sequence"
 
-onready var cam : Camera2D = Global.player.cam
+onready var cam : Camera2D
 
 func sequence():
 	pass
