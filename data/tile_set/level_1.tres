@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=64 format=2]
+[gd_resource type="TileSet" load_steps=66 format=2]
 
 [ext_resource path="res://assets/sprites/tile/tile_lev1.png" type="Texture" id=1]
 
@@ -60,7 +60,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=58]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+points = PoolVector2Array( 0, 0, 16, 0, 16, 0, 0, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=20]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -187,6 +187,12 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=62]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=63]
+points = PoolVector2Array( 0, 0, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=64]
+points = PoolVector2Array( 16, 16, 16, 0, 0, 0, 16, 0 )
 
 [resource]
 0/name = "tile_lev1.png 0"
@@ -1879,9 +1885,16 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 94/navigation_offset = Vector2( 0, 0 )
 94/shape_offset = Vector2( 0, 0 )
 94/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+94/shape = SubResource( 63 )
 94/shape_one_way = false
-94/shape_one_way_margin = 0.0
-94/shapes = [  ]
+94/shape_one_way_margin = 1.0
+94/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 63 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 94/z_index = 0
 95/name = "tile_lev1.png 95"
 95/texture = ExtResource( 1 )
@@ -1893,7 +1906,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 95/navigation_offset = Vector2( 0, 0 )
 95/shape_offset = Vector2( 0, 0 )
 95/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+95/shape = SubResource( 64 )
 95/shape_one_way = false
-95/shape_one_way_margin = 0.0
-95/shapes = [  ]
+95/shape_one_way_margin = 1.0
+95/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 64 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 95/z_index = 0
