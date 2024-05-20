@@ -1159,11 +1159,25 @@ position = Vector2( 4808, 1080 )
 [node name="loot_chest20" parent="level2/entity" instance=ExtResource( 6 )]
 position = Vector2( 5144, 1128 )
 
-[node name="RooftopLevelIdChange" type="Area2D" parent="level2"]
+[node name="RooftopLevelIdChange2" type="Area2D" parent="level2"]
 position = Vector2( 2664, 624 )
 script = ExtResource( 27 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="level2/RooftopLevelIdChange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level2/RooftopLevelIdChange2"]
+shape = SubResource( 5 )
+
+[node name="RooftopToLevel1" type="Area2D" parent="level2"]
+position = Vector2( 2600, 624 )
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_group_": true
+}
+new_level_id = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level2/RooftopToLevel1"]
 shape = SubResource( 5 )
 
 [node name="ChangeBGArea" type="Area2D" parent="level2"]
@@ -1445,12 +1459,31 @@ position = Vector2( 6192, -424 )
 [node name="EnemySwordfishBig4" parent="level3/entity" instance=ExtResource( 23 )]
 position = Vector2( 6288, -608 )
 
+[node name="CastleToRoof" type="Area2D" parent="level3"]
+position = Vector2( 5288, 699 )
+script = ExtResource( 27 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level3/CastleToRoof"]
+shape = SubResource( 5 )
+
 [node name="CastleIdChange" type="Area2D" parent="level3"]
 position = Vector2( 5352, 699 )
 script = ExtResource( 27 )
 new_level_id = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="level3/CastleIdChange"]
+shape = SubResource( 5 )
+
+[node name="LeaveBossTrigger" type="Area2D" parent="."]
+position = Vector2( 5936, -816 )
+z_index = 3
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_group_": true
+}
+new_level_id = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeaveBossTrigger"]
 shape = SubResource( 5 )
 
 [node name="BossIdChange" type="Area2D" parent="."]

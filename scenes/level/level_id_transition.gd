@@ -2,8 +2,6 @@ extends Area2D
 
 export (int) var new_level_id := 1
 
-var crossed := false
-
 func _ready():
 	connect("body_entered", self, "_on_body_entered")
 	
@@ -18,16 +16,11 @@ func _play_cutscene():
 			CutsceneManager.connect("cutscene_ended", self, "_on_cutscene_end")
 			
 func _on_body_entered(body):
-	if crossed:
-		return
-	
 	if body.name == Global.player.name:
 		if Global.level_id == new_level_id:
 			return
 		
 		var level = get_tree().current_scene.level
-		
-		crossed = true
 		
 		_play_cutscene()
 		
