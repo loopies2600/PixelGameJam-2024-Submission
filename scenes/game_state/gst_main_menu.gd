@@ -7,6 +7,10 @@ onready var base_anim : AnimationPlayer = $AnimationPlayer
 onready var base_cam : Camera2D = $Camera2D
 
 func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			_on_key_press()
+			
 	if event is InputEventKey:
 		if event.pressed:
 			_on_key_press()

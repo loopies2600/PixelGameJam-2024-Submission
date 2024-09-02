@@ -322,6 +322,8 @@ func reset_combo_counter():
 func _physics_process(delta):
 	velocity = get_walk_velocity()
 	
+	_check_touch()
+	
 func _process(delta : float):
 	_check_perks()
 	
@@ -347,6 +349,19 @@ func _process(delta : float):
 			
 	_animate()
 	
+func _check_touch():
+	if current_state == PlayerStates.CUTSCENE:
+		return
+	
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+		if current_state == PlayerStates.IDLE:
+			set_state(PlayerStates.WALK)
+			
+		if current_state == PlayerStates.WALK:
+			velocity = look_at_cursor() * walk_speed
+			look_angle = look_at_cursor()
+			direction = look_at_cursor()
+			
 func _check_perks():
 	walk_speed = _bwalk
 	swim_speed = _bswim
@@ -379,7 +394,10 @@ func check_input():
 	input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	if is_input_moving():
-		look_angle = input_direction
+		if Input.is_mouse_button_pressed(BUTTON_LEFT):
+			pass
+		else:
+			look_angle = input_direction
 	
 	if Input.is_action_just_pressed("interact"):
 		_try_interaction()
@@ -419,7 +437,7 @@ func _check_interaction_ray() -> Interactable:
 	return hit
 	
 func is_input_moving() -> bool:
-	return input_direction != Vector2.ZERO
+	return input_direction != Vector2.ZERO || Input.is_mouse_button_pressed(BUTTON_LEFT)
 	
 func _tick_idle_state(delta : float):
 	base_speed = lerp(base_speed, 0.0, LERP_WEIGHT * delta)

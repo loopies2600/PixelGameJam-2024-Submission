@@ -7,6 +7,7 @@ const LEVELS := [
 ]
 
 const HUD := preload("res://scenes/ui/main_hud.tscn")
+const CLICK_BUBBLE := preload("res://scenes/ui/click_bubble.tscn")
 
 onready var level : Node = LEVELS[0].instance()
 onready var main_hud := HUD.instance()
@@ -43,6 +44,20 @@ func _on_king_timer_timeout():
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	king_music.play()
+	
+func _input(event):
+	if CutsceneManager.running:
+		return
+	
+	if event is InputEventMouseButton:
+		var base_click : bool = event.button_index == BUTTON_LEFT && event.pressed
+		
+		if base_click:
+			var clk := CLICK_BUBBLE.instance()
+			
+			get_tree().root.add_child(clk)
+			
+			clk.global_position = get_global_mouse_position()
 	
 func _process(delta):
 	if not is_instance_valid(Global.king):
